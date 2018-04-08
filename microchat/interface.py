@@ -169,6 +169,16 @@ def get_chatroom_member_list(wxid):
     friend = get_contact(wxid)
     return [member.wxid for member in friend.group_member_list.member]
 
+# 建群聊(参数group_member_list为群成员wxid)(建群成功返回新建群聊的wxid)
+def create_chatroom(group_member_list):
+    # 组包
+    send_data = business.create_chatroom_req2buf(group_member_list)
+    # 发包
+    ret_bytes = Util.mmPost('/cgi-bin/micromsg-bin/createchatroom', send_data)
+    logger.debug('createchatroom返回数据:' + Util.b2hex(ret_bytes))
+    # 解包
+    return business.create_chatroom_buf2resp(ret_bytes)
+
 # 初始化python模块
 def init_all():
     #配置logger

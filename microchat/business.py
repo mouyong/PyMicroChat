@@ -257,7 +257,7 @@ def update_contact_info(friend,update = True):
         logger.info('{}{}:公众号:{} 公众号wxid:{} alias:{} 注册主体:{}'.format(tag, is_friend, friend.nickname.name, friend.wxid.id, friend.alias, friend.register_body if friend.register_body_type == 24 else '个人'), 6)
     else:                                                                                       # 好友
         logger.info('{}{}:昵称:{} 备注名:{} wxid:{} alias:{} 性别:{} 好友来源:{} 个性签名:{}'.format(tag, is_friend, friend.nickname.name, friend.remark_name.name, friend.wxid.id, friend.alias, friend.sex, Util.get_way(friend.src), friend.qianming), 6)
-    if (friend.type & 1):
+    if (friend.type & 1) or friend.wxid.id.endswith('@chatroom'):
         # 将好友信息存入数据库
         Util.insert_contact_info_to_db(friend.wxid.id, friend.nickname.name, friend.remark_name.name, friend.alias, friend.avatar_big, friend.v1_name, friend.type, friend.sex, friend.country,friend.sheng, friend.shi, friend.qianming, friend.register_body, friend.src, friend.chatroomOwnerWxid, friend.chatroom_serverVer, friend.chatroom_max_member, friend.group_member_list.cnt)
     return
@@ -666,7 +666,7 @@ def transfer_query_buf2resp(buf):
 
 # 获取好友信息请求
 def get_contact_req2buf(wxid):
-     #protobuf组包
+    #protobuf组包
     req = mm_pb2.get_contact_req(
         login = mm_pb2.LoginInfo(
             aesKey =  Util.sessionKey,
@@ -692,4 +692,37 @@ def get_contact_buf2resp(buf):
     res.ParseFromString(UnPack(buf))
     # 显示好友信息
     update_contact_info(res.info, False)
-    return      
+    return res.info
+
+# 建群聊请求
+def create_chatroom_req2buf(group_member_list):
+    #protobuf组包
+    req = mm_pb2.create_chatroom_req(
+        login = mm_pb2.LoginInfo(
+            aesKey =  Util.sessionKey,
+            uin = Util.uin,
+            guid = define.__GUID__ + '\0',          #guid以\0结尾
+            clientVer = define.__CLIENT_VERSION__,
+            androidVer = define.__ANDROID_VER__,
+            unknown = 0,
+        ),
+        tag2 = mm_pb2.create_chatroom_req.TAG2(),
+        member_cnt = len(group_member_list),
+        tag5 = 0,
+    )
+    # 添加群成员
+    for wxid in group_member_list:
+        member = req.member.add()
+        member.wxid.id = wxid
+    # 组包
+    return pack(req.SerializeToString(), 119)
+
+# 建群聊响应
+def create_chatroom_buf2resp(buf):
+    res = mm_pb2.create_chatroom_resp()
+    res.ParseFromString(UnPack(buf))
+    if not res.res.code and res.chatroom_wxid.id:
+        logger.info('建群成功!群聊wxid:{}'.format(res.chatroom_wxid.id), 11)
+    else:
+        logger.info('建群失败!\n错误码:{}\n错误信息:{}'.format(res.res.code, res.res.msg.msg), 5)
+    return res.chatroom_wxid.id

@@ -687,3 +687,54 @@ message get_contact_resp
 	optional ticket_info ticket             = 5;					//对方删除/拉黑我 返回v2_name;正常好友该字段为空
 }
 
+//建群聊请求
+message create_chatroom_req
+{
+	optional LoginInfo login 				= 1;					//登录信息
+	message TAG2
+	{
+		optional string tag1  = 1;
+	}
+	optional TAG2       tag2				= 2;
+	optional int32      member_cnt    		= 3;					//群成员数量
+	message member_info
+	{
+		optional Wxid    wxid		= 1;
+	}
+	repeated member_info member				= 4;					//群成员信息
+	optional int32		tag5				= 5;
+}
+
+//建群聊响应
+message create_chatroom_resp
+{
+	message result
+	{
+		optional int32 code    		= 1;							//错误码
+		message err_msg
+		{
+			optional string msg  = 1;								//错误信息
+		}
+		optional err_msg msg		= 2;
+	}
+	optional result res						= 1;					//建群结果
+	optional int32	member_cnt 				= 5;					//群成员数量
+	message member_info
+	{
+		optional Wxid    wxid			  = 1;						//wxid
+		message nick_name_info
+		{
+			optional string name  = 1;								//昵称
+		}
+		optional nick_name_info nick_name = 3;
+		optional string qianming  		  = 15;						//签名
+	}
+	repeated member_info member				= 6;
+	optional Wxid chatroom_wxid  			= 7;					//新建群聊wxid
+	message chatroom_avatar
+	{
+		optional int32	len  = 1;									//群头像raw data大小
+		optional bytes  data = 2; 									//群头像 jpg格式 raw data
+	}
+	optional chatroom_avatar  avatar		= 8;					//群头像				
+}
