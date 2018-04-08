@@ -774,3 +774,36 @@ message mm_facing_create_chatroom_resp
 	repeated member_info member             = 4;					//群成员信息(op_code=0阶段)
 	optional string wxid					= 5;					//面对面群id(op_code=1阶段)
 }
+
+//群聊拉人请求
+message add_chatroom_member_req
+{
+	optional LoginInfo login 				= 1;					//登录信息
+	optional int32      member_cnt    		= 2;					//本次邀请加入群聊的好友数量
+	message member_info
+	{
+		optional Wxid    wxid		= 1;
+	}
+	repeated member_info member				= 3;					//本次邀请加入群聊的好友信息
+	message chatroom_info
+	{
+		optional string  wxid = 1;
+	}
+	optional chatroom_info chatroom_wxid    = 4;					//群聊wxid
+	optional int32	tag5					= 5;
+}
+
+//群聊拉人响应
+message add_chatroom_member_resp
+{
+	message result
+	{
+		optional int32 code    		= 1;							//错误码
+		message err_msg
+		{
+			optional string msg  = 1;								//错误信息
+		}
+		optional err_msg msg		= 2;
+	}
+	optional result res						= 1;					//群聊拉人结果
+}

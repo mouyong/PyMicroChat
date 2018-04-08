@@ -200,6 +200,16 @@ def mm_facing_create_chatroom(pwd = '9999', lon = 116.39, lat = 38.90):
         return wxid
     return ''
 
+# 群聊拉人
+def add_chatroom_member(chatroom_wxid, member_list):
+    # 组包
+    send_data = business.add_chatroom_member_req2buf(chatroom_wxid, member_list)
+    # 发包
+    ret_bytes = Util.mmPost('/cgi-bin/micromsg-bin/addchatroommember', send_data)
+    logger.debug('addchatroommember返回数据:' + Util.b2hex(ret_bytes))
+    # 解包
+    return business.add_chatroom_member_buf2resp(ret_bytes)
+
 # 初始化python模块
 def init_all():
     #配置logger

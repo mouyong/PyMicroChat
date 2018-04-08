@@ -764,3 +764,31 @@ def mm_facing_create_chatroom_buf2resp(buf, op_code):
             logger.info('面对面建群步骤2失败!\n错误码:{}\n错误信息:{}'.format(res.res.code, res.res.msg.msg), 5)  
         return res.res.code, res.wxid
 
+# 群聊拉人请求
+def add_chatroom_member_req2buf(chatroom_wxid, member_list):
+    #protobuf组包
+    req = mm_pb2.add_chatroom_member_req(
+        login = mm_pb2.LoginInfo(
+            aesKey =  Util.sessionKey,
+            uin = Util.uin,
+            guid = define.__GUID__ + '\0',          #guid以\0结尾
+            clientVer = define.__CLIENT_VERSION__,
+            androidVer = define.__ANDROID_VER__,
+            unknown = 0,
+        ),
+        member_cnt = len(member_list),
+        chatroom_wxid = mm_pb2.add_chatroom_member_req.chatroom_info(wxid = chatroom_wxid),
+        tag5 = 0,
+    )
+    # 添加群成员
+    for wxid in member_list:
+        member = req.member.add()
+        member.wxid.id = wxid
+    # 组包
+    return pack(req.SerializeToString(), 120)
+
+# 群聊拉人响应
+def add_chatroom_member_buf2resp(buf):
+    res = mm_pb2.mm_facing_create_chatroom_resp()
+    res.ParseFromString(UnPack(buf))
+    return (res.res.code, res.res.msg.msg)

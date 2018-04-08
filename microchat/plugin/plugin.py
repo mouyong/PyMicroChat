@@ -54,7 +54,11 @@ def test(msg):
         interface.send_emoji(msg.from_id.id,'9a21c57defc4974ab5b7c842e3232671','1','9')
         return False
     elif TEST_KEY_WORD[6] == msg.raw.content or '6' == msg.raw.content:                                                             # 测试面对面建群
-        interface.mm_facing_create_chatroom('{}'.format(random.randint(2222,9999)))
+        wxid = interface.mm_facing_create_chatroom('{}'.format(random.randint(2222, 9999)))
+        if wxid:
+            interface.add_chatroom_member(wxid, [msg.from_id.id, ])
+            # 刚建的面对面群立即拉人对方无法收到通知（延迟2秒后再拉人对方才会收到进群通知),这里发消息到群聊测试对方是否入群                                                      
+            interface.new_send_msg(wxid, '你已经在我的群聊里了'.encode(encoding="utf-8"))
         return False
     return True
 
