@@ -726,3 +726,41 @@ def create_chatroom_buf2resp(buf):
     else:
         logger.info('建群失败!\n错误码:{}\n错误信息:{}'.format(res.res.code, res.res.msg.msg), 5)
     return res.chatroom_wxid.id
+
+# 面对面建群请求
+def mm_facing_create_chatroom_req2buf(op_code, pwd = '9999', lon = 116.39, lat = 39.90):
+    #protobuf组包
+    req = mm_pb2.mm_facing_create_chatroom_req(
+        login = mm_pb2.LoginInfo(
+            aesKey =  Util.sessionKey,
+            uin = Util.uin,
+            guid = define.__GUID__ + '\0',          #guid以\0结尾
+            clientVer = define.__CLIENT_VERSION__,
+            androidVer = define.__ANDROID_VER__,
+            unknown = 0,
+        ),
+        op_code = op_code,
+        chatroom_pwd = pwd,
+        lon = lon,
+        lat = lat,
+        tag6 = 1,
+        tag9 = 0,
+    )
+    # 组包
+    return pack(req.SerializeToString(), 653)
+
+# 面对面建群响应
+def mm_facing_create_chatroom_buf2resp(buf, op_code):
+    res = mm_pb2.mm_facing_create_chatroom_resp()
+    res.ParseFromString(UnPack(buf))
+    if 0 == op_code:
+        if res.res.code:
+            logger.info('面对面建群步骤1失败!\n错误码:{}\n错误信息:{}'.format(res.res.code, res.res.msg.msg), 5)
+        return res.res.code, ''
+    else:    
+        if not res.res.code and res.wxid:
+            logger.info('面对面建群成功! {} 面对面群聊wxid:{}'.format(res.res.msg.msg, res.wxid), 11)
+        else:
+            logger.info('面对面建群步骤2失败!\n错误码:{}\n错误信息:{}'.format(res.res.code, res.res.msg.msg), 5)  
+        return res.res.code, res.wxid
+

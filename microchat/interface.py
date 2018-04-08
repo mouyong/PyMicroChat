@@ -179,6 +179,27 @@ def create_chatroom(group_member_list):
     # 解包
     return business.create_chatroom_buf2resp(ret_bytes)
 
+# 面对面建群(参数为群密码,建群地点经纬度)(无需好友建群方便测试)
+# 建群成功返回新建群聊的wxid;系统会发10000消息通知群创建成功;使用相同密码短时间内会返回同一群聊
+def mm_facing_create_chatroom(pwd = '9999', lon = 116.39, lat = 38.90):
+    # 面对面建群步骤1组包
+    send_data = business.mm_facing_create_chatroom_req2buf(0, pwd, lon, lat)
+    # 面对面建群步骤1发包
+    ret_bytes = Util.mmPost('/cgi-bin/micromsg-bin/mmfacingcreatechatroom', send_data)
+    logger.debug('mmfacingcreatechatroom返回数据:' + Util.b2hex(ret_bytes))
+    # 面对面建群步骤1解包
+    ret, wxid = business.mm_facing_create_chatroom_buf2resp(ret_bytes, 0)
+    if not ret:
+        # 面对面建群步骤2组包
+        send_data = business.mm_facing_create_chatroom_req2buf(1, pwd, lon, lat)
+        # 面对面建群步骤2发包
+        ret_bytes = Util.mmPost('/cgi-bin/micromsg-bin/mmfacingcreatechatroom', send_data)
+        logger.debug('mmfacingcreatechatroom返回数据:' + Util.b2hex(ret_bytes))
+        # 面对面建群步骤2解包
+        ret, wxid = business.mm_facing_create_chatroom_buf2resp(ret_bytes, 1)
+        return wxid
+    return ''
+
 # 初始化python模块
 def init_all():
     #配置logger

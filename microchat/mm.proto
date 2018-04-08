@@ -738,3 +738,39 @@ message create_chatroom_resp
 	}
 	optional chatroom_avatar  avatar		= 8;					//群头像				
 }
+
+//面对面建群请求
+message mm_facing_create_chatroom_req
+{
+	optional LoginInfo login 				= 1;					//登录信息
+	optional int32	op_code					= 2;					//op_code=0：建群等人(未生成群wxid,只返回群成员信息) op_code=1:进群(返回群wxid)
+	optional string chatroom_pwd			= 3;					//面对面建群密码(4位;不能是1234)
+	optional float lon						= 4;					//面对面建群坐标经度
+	optional float lat						= 5;					//面对面建群坐标纬度
+	optional int32 tag6						= 6;
+	optional int32 tag9						= 9;
+	optional string tag10					= 10;
+}
+
+//面对面建群响应
+message mm_facing_create_chatroom_resp
+{
+	message result
+	{
+		optional int32 code    		= 1;							//错误码
+		message err_msg
+		{
+			optional string msg  = 1;								//错误信息
+		}
+		optional err_msg msg		= 2;
+	}
+	optional result res						= 1;					//面对面建群结果
+	optional int32	member_cnt				= 3;					//群成员数量(op_code=0阶段)
+	message member_info
+	{
+		optional string msg  		= 1;							//wxid
+		optional string nick_name   = 3;							//nick_name
+	}
+	repeated member_info member             = 4;					//群成员信息(op_code=0阶段)
+	optional string wxid					= 5;					//面对面群id(op_code=1阶段)
+}
