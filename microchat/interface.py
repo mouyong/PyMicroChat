@@ -164,6 +164,11 @@ def get_contact(wxid):
     # 解包
     return business.get_contact_buf2resp(ret_bytes)
 
+# 获取群成员列表
+def get_chatroom_member_list(wxid):
+    friend = get_contact(wxid)
+    return [member.wxid for member in friend.group_member_list.member]
+
 # 初始化python模块
 def init_all():
     #配置logger
