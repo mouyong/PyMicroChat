@@ -140,7 +140,9 @@ class LoggerWrapper(object):
             logger.addHandler(console_handler)
         else:
             logger.addHandler(file_handler)
-            #logger.addHandler(console_handler)
+            logger.addHandler(console_handler)
+        
+        logger.propagate = False
 
         return logger
 
