@@ -101,7 +101,7 @@ message contact_info
 	optional int32  sex 		= 5;						//性别：0=>未知,1=>男,2=>女
 	optional string tag6    	= 6;
 	optional int32  tag7  		= 7;
-	optional int32  type 		= 8;						//好友状态:11=>拉黑 
+	optional int32  type 		= 8;						//好友状态:  
 	optional int32  tag9 		= 9;
 	message BeiZhu
 	{
@@ -657,5 +657,33 @@ message transfer_query_resp
 	optional mmStr 	   res					= 2;					//收款结果详细信息
 	optional int32	   ret_code				= 6;					//错误码 
 	optional string    ret_msg				= 7;					//错误信息
+}
+
+//获取好友详细信息请求
+message get_contact_req
+{
+	optional LoginInfo login 				= 1;					//登录信息
+	optional int32     tag2					= 2;
+	optional Wxid      wxid					= 3;					//要查询的 好友/群聊 wxid
+	optional int32     tag4					= 4;
+	optional int32     tag6					= 6;
+	message TAG7
+	{
+		optional string tag1  = 1;
+	}
+	optional TAG7       tag7				= 7;
+	optional int32      tag8				= 8;
+}
+
+//获取好友详细信息响应
+message get_contact_resp
+{
+	optional contact_info   info			= 3;					//好友详细信息
+	message ticket_info
+	{
+		optional string wxid  	= 1;								//查询好友的wxid
+		optional string ticket  = 2;								//v2_ticket
+	}
+	optional ticket_info ticket             = 5;					//对方删除/拉黑我 返回v2_name;正常好友该字段为空
 }
 

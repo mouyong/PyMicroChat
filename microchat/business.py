@@ -242,6 +242,26 @@ def new_init_req2buf(cur=b'', max=b''):
     # 组包
     return pack(new_init_request.SerializeToString(), 139)
 
+# 更新好友信息
+def update_contact_info(friend,update = True):
+    tag = '[更新好友信息]' if update else '[查询好友信息]'
+    is_friend = '<好友>' if (friend.type & 1) else '<非好友>'
+    # 过滤系统wxid
+    if friend.wxid.id in define.MM_DEFAULT_WXID:
+        logger.info('{}:跳过默认wxid[{}]'.format(tag, friend.wxid.id), 6)
+        return
+    # 好友分类
+    if friend.wxid.id.endswith('@chatroom'):                                                    # 群聊
+        logger.info('{}{}:群聊名:{} 群聊wxid:{} chatroom_serverVer:{} chatroom_max_member:{} 群主:{} 群成员数量:{}'.format(tag, is_friend, friend.nickname.name, friend.wxid.id, friend.chatroom_serverVer, friend.chatroom_max_member, friend.chatroomOwnerWxid, friend.group_member_list.cnt), 6)
+    elif friend.wxid.id.startswith('gh_'):                                                      # 公众号
+        logger.info('{}{}:公众号:{} 公众号wxid:{} alias:{} 注册主体:{}'.format(tag, is_friend, friend.nickname.name, friend.wxid.id, friend.alias, friend.register_body if friend.register_body_type == 24 else '个人'), 6)
+    else:                                                                                       # 好友
+        logger.info('{}{}:昵称:{} 备注名:{} wxid:{} alias:{} 性别:{} 好友来源:{} 个性签名:{}'.format(tag, is_friend, friend.nickname.name, friend.remark_name.name, friend.wxid.id, friend.alias, friend.sex, Util.get_way(friend.src), friend.qianming), 6)
+    if (friend.type & 1):
+        # 将好友信息存入数据库
+        Util.insert_contact_info_to_db(friend.wxid.id, friend.nickname.name, friend.remark_name.name, friend.alias, friend.avatar_big, friend.v1_name, friend.type, friend.sex, friend.country,friend.sheng, friend.shi, friend.qianming, friend.register_body, friend.src, friend.chatroomOwnerWxid, friend.chatroom_serverVer, friend.chatroom_max_member, friend.group_member_list.cnt)
+    return
+
 # 首次登录设备初始化解包函数
 def new_init_buf2resp(buf):
     # 解包
@@ -270,19 +290,8 @@ def new_init_buf2resp(buf):
         elif 2 == res.tag7[i].type:                                                                     # 好友列表
             friend = mm_pb2.contact_info()
             friend.ParseFromString(res.tag7[i].data.data)
-            # 过滤系统wxid
-            if friend.wxid.id in define.MM_DEFAULT_WXID:
-                logger.info('更新好友信息:跳过默认wxid[{}]'.format(friend.wxid.id))
-                continue
-            # 好友分类
-            if friend.wxid.id.endswith('@chatroom'):                                                    # 群聊
-                logger.info('更新好友信息:群聊名:{} 群聊wxid:{} chatroom_serverVer:{} chatroom_max_member:{} 群主:{} 群成员数量:{}'.format(friend.nickname.name, friend.wxid.id, friend.chatroom_serverVer, friend.chatroom_max_member, friend.chatroomOwnerWxid, friend.group_member_list.cnt))
-            elif friend.wxid.id.startswith('gh_'):                                                      # 公众号
-                logger.info('更新好友信息:公众号:{} 公众号wxid:{} alias:{} 注册主体:{}'.format(friend.nickname.name, friend.wxid.id, friend.alias, friend.register_body if friend.register_body_type == 24 else '个人'))
-            else:                                                                                       # 好友
-                logger.info('更新好友信息:昵称:{} 备注名:{} wxid:{} alias:{} 性别:{} 好友来源:{} 个性签名:{}'.format(friend.nickname.name, friend.remark_name.name, friend.wxid.id, friend.alias, friend.sex, Util.get_way(friend.src), friend.qianming))
-            # 将好友信息存入数据库
-            Util.insert_contact_info_to_db(friend.wxid.id, friend.nickname.name, friend.remark_name.name, friend.alias, friend.avatar_big, friend.v1_name, friend.type, friend.sex, friend.country,friend.sheng, friend.shi, friend.qianming, friend.register_body, friend.src, friend.chatroomOwnerWxid, friend.chatroom_serverVer, friend.chatroom_max_member, friend.group_member_list.cnt)
+            # 更新好友信息到数据库
+            update_contact_info(friend)
     return (res.continue_flag, res.sync_key_cur, res.sync_key_max)
 
 # 同步消息组包函数
@@ -324,6 +333,11 @@ def new_sync_buf2resp(buf):
                 logger.info('收到新消息:\ncreate utc time:{}\ntype:{}\nfrom:{}\nto:{}\nraw data:{}\nxml data:{}'.format(Util.utc_to_local_time(msg.createTime), msg.type, msg.from_id.id, msg.to_id.id, msg.raw.content, msg.xmlContent))
                 # 接入插件
                 plugin.dispatch(msg)   
+        elif 2 == res.msg.tag2[i].type:                                                                     # 更新好友消息
+            friend = mm_pb2.contact_info()
+            friend.ParseFromString(res.msg.tag2[i].data.data)
+            # 更新好友信息到数据库
+            update_contact_info(friend)
     return
 
 # 通知服务器消息已接收(无返回数据)(仅用于长链接)
@@ -649,3 +663,33 @@ def transfer_query_buf2resp(buf):
     res.ParseFromString(UnPack(buf))
     logger.debug('[查询转账记录]错误码={},详细信息:{}'.format(res.ret_code,res.res.str))
     return (res.ret_code,res.res.str)
+
+# 获取好友信息请求
+def get_contact_req2buf(wxid):
+     #protobuf组包
+    req = mm_pb2.get_contact_req(
+        login = mm_pb2.LoginInfo(
+            aesKey =  Util.sessionKey,
+            uin = Util.uin,
+            guid = define.__GUID__ + '\0',          #guid以\0结尾
+            clientVer = define.__CLIENT_VERSION__,
+            androidVer = define.__ANDROID_VER__,
+            unknown = 0,
+        ),
+        tag2 = 1,
+        wxid = mm_pb2.Wxid(id = wxid),
+        tag4 = 0,
+        tag6 = 1,
+        tag7 = mm_pb2.get_contact_req.TAG7(),
+        tag8 = 0,
+    )
+    # 组包
+    return pack(req.SerializeToString(), 182)
+
+# 获取好友信息响应
+def get_contact_buf2resp(buf):
+    res = mm_pb2.get_contact_resp()
+    res.ParseFromString(UnPack(buf))
+    # 显示好友信息
+    update_contact_info(res.info, False)
+    return      

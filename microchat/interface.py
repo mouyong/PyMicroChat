@@ -154,6 +154,15 @@ def transfer_query(invalid_time, trans_id, transfer_id):
     # 解包
     return business.transfer_query_buf2resp(ret_bytes)
 
+# 刷新好友信息(通讯录中的好友或群聊可以获取详细信息;陌生人仅可获取昵称和头像)
+def get_contact(wxid):
+    # 组包
+    send_data = business.get_contact_req2buf(wxid)
+    # 发包
+    ret_bytes = Util.mmPost('/cgi-bin/micromsg-bin/getcontact', send_data)
+    logger.debug('get_contact返回数据:' + Util.b2hex(ret_bytes))
+    # 解包
+    return business.get_contact_buf2resp(ret_bytes)
 
 # 初始化python模块
 def init_all():

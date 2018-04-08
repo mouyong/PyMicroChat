@@ -320,12 +320,12 @@ def get_frient_type(wxid):
     else:
         return 0
 
-# 好友是否已删除
-def is_deleted(type):
-    # type的最后一bit是0表示已被删除
-    return 0 == (type & 1)
+# 是否在我的好友列表中
+def is_in_my_friend_list(type):
+    # type的最后一bit是1表示对方在我的好友列表中
+    return (type & 1)
 
-# 好友是否在黑名单中
+# 对方是否在我的黑名单中
 def is_in_blacklist(type):
     return (type & (1 << 3))
 
@@ -334,18 +334,18 @@ def get_contact(contact_type):
     cur = conn.cursor()
     rows = []
     if contact_type & CONTACT_TYPE_FRIEND:                                                  # 返回好友列表
-        cur.execute("select wxid,nick_name,remark_name,alias,v1_name,avatar_big from contact where wxid not like '%%@chatroom' and wxid not like 'gh_%%' and (type & 8) = 0")
+        cur.execute("select wxid,nick_name,remark_name,alias,v1_name,avatar_big from contact where wxid not like '%%@chatroom' and wxid not like 'gh_%%' and (type & 8) = 0 and (type & 1)")
         rows = rows + cur.fetchall()
     if contact_type & CONTACT_TYPE_CHATROOM:                                                # 返回群聊列表
-        cur.execute("select wxid,nick_name,remark_name,alias,v1_name,avatar_big from contact where wxid like '%%@chatroom'")
+        cur.execute("select wxid,nick_name,remark_name,alias,v1_name,avatar_big from contact where wxid like '%%@chatroom' and (type & 1)")
         rows = rows + cur.fetchall()
     if contact_type & CONTACT_TYPE_OFFICAL:                                                 # 返回公众号列表
-        cur.execute("select wxid,nick_name,remark_name,alias,v1_name,avatar_big from contact where wxid like 'gh_%%'")
+        cur.execute("select wxid,nick_name,remark_name,alias,v1_name,avatar_big from contact where wxid like 'gh_%%' and (type & 1)")
         rows = rows + cur.fetchall()
     if contact_type & CONTACT_TYPE_BLACKLIST:                                               # 返回黑名单列表
         cur.execute("select wxid,nick_name,remark_name,alias,v1_name,avatar_big from contact where wxid not like '%%@chatroom' and wxid not like 'gh_%%' and (type & 8)")
         rows = rows + cur.fetchall()
-    if contact_type & CONTACT_TYPE_DELETED:                                                 # 返回已删除好友列表
+    if contact_type & CONTACT_TYPE_DELETED:                                                 # 返回已删除好友列表(非主动删除对方?)
         cur.execute("select wxid,nick_name,remark_name,alias,v1_name,avatar_big from contact where wxid not like '%%@chatroom' and wxid not like 'gh_%%' and (type & 1) = 0")
         rows = rows + cur.fetchall()
     return rows
