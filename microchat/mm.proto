@@ -73,7 +73,7 @@ message Msg
 	optional int32 tag7 			= 7;
 	optional bytes tag8 			= 8;
 	optional int32 createTime 		= 9;							//消息发送时间
-	optional string anticlient 		= 10;
+	optional string ex_info 		= 10;							//消息附加内容(群是否屏蔽,群人数,群at功能)
 	optional string xmlContent 		= 11;							//推送内容(xml格式)
 	optional int64 svrId 			= 12;							//每条消息的唯一id
 	optional int32 msgKey 			= 13;							//sync key中的id
@@ -417,6 +417,7 @@ message new_send_msg_req
 		optional int32 type 		= 3;							//消息类型: 文字消息=>1,名片=>42，
 		optional int32 utc 			= 4;
 		optional int32 client_id 	= 5;							//不同消息的utc与client_id必须至少有1个不相同
+		optional string at_list		= 6;							//群聊at功能
 	}
 	optional msg_info msg 				= 2;						//这里可以是repeated,允许一次发送多条消息
 }

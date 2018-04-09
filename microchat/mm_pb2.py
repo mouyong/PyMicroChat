@@ -19,7 +19,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='mm.proto',
   package='',
   syntax='proto2',
-  serialized_pb=_b('\n\x08mm.proto\"!\n\x05mmStr\x12\x0b\n\x03len\x18\x01 \x01(\x05\x12\x0b\n\x03str\x18\x02 \x01(\t\"&\n\x05mmRes\x12\x0c\n\x04\x63ode\x18\x01 \x01(\x05\x12\x0f\n\x07message\x18\x02 \x01(\t\"n\n\tLoginInfo\x12\x0e\n\x06\x61\x65sKey\x18\x01 \x01(\x0c\x12\x0b\n\x03uin\x18\x02 \x01(\x05\x12\x0c\n\x04guid\x18\x03 \x01(\t\x12\x11\n\tclientVer\x18\x04 \x01(\x05\x12\x12\n\nandroidVer\x18\x05 \x01(\t\x12\x0f\n\x07unknown\x18\x06 \x01(\x05\"\x92\x01\n\x07SyncKey\x12\x0b\n\x03len\x18\x01 \x01(\x05\x12\x1f\n\x06msgkey\x18\x02 \x01(\x0b\x32\x0f.SyncKey.MsgKey\x1aY\n\x06MsgKey\x12\x0b\n\x03\x63nt\x18\x01 \x01(\x05\x12 \n\x03key\x18\x02 \x03(\x0b\x32\x13.SyncKey.MsgKey.Key\x1a \n\x03Key\x12\x0c\n\x04type\x18\x01 \x01(\x05\x12\x0b\n\x03key\x18\x02 \x01(\x03\"]\n\ncommon_msg\x12\x0c\n\x04type\x18\x01 \x01(\x05\x12\x1e\n\x04\x64\x61ta\x18\x02 \x01(\x0b\x32\x10.common_msg.Data\x1a!\n\x04\x44\x61ta\x12\x0b\n\x03len\x18\x01 \x01(\x05\x12\x0c\n\x04\x64\x61ta\x18\x02 \x01(\x0c\"\x12\n\x04Wxid\x12\n\n\x02id\x18\x01 \x01(\t\"\x97\x02\n\x03Msg\x12\x10\n\x08serverid\x18\x01 \x01(\x03\x12\x16\n\x07\x66rom_id\x18\x02 \x01(\x0b\x32\x05.Wxid\x12\x14\n\x05to_id\x18\x03 \x01(\x0b\x32\x05.Wxid\x12\x0c\n\x04type\x18\x04 \x01(\x05\x12\x1c\n\x03raw\x18\x05 \x01(\x0b\x32\x0f.Msg.RawContent\x12\x0e\n\x06status\x18\x06 \x01(\x05\x12\x0c\n\x04tag7\x18\x07 \x01(\x05\x12\x0c\n\x04tag8\x18\x08 \x01(\x0c\x12\x12\n\ncreateTime\x18\t \x01(\x05\x12\x12\n\nanticlient\x18\n \x01(\t\x12\x12\n\nxmlContent\x18\x0b \x01(\t\x12\r\n\x05svrId\x18\x0c \x01(\x03\x12\x0e\n\x06msgKey\x18\r \x01(\x05\x1a\x1d\n\nRawContent\x12\x0f\n\x07\x63ontent\x18\x01 \x01(\t\"\xef\n\n\x0c\x63ontact_info\x12\x13\n\x04wxid\x18\x01 \x01(\x0b\x32\x05.Wxid\x12(\n\x08nickname\x18\x02 \x01(\x0b\x32\x16.contact_info.NickName\x12\'\n\x07shortPy\x18\x03 \x01(\x0b\x32\x16.contact_info.PY_SHORT\x12&\n\x07quanpin\x18\x04 \x01(\x0b\x32\x15.contact_info.QuanPin\x12\x0b\n\x03sex\x18\x05 \x01(\x05\x12\x0c\n\x04tag6\x18\x06 \x01(\t\x12\x0c\n\x04tag7\x18\x07 \x01(\x05\x12\x0c\n\x04type\x18\x08 \x01(\x05\x12\x0c\n\x04tag9\x18\t \x01(\x05\x12)\n\x0bremark_name\x18\n \x01(\x0b\x32\x14.contact_info.BeiZhu\x12\x31\n\x0creal_shortPy\x18\x0b \x01(\x0b\x32\x1b.contact_info.REAL_PY_SHORT\x12\x30\n\x0creal_quanpin\x18\x0c \x01(\x0b\x32\x1a.contact_info.REAL_QuanPin\x12\r\n\x05tag13\x18\r \x01(\x05\x12\r\n\x05tag14\x18\x0e \x01(\x05\x12\r\n\x05tag16\x18\x10 \x01(\t\x12\x11\n\tbChatRoom\x18\x11 \x01(\x05\x12\r\n\x05tag18\x18\x12 \x01(\x05\x12\r\n\x05sheng\x18\x13 \x01(\t\x12\x0b\n\x03shi\x18\x14 \x01(\t\x12\x10\n\x08qianming\x18\x15 \x01(\t\x12\r\n\x05tag22\x18\x16 \x01(\x05\x12\r\n\x05tag23\x18\x17 \x01(\x05\x12\x1a\n\x12register_body_type\x18\x18 \x01(\x05\x12\x15\n\rregister_body\x18\x19 \x01(\t\x12\r\n\x05tag26\x18\x1a \x01(\x05\x12\x0b\n\x03src\x18\x1b \x01(\x05\x12\x13\n\x0blastMsgTime\x18\x1d \x01(\t\x12\r\n\x05\x61lias\x18\x1e \x01(\t\x12\x19\n\x11\x63hatroomOwnerWxid\x18\x1f \x01(\t\x12\r\n\x05tag33\x18! \x01(\x05\x12\r\n\x05tag34\x18\" \x01(\x05\x12\r\n\x05tag35\x18# \x01(\x05\x12\r\n\x05tag37\x18% \x01(\x0c\x12\x0f\n\x07\x63ountry\x18& \x01(\t\x12\x12\n\navatar_big\x18\' \x01(\t\x12\x14\n\x0c\x61vatar_small\x18( \x01(\t\x12\r\n\x05tag42\x18* \x01(\x0c\x12\x0f\n\x07v1_name\x18- \x01(\t\x12\r\n\x05tag50\x18\x32 \x01(\x0c\x12\x1a\n\x12\x63hatroom_serverVer\x18\x35 \x01(\x05\x12\x1b\n\x13\x63hatroom_max_member\x18\x37 \x01(\x05\x12\r\n\x05tag56\x18\x38 \x01(\x05\x12\x38\n\x11group_member_list\x18\x39 \x01(\x0b\x32\x1d.contact_info.GroupMemberList\x12\r\n\x05tag58\x18: \x01(\x05\x12\r\n\x05tag62\x18> \x01(\x0c\x12\r\n\x05tag64\x18@ \x01(\x05\x12\r\n\x05tag65\x18\x41 \x01(\x05\x12\r\n\x05tag66\x18\x42 \x01(\x05\x12\r\n\x05tag67\x18\x43 \x01(\x05\x1a\x18\n\x08NickName\x12\x0c\n\x04name\x18\x01 \x01(\t\x1a\x18\n\x08PY_SHORT\x12\x0c\n\x04name\x18\x01 \x01(\t\x1a\x17\n\x07QuanPin\x12\x0c\n\x04name\x18\x01 \x01(\t\x1a\x16\n\x06\x42\x65iZhu\x12\x0c\n\x04name\x18\x01 \x01(\t\x1a\x1d\n\rREAL_PY_SHORT\x12\x0c\n\x04name\x18\x01 \x01(\t\x1a\x1c\n\x0cREAL_QuanPin\x12\x0c\n\x04name\x18\x01 \x01(\t\x1a\xac\x01\n\x0fGroupMemberList\x12\x0b\n\x03\x63nt\x18\x01 \x01(\x05\x12\x38\n\x06member\x18\x02 \x03(\x0b\x32(.contact_info.GroupMemberList.MemberInfo\x12\x0c\n\x04tag3\x18\x03 \x01(\x05\x12\x0c\n\x04tag4\x18\x04 \x01(\t\x1a\x36\n\nMemberInfo\x12\x0c\n\x04wxid\x18\x01 \x01(\t\x12\x0c\n\x04tag6\x18\x06 \x01(\x05\x12\x0c\n\x04tag8\x18\x08 \x01(\x05\"\xc6\x02\n\x18ManualAuthAccountRequest\x12-\n\x03\x61\x65s\x18\x01 \x02(\x0b\x32 .ManualAuthAccountRequest.AesKey\x12,\n\x04\x65\x63\x64h\x18\x02 \x02(\x0b\x32\x1e.ManualAuthAccountRequest.Ecdh\x12\x10\n\x08userName\x18\x03 \x02(\t\x12\x11\n\tpassword1\x18\x04 \x02(\t\x12\x11\n\tpassword2\x18\x05 \x02(\t\x1a\"\n\x06\x41\x65sKey\x12\x0b\n\x03len\x18\x01 \x02(\x05\x12\x0b\n\x03key\x18\x02 \x02(\x0c\x1aq\n\x04\x45\x63\x64h\x12\x0b\n\x03nid\x18\x01 \x02(\x05\x12\x37\n\x07\x65\x63\x64hKey\x18\x02 \x02(\x0b\x32&.ManualAuthAccountRequest.Ecdh.EcdhKey\x1a#\n\x07\x45\x63\x64hKey\x12\x0b\n\x03len\x18\x01 \x02(\x05\x12\x0b\n\x03key\x18\x02 \x02(\x0c\"\xd2\x05\n\x17ManualAuthDeviceRequest\x12\x19\n\x05login\x18\x01 \x01(\x0b\x32\n.LoginInfo\x12,\n\x04tag2\x18\x02 \x01(\x0b\x32\x1e.ManualAuthDeviceRequest._Tag2\x12\x0c\n\x04imei\x18\x03 \x01(\t\x12\x13\n\x0bsoftInfoXml\x18\x04 \x01(\t\x12\x10\n\x08unknown5\x18\x05 \x01(\x05\x12\x13\n\x0b\x63lientSeqID\x18\x06 \x01(\t\x12\x18\n\x10\x63lientSeqID_sign\x18\x07 \x01(\t\x12\x17\n\x0floginDeviceName\x18\x08 \x01(\t\x12\x15\n\rdeviceInfoXml\x18\t \x01(\t\x12\x10\n\x08language\x18\n \x01(\t\x12\x10\n\x08timeZone\x18\x0b \x01(\t\x12\x11\n\tunknown13\x18\r \x01(\x05\x12\x11\n\tunknown14\x18\x0e \x01(\x05\x12\x13\n\x0b\x64\x65viceBrand\x18\x0f \x01(\t\x12\x13\n\x0b\x64\x65viceModel\x18\x10 \x01(\t\x12\x0e\n\x06osType\x18\x11 \x01(\t\x12\x13\n\x0brealCountry\x18\x12 \x01(\t\x12\x11\n\tunknown22\x18\x16 \x01(\x05\x1a\xad\x02\n\x05_Tag2\x12\x14\n\x04tag1\x18\x01 \x01(\x0b\x32\x06.mmStr\x12\x33\n\x04tag2\x18\x02 \x01(\x0b\x32%.ManualAuthDeviceRequest._Tag2.__Tag2\x12\x31\n\x04tag3\x18\x03 \x01(\x0b\x32#.ManualAuthDeviceRequest._Tag2.TAG3\x12\x14\n\x04tag4\x18\x04 \x01(\x0b\x32\x06.mmStr\x12\x14\n\x04tag5\x18\x05 \x01(\x0b\x32\x06.mmStr\x12\x0c\n\x04tag6\x18\x06 \x01(\x05\x1aH\n\x06__Tag2\x12\x0c\n\x04tag1\x18\x01 \x01(\t\x12\x0c\n\x04tag2\x18\x02 \x01(\t\x12\x0c\n\x04tag3\x18\x03 \x01(\t\x12\x14\n\x04tag4\x18\x04 \x01(\x0b\x32\x06.mmStr\x1a\"\n\x04TAG3\x12\x0c\n\x04tag1\x18\x01 \x01(\t\x12\x0c\n\x04tag2\x18\x02 \x01(\t\"\xb9\x0c\n\x12ManualAuthResponse\x12.\n\x06result\x18\x01 \x02(\x0b\x32\x1e.ManualAuthResponse.AuthResult\x12\x11\n\tunifyFlag\x18\x02 \x02(\x05\x12\x30\n\tauthParam\x18\x03 \x02(\x0b\x32\x1d.ManualAuthResponse.AuthParam\x12\x34\n\x0b\x61\x63\x63ountInfo\x18\x04 \x01(\x0b\x32\x1f.ManualAuthResponse.AccountInfo\x12)\n\x03\x64ns\x18\x05 \x01(\x0b\x32\x1c.ManualAuthResponse.dns_info\x1ai\n\nAuthResult\x12\x0c\n\x04\x63ode\x18\x01 \x02(\x05\x12\x36\n\x07\x65rr_msg\x18\x02 \x02(\x0b\x32%.ManualAuthResponse.AuthResult.ErrMsg\x1a\x15\n\x06\x45rrMsg\x12\x0b\n\x03msg\x18\x01 \x01(\t\x1a\xe5\x02\n\tAuthParam\x12\x0b\n\x03uin\x18\x01 \x02(\x05\x12\x30\n\x04\x65\x63\x64h\x18\x02 \x02(\x0b\x32\".ManualAuthResponse.AuthParam.Ecdh\x12\x39\n\x07session\x18\x03 \x02(\x0b\x32(.ManualAuthResponse.AuthParam.SessionKey\x12\x11\n\tSmsTicket\x18\x10 \x01(\x0c\x12\x18\n\x10\x62indMailLoginUrl\x18\x14 \x01(\t\x12\x12\n\nserverTime\x18\x16 \x01(\x05\x1au\n\x04\x45\x63\x64h\x12\x0b\n\x03nid\x18\x01 \x02(\x05\x12;\n\x07\x65\x63\x64hKey\x18\x02 \x01(\x0b\x32*.ManualAuthResponse.AuthParam.Ecdh.EcdhKey\x1a#\n\x07\x45\x63\x64hKey\x12\x0b\n\x03len\x18\x01 \x02(\x05\x12\x0b\n\x03key\x18\x02 \x01(\x0c\x1a&\n\nSessionKey\x12\x0b\n\x03len\x18\x01 \x02(\x05\x12\x0b\n\x03key\x18\x02 \x01(\x0c\x1a\xad\x02\n\x0b\x41\x63\x63ountInfo\x12\x0c\n\x04wxId\x18\x01 \x01(\t\x12\x10\n\x08nickName\x18\x02 \x01(\t\x12\x0c\n\x04tag3\x18\x03 \x01(\x05\x12\x10\n\x08\x62indMail\x18\x04 \x01(\t\x12\x12\n\nbindMobile\x18\x05 \x01(\t\x12\r\n\x05\x41lias\x18\x06 \x01(\t\x12\x0c\n\x04tag7\x18\x07 \x01(\t\x12\x0e\n\x06status\x18\x08 \x01(\x05\x12\x12\n\npluginFlag\x18\t \x01(\x05\x12\x14\n\x0cregisterType\x18\n \x01(\x05\x12\r\n\x05tag11\x18\x0b \x01(\t\x12\x12\n\nsafeDevice\x18\x0c \x01(\x05\x12\x1a\n\x12officialNamePinyin\x18\r \x01(\t\x12\x16\n\x0eofficialNameZh\x18\x0e \x01(\t\x12\r\n\x05tag15\x18\x0f \x01(\t\x12\r\n\x05\x66sUrl\x18\x10 \x01(\t\x1a\xc9\x04\n\x08\x64ns_info\x12<\n\x08redirect\x18\x01 \x01(\x0b\x32*.ManualAuthResponse.dns_info.redirect_info\x12\x30\n\x02ip\x18\x03 \x01(\x0b\x32$.ManualAuthResponse.dns_info.ip_info\x1a\x9c\x01\n\rredirect_info\x12\x0b\n\x03\x63nt\x18\x01 \x01(\x05\x12L\n\treal_host\x18\x02 \x03(\x0b\x32\x39.ManualAuthResponse.dns_info.redirect_info.real_host_info\x1a\x30\n\x0ereal_host_info\x12\x0c\n\x04host\x18\x01 \x01(\t\x12\x10\n\x08redirect\x18\x02 \x01(\t\x1a\xad\x02\n\x07ip_info\x12\x17\n\x0flonglink_ip_cnt\x18\x01 \x01(\x05\x12\x18\n\x10shortlink_ip_cnt\x18\x02 \x01(\x05\x12G\n\x08longlink\x18\x03 \x03(\x0b\x32\x35.ManualAuthResponse.dns_info.ip_info.longlink_ip_info\x12I\n\tshortlink\x18\x04 \x03(\x0b\x32\x36.ManualAuthResponse.dns_info.ip_info.shortlink_ip_info\x1a,\n\x10longlink_ip_info\x12\n\n\x02ip\x18\x03 \x01(\t\x12\x0c\n\x04host\x18\x04 \x01(\t\x1a-\n\x11shortlink_ip_info\x12\n\n\x02ip\x18\x03 \x01(\t\x12\x0c\n\x04host\x18\x04 \x01(\t\"w\n\x0eNewInitRequest\x12\x19\n\x05login\x18\x01 \x01(\x0b\x32\n.LoginInfo\x12\x0c\n\x04wxid\x18\x02 \x01(\t\x12\x14\n\x0csync_key_cur\x18\x03 \x01(\x0c\x12\x14\n\x0csync_key_max\x18\x04 \x01(\x0c\x12\x10\n\x08language\x18\x05 \x01(\t\"\x8e\x01\n\x0fNewInitResponse\x12\x0c\n\x04tag1\x18\x01 \x01(\t\x12\x14\n\x0csync_key_cur\x18\x02 \x01(\x0c\x12\x14\n\x0csync_key_max\x18\x03 \x01(\x0c\x12\x15\n\rcontinue_flag\x18\x04 \x01(\x05\x12\x0f\n\x07\x63ntList\x18\x06 \x01(\x05\x12\x19\n\x04tag7\x18\x07 \x03(\x0b\x32\x0b.common_msg\"\xb4\x01\n\x0cnew_sync_req\x12)\n\x04\x66lag\x18\x01 \x01(\x0b\x32\x1b.new_sync_req.continue_flag\x12\x10\n\x08selector\x18\x02 \x01(\x05\x12\x10\n\x08sync_Key\x18\x03 \x01(\x0c\x12\r\n\x05scene\x18\x04 \x01(\x05\x12\x0e\n\x06\x64\x65vice\x18\x05 \x01(\t\x12\x17\n\x0fsync_msg_digest\x18\x06 \x01(\x05\x1a\x1d\n\rcontinue_flag\x12\x0c\n\x04\x66lag\x18\x01 \x01(\x05\"\xc2\x01\n\rnew_sync_resp\x12\x0c\n\x04tag1\x18\x01 \x01(\x05\x12#\n\x03msg\x18\x02 \x01(\x0b\x32\x16.new_sync_resp.new_msg\x12\x0c\n\x04tag3\x18\x03 \x01(\x05\x12\x10\n\x08sync_key\x18\x04 \x01(\x0c\x12\x0c\n\x04tag5\x18\x05 \x01(\x05\x12\x0c\n\x04tag6\x18\x06 \x01(\x05\x12\x0b\n\x03utc\x18\x07 \x01(\x05\x1a\x35\n\x07new_msg\x12\x0f\n\x07\x63ntList\x18\x01 \x01(\x05\x12\x19\n\x04tag2\x18\x02 \x03(\x0b\x32\x0b.common_msg\"\xa6\x01\n\x10new_send_msg_req\x12\x0b\n\x03\x63nt\x18\x01 \x01(\x05\x12\'\n\x03msg\x18\x02 \x01(\x0b\x32\x1a.new_send_msg_req.msg_info\x1a\\\n\x08msg_info\x12\x11\n\x02to\x18\x01 \x01(\x0b\x32\x05.Wxid\x12\x0f\n\x07\x63ontent\x18\x02 \x01(\x0c\x12\x0c\n\x04type\x18\x03 \x01(\x05\x12\x0b\n\x03utc\x18\x04 \x01(\x05\x12\x11\n\tclient_id\x18\x05 \x01(\x05\"\xa6\x01\n\x11new_send_msg_resp\x12\x14\n\x04tag1\x18\x01 \x01(\x0b\x32\x06.mmStr\x12\x0b\n\x03\x63nt\x18\x02 \x01(\x05\x12&\n\x03res\x18\x03 \x01(\x0b\x32\x19.new_send_msg_resp.result\x1a\x46\n\x06result\x12\x0c\n\x04\x63ode\x18\x01 \x01(\x05\x12\x11\n\x02to\x18\x02 \x01(\x0b\x32\x05.Wxid\x12\x0c\n\x04type\x18\x07 \x01(\x05\x12\r\n\x05svrid\x18\x08 \x01(\x03\"\xed\x02\n\x14new_send_app_msg_req\x12\x19\n\x05login\x18\x01 \x01(\x0b\x32\n.LoginInfo\x12/\n\x04info\x18\x02 \x01(\x0b\x32!.new_send_app_msg_req.appmsg_info\x12\x0c\n\x04tag4\x18\x04 \x01(\x05\x12\x0c\n\x04tag6\x18\x06 \x01(\x05\x12\x0c\n\x04tag7\x18\x07 \x01(\t\x12\x11\n\tfromScene\x18\x08 \x01(\t\x12\x0c\n\x04tag9\x18\t \x01(\x05\x12\r\n\x05tag10\x18\n \x01(\x05\x1a\xae\x01\n\x0b\x61ppmsg_info\x12\x11\n\tfrom_wxid\x18\x01 \x01(\t\x12\x10\n\x08\x61pp_wxid\x18\x02 \x01(\t\x12\x0c\n\x04tag3\x18\x03 \x01(\x05\x12\x0f\n\x07to_wxid\x18\x04 \x01(\t\x12\x0c\n\x04type\x18\x05 \x01(\x05\x12\x0f\n\x07\x63ontent\x18\x06 \x01(\t\x12\x0b\n\x03utc\x18\x07 \x01(\x05\x12\x11\n\tclient_id\x18\x08 \x01(\t\x12\r\n\x05tag10\x18\n \x01(\x05\x12\r\n\x05tag11\x18\x0b \x01(\x05\"\xa3\x01\n\x15new_send_app_msg_resp\x12\x14\n\x04tag1\x18\x01 \x01(\x0b\x32\x06.mmStr\x12\x11\n\tfrom_wxid\x18\x03 \x01(\t\x12\x0f\n\x07to_wxid\x18\x04 \x01(\t\x12\x13\n\x0bsync_key_id\x18\x05 \x01(\x05\x12\x11\n\tclient_id\x18\x06 \x01(\t\x12\x0b\n\x03utc\x18\x07 \x01(\x05\x12\x0c\n\x04type\x18\x08 \x01(\x05\x12\r\n\x05svrid\x18\t \x01(\x03\"\x9c\x02\n\x0fverify_user_req\x12\x19\n\x05login\x18\x01 \x01(\x0b\x32\n.LoginInfo\x12\x0f\n\x07op_code\x18\x02 \x01(\x05\x12\x0c\n\x04tag3\x18\x03 \x01(\x05\x12(\n\x04user\x18\x04 \x01(\x0b\x32\x1a.verify_user_req.user_info\x12\x0f\n\x07\x63ontent\x18\x05 \x01(\t\x12\x0c\n\x04tag6\x18\x06 \x01(\x05\x12\r\n\x05scene\x18\x07 \x01(\t\x12\x1b\n\x0b\x64\x65vice_info\x18\x08 \x01(\x0b\x32\x06.mmStr\x1aZ\n\tuser_info\x12\x0c\n\x04wxid\x18\x01 \x01(\t\x12\x0e\n\x06ticket\x18\x02 \x01(\t\x12\x13\n\x0b\x61nti_ticket\x18\x03 \x01(\t\x12\x0c\n\x04tag4\x18\x04 \x01(\x05\x12\x0c\n\x04tag8\x18\x08 \x01(\x05\"5\n\x10verify_user_resp\x12\x13\n\x03res\x18\x01 \x01(\x0b\x32\x06.mmRes\x12\x0c\n\x04wxid\x18\x02 \x01(\t\"^\n\x10receive_wxhb_req\x12\x19\n\x05login\x18\x01 \x01(\x0b\x32\n.LoginInfo\x12\x0b\n\x03\x63md\x18\x02 \x01(\x05\x12\x0c\n\x04tag3\x18\x03 \x01(\x05\x12\x14\n\x04info\x18\x04 \x01(\x0b\x32\x06.mmStr\"\xaf\x01\n\x11receive_wxhb_resp\x12%\n\x04tag1\x18\x01 \x01(\x0b\x32\x17.receive_wxhb_resp.TAG1\x12\x17\n\x07hb_info\x18\x02 \x01(\x0b\x32\x06.mmStr\x12\x0b\n\x03\x63md\x18\x05 \x01(\x05\x12\x10\n\x08ret_code\x18\x06 \x01(\x05\x12\x0f\n\x07ret_msg\x18\x07 \x01(\t\x1a*\n\x04TAG1\x12\x0c\n\x04tag1\x18\x01 \x01(\x05\x1a\x14\n\x04TAG1\x12\x0c\n\x04tag1\x18\x01 \x01(\t\"[\n\ropen_wxhb_req\x12\x19\n\x05login\x18\x01 \x01(\x0b\x32\n.LoginInfo\x12\x0b\n\x03\x63md\x18\x02 \x01(\x05\x12\x0c\n\x04tag3\x18\x03 \x01(\x05\x12\x14\n\x04info\x18\x04 \x01(\x0b\x32\x06.mmStr\"\xa5\x01\n\x0eopen_wxhb_resp\x12\"\n\x04tag1\x18\x01 \x01(\x0b\x32\x14.open_wxhb_resp.TAG1\x12\x13\n\x03res\x18\x02 \x01(\x0b\x32\x06.mmStr\x12\x0b\n\x03\x63md\x18\x05 \x01(\x05\x12\x10\n\x08ret_code\x18\x06 \x01(\x05\x12\x0f\n\x07ret_msg\x18\x07 \x01(\t\x1a*\n\x04TAG1\x12\x0c\n\x04tag1\x18\x01 \x01(\x05\x1a\x14\n\x04TAG1\x12\x0c\n\x04tag1\x18\x01 \x01(\t\"a\n\x13qry_detail_wxhb_req\x12\x19\n\x05login\x18\x01 \x01(\x0b\x32\n.LoginInfo\x12\x0b\n\x03\x63md\x18\x02 \x01(\x05\x12\x0c\n\x04tag3\x18\x03 \x01(\x05\x12\x14\n\x04info\x18\x04 \x01(\x0b\x32\x06.mmStr\"\xb1\x01\n\x14qry_detail_wxhb_resp\x12(\n\x04tag1\x18\x01 \x01(\x0b\x32\x1a.qry_detail_wxhb_resp.TAG1\x12\x13\n\x03res\x18\x02 \x01(\x0b\x32\x06.mmStr\x12\x0b\n\x03\x63md\x18\x05 \x01(\x05\x12\x10\n\x08ret_code\x18\x06 \x01(\x05\x12\x0f\n\x07ret_msg\x18\x07 \x01(\t\x1a*\n\x04TAG1\x12\x0c\n\x04tag1\x18\x01 \x01(\x05\x1a\x14\n\x04TAG1\x12\x0c\n\x04tag1\x18\x01 \x01(\t\"\xd3\x02\n\x0esend_emoji_req\x12\x19\n\x05login\x18\x01 \x01(\x0b\x32\n.LoginInfo\x12\x0c\n\x04tag2\x18\x02 \x01(\x05\x12)\n\x05\x65moji\x18\x03 \x01(\x0b\x32\x1a.send_emoji_req.emoji_info\x12\x0c\n\x04tag4\x18\x04 \x01(\x05\x1a\xde\x01\n\nemoji_info\x12\x14\n\x0c\x61nimation_id\x18\x01 \x01(\t\x12\x0c\n\x04tag2\x18\x02 \x01(\x05\x12\x0c\n\x04tag3\x18\x03 \x01(\x05\x12-\n\x04tag4\x18\x04 \x01(\x0b\x32\x1f.send_emoji_req.emoji_info.TAG4\x12\x0c\n\x04tag5\x18\x05 \x01(\x05\x12\x0f\n\x07to_wxid\x18\x06 \x01(\t\x12\x10\n\x08game_ext\x18\x07 \x01(\t\x12\x0c\n\x04tag8\x18\x08 \x01(\t\x12\x0b\n\x03utc\x18\t \x01(\t\x12\r\n\x05tag11\x18\x0b \x01(\x05\x1a\x14\n\x04TAG4\x12\x0c\n\x04tag1\x18\x01 \x01(\x05\"\x9f\x01\n\x0fsend_emoji_resp\x12$\n\x03res\x18\x03 \x01(\x0b\x32\x17.send_emoji_resp.result\x1a\x66\n\x06result\x12\x0c\n\x04\x63ode\x18\x01 \x01(\x05\x12\x0c\n\x04tag2\x18\x02 \x01(\x05\x12\x0c\n\x04tag3\x18\x03 \x01(\x05\x12\x11\n\tfile_name\x18\x04 \x01(\t\x12\x10\n\x08sync_key\x18\x05 \x01(\x05\x12\r\n\x05svrid\x18\x06 \x01(\x05\"e\n\x16transfer_operation_req\x12\x19\n\x05login\x18\x01 \x01(\x0b\x32\n.LoginInfo\x12\x0c\n\x04tag2\x18\x02 \x01(\x05\x12\x0c\n\x04tag3\x18\x03 \x01(\x05\x12\x14\n\x04info\x18\x04 \x01(\x0b\x32\x06.mmStr\"Q\n\x17transfer_operation_resp\x12\x13\n\x03res\x18\x02 \x01(\x0b\x32\x06.mmStr\x12\x10\n\x08ret_code\x18\x06 \x01(\x05\x12\x0f\n\x07ret_msg\x18\x07 \x01(\t\"a\n\x12transfer_query_req\x12\x19\n\x05login\x18\x01 \x01(\x0b\x32\n.LoginInfo\x12\x0c\n\x04tag2\x18\x02 \x01(\x05\x12\x0c\n\x04tag3\x18\x03 \x01(\x05\x12\x14\n\x04info\x18\x04 \x01(\x0b\x32\x06.mmStr\"M\n\x13transfer_query_resp\x12\x13\n\x03res\x18\x02 \x01(\x0b\x32\x06.mmStr\x12\x10\n\x08ret_code\x18\x06 \x01(\x05\x12\x0f\n\x07ret_msg\x18\x07 \x01(\t\"\xb4\x01\n\x0fget_contact_req\x12\x19\n\x05login\x18\x01 \x01(\x0b\x32\n.LoginInfo\x12\x0c\n\x04tag2\x18\x02 \x01(\x05\x12\x13\n\x04wxid\x18\x03 \x01(\x0b\x32\x05.Wxid\x12\x0c\n\x04tag4\x18\x04 \x01(\x05\x12\x0c\n\x04tag6\x18\x06 \x01(\x05\x12#\n\x04tag7\x18\x07 \x01(\x0b\x32\x15.get_contact_req.TAG7\x12\x0c\n\x04tag8\x18\x08 \x01(\x05\x1a\x14\n\x04TAG7\x12\x0c\n\x04tag1\x18\x01 \x01(\t\"\x8b\x01\n\x10get_contact_resp\x12\x1b\n\x04info\x18\x03 \x01(\x0b\x32\r.contact_info\x12-\n\x06ticket\x18\x05 \x01(\x0b\x32\x1d.get_contact_resp.ticket_info\x1a+\n\x0bticket_info\x12\x0c\n\x04wxid\x18\x01 \x01(\t\x12\x0e\n\x06ticket\x18\x02 \x01(\t\"\xe7\x01\n\x13\x63reate_chatroom_req\x12\x19\n\x05login\x18\x01 \x01(\x0b\x32\n.LoginInfo\x12\'\n\x04tag2\x18\x02 \x01(\x0b\x32\x19.create_chatroom_req.TAG2\x12\x12\n\nmember_cnt\x18\x03 \x01(\x05\x12\x30\n\x06member\x18\x04 \x03(\x0b\x32 .create_chatroom_req.member_info\x12\x0c\n\x04tag5\x18\x05 \x01(\x05\x1a\x14\n\x04TAG2\x12\x0c\n\x04tag1\x18\x01 \x01(\t\x1a\"\n\x0bmember_info\x12\x13\n\x04wxid\x18\x01 \x01(\x0b\x32\x05.Wxid\"\x8a\x04\n\x14\x63reate_chatroom_resp\x12)\n\x03res\x18\x01 \x01(\x0b\x32\x1c.create_chatroom_resp.result\x12\x12\n\nmember_cnt\x18\x05 \x01(\x05\x12\x31\n\x06member\x18\x06 \x03(\x0b\x32!.create_chatroom_resp.member_info\x12\x1c\n\rchatroom_wxid\x18\x07 \x01(\x0b\x32\x05.Wxid\x12\x35\n\x06\x61vatar\x18\x08 \x01(\x0b\x32%.create_chatroom_resp.chatroom_avatar\x1a\x61\n\x06result\x12\x0c\n\x04\x63ode\x18\x01 \x01(\x05\x12\x31\n\x03msg\x18\x02 \x01(\x0b\x32$.create_chatroom_resp.result.err_msg\x1a\x16\n\x07\x65rr_msg\x12\x0b\n\x03msg\x18\x01 \x01(\t\x1a\x99\x01\n\x0bmember_info\x12\x13\n\x04wxid\x18\x01 \x01(\x0b\x32\x05.Wxid\x12\x43\n\tnick_name\x18\x03 \x01(\x0b\x32\x30.create_chatroom_resp.member_info.nick_name_info\x12\x10\n\x08qianming\x18\x0f \x01(\t\x1a\x1e\n\x0enick_name_info\x12\x0c\n\x04name\x18\x01 \x01(\t\x1a,\n\x0f\x63hatroom_avatar\x12\x0b\n\x03len\x18\x01 \x01(\x05\x12\x0c\n\x04\x64\x61ta\x18\x02 \x01(\x0c\"\xa6\x01\n\x1dmm_facing_create_chatroom_req\x12\x19\n\x05login\x18\x01 \x01(\x0b\x32\n.LoginInfo\x12\x0f\n\x07op_code\x18\x02 \x01(\x05\x12\x14\n\x0c\x63hatroom_pwd\x18\x03 \x01(\t\x12\x0b\n\x03lon\x18\x04 \x01(\x02\x12\x0b\n\x03lat\x18\x05 \x01(\x02\x12\x0c\n\x04tag6\x18\x06 \x01(\x05\x12\x0c\n\x04tag9\x18\t \x01(\x05\x12\r\n\x05tag10\x18\n \x01(\t\"\xd0\x02\n\x1emm_facing_create_chatroom_resp\x12\x33\n\x03res\x18\x01 \x01(\x0b\x32&.mm_facing_create_chatroom_resp.result\x12\x12\n\nmember_cnt\x18\x03 \x01(\x05\x12;\n\x06member\x18\x04 \x03(\x0b\x32+.mm_facing_create_chatroom_resp.member_info\x12\x0c\n\x04wxid\x18\x05 \x01(\t\x1ak\n\x06result\x12\x0c\n\x04\x63ode\x18\x01 \x01(\x05\x12;\n\x03msg\x18\x02 \x01(\x0b\x32..mm_facing_create_chatroom_resp.result.err_msg\x1a\x16\n\x07\x65rr_msg\x12\x0b\n\x03msg\x18\x01 \x01(\t\x1a-\n\x0bmember_info\x12\x0b\n\x03msg\x18\x01 \x01(\t\x12\x11\n\tnick_name\x18\x03 \x01(\t\"\x8e\x02\n\x17\x61\x64\x64_chatroom_member_req\x12\x19\n\x05login\x18\x01 \x01(\x0b\x32\n.LoginInfo\x12\x12\n\nmember_cnt\x18\x02 \x01(\x05\x12\x34\n\x06member\x18\x03 \x03(\x0b\x32$.add_chatroom_member_req.member_info\x12=\n\rchatroom_wxid\x18\x04 \x01(\x0b\x32&.add_chatroom_member_req.chatroom_info\x12\x0c\n\x04tag5\x18\x05 \x01(\x05\x1a\"\n\x0bmember_info\x12\x13\n\x04wxid\x18\x01 \x01(\x0b\x32\x05.Wxid\x1a\x1d\n\rchatroom_info\x12\x0c\n\x04wxid\x18\x01 \x01(\t\"\xb0\x01\n\x18\x61\x64\x64_chatroom_member_resp\x12-\n\x03res\x18\x01 \x01(\x0b\x32 .add_chatroom_member_resp.result\x1a\x65\n\x06result\x12\x0c\n\x04\x63ode\x18\x01 \x01(\x05\x12\x35\n\x03msg\x18\x02 \x01(\x0b\x32(.add_chatroom_member_resp.result.err_msg\x1a\x16\n\x07\x65rr_msg\x12\x0b\n\x03msg\x18\x01 \x01(\t')
+  serialized_pb=_b('\n\x08mm.proto\"!\n\x05mmStr\x12\x0b\n\x03len\x18\x01 \x01(\x05\x12\x0b\n\x03str\x18\x02 \x01(\t\"&\n\x05mmRes\x12\x0c\n\x04\x63ode\x18\x01 \x01(\x05\x12\x0f\n\x07message\x18\x02 \x01(\t\"n\n\tLoginInfo\x12\x0e\n\x06\x61\x65sKey\x18\x01 \x01(\x0c\x12\x0b\n\x03uin\x18\x02 \x01(\x05\x12\x0c\n\x04guid\x18\x03 \x01(\t\x12\x11\n\tclientVer\x18\x04 \x01(\x05\x12\x12\n\nandroidVer\x18\x05 \x01(\t\x12\x0f\n\x07unknown\x18\x06 \x01(\x05\"\x92\x01\n\x07SyncKey\x12\x0b\n\x03len\x18\x01 \x01(\x05\x12\x1f\n\x06msgkey\x18\x02 \x01(\x0b\x32\x0f.SyncKey.MsgKey\x1aY\n\x06MsgKey\x12\x0b\n\x03\x63nt\x18\x01 \x01(\x05\x12 \n\x03key\x18\x02 \x03(\x0b\x32\x13.SyncKey.MsgKey.Key\x1a \n\x03Key\x12\x0c\n\x04type\x18\x01 \x01(\x05\x12\x0b\n\x03key\x18\x02 \x01(\x03\"]\n\ncommon_msg\x12\x0c\n\x04type\x18\x01 \x01(\x05\x12\x1e\n\x04\x64\x61ta\x18\x02 \x01(\x0b\x32\x10.common_msg.Data\x1a!\n\x04\x44\x61ta\x12\x0b\n\x03len\x18\x01 \x01(\x05\x12\x0c\n\x04\x64\x61ta\x18\x02 \x01(\x0c\"\x12\n\x04Wxid\x12\n\n\x02id\x18\x01 \x01(\t\"\x94\x02\n\x03Msg\x12\x10\n\x08serverid\x18\x01 \x01(\x03\x12\x16\n\x07\x66rom_id\x18\x02 \x01(\x0b\x32\x05.Wxid\x12\x14\n\x05to_id\x18\x03 \x01(\x0b\x32\x05.Wxid\x12\x0c\n\x04type\x18\x04 \x01(\x05\x12\x1c\n\x03raw\x18\x05 \x01(\x0b\x32\x0f.Msg.RawContent\x12\x0e\n\x06status\x18\x06 \x01(\x05\x12\x0c\n\x04tag7\x18\x07 \x01(\x05\x12\x0c\n\x04tag8\x18\x08 \x01(\x0c\x12\x12\n\ncreateTime\x18\t \x01(\x05\x12\x0f\n\x07\x65x_info\x18\n \x01(\t\x12\x12\n\nxmlContent\x18\x0b \x01(\t\x12\r\n\x05svrId\x18\x0c \x01(\x03\x12\x0e\n\x06msgKey\x18\r \x01(\x05\x1a\x1d\n\nRawContent\x12\x0f\n\x07\x63ontent\x18\x01 \x01(\t\"\xef\n\n\x0c\x63ontact_info\x12\x13\n\x04wxid\x18\x01 \x01(\x0b\x32\x05.Wxid\x12(\n\x08nickname\x18\x02 \x01(\x0b\x32\x16.contact_info.NickName\x12\'\n\x07shortPy\x18\x03 \x01(\x0b\x32\x16.contact_info.PY_SHORT\x12&\n\x07quanpin\x18\x04 \x01(\x0b\x32\x15.contact_info.QuanPin\x12\x0b\n\x03sex\x18\x05 \x01(\x05\x12\x0c\n\x04tag6\x18\x06 \x01(\t\x12\x0c\n\x04tag7\x18\x07 \x01(\x05\x12\x0c\n\x04type\x18\x08 \x01(\x05\x12\x0c\n\x04tag9\x18\t \x01(\x05\x12)\n\x0bremark_name\x18\n \x01(\x0b\x32\x14.contact_info.BeiZhu\x12\x31\n\x0creal_shortPy\x18\x0b \x01(\x0b\x32\x1b.contact_info.REAL_PY_SHORT\x12\x30\n\x0creal_quanpin\x18\x0c \x01(\x0b\x32\x1a.contact_info.REAL_QuanPin\x12\r\n\x05tag13\x18\r \x01(\x05\x12\r\n\x05tag14\x18\x0e \x01(\x05\x12\r\n\x05tag16\x18\x10 \x01(\t\x12\x11\n\tbChatRoom\x18\x11 \x01(\x05\x12\r\n\x05tag18\x18\x12 \x01(\x05\x12\r\n\x05sheng\x18\x13 \x01(\t\x12\x0b\n\x03shi\x18\x14 \x01(\t\x12\x10\n\x08qianming\x18\x15 \x01(\t\x12\r\n\x05tag22\x18\x16 \x01(\x05\x12\r\n\x05tag23\x18\x17 \x01(\x05\x12\x1a\n\x12register_body_type\x18\x18 \x01(\x05\x12\x15\n\rregister_body\x18\x19 \x01(\t\x12\r\n\x05tag26\x18\x1a \x01(\x05\x12\x0b\n\x03src\x18\x1b \x01(\x05\x12\x13\n\x0blastMsgTime\x18\x1d \x01(\t\x12\r\n\x05\x61lias\x18\x1e \x01(\t\x12\x19\n\x11\x63hatroomOwnerWxid\x18\x1f \x01(\t\x12\r\n\x05tag33\x18! \x01(\x05\x12\r\n\x05tag34\x18\" \x01(\x05\x12\r\n\x05tag35\x18# \x01(\x05\x12\r\n\x05tag37\x18% \x01(\x0c\x12\x0f\n\x07\x63ountry\x18& \x01(\t\x12\x12\n\navatar_big\x18\' \x01(\t\x12\x14\n\x0c\x61vatar_small\x18( \x01(\t\x12\r\n\x05tag42\x18* \x01(\x0c\x12\x0f\n\x07v1_name\x18- \x01(\t\x12\r\n\x05tag50\x18\x32 \x01(\x0c\x12\x1a\n\x12\x63hatroom_serverVer\x18\x35 \x01(\x05\x12\x1b\n\x13\x63hatroom_max_member\x18\x37 \x01(\x05\x12\r\n\x05tag56\x18\x38 \x01(\x05\x12\x38\n\x11group_member_list\x18\x39 \x01(\x0b\x32\x1d.contact_info.GroupMemberList\x12\r\n\x05tag58\x18: \x01(\x05\x12\r\n\x05tag62\x18> \x01(\x0c\x12\r\n\x05tag64\x18@ \x01(\x05\x12\r\n\x05tag65\x18\x41 \x01(\x05\x12\r\n\x05tag66\x18\x42 \x01(\x05\x12\r\n\x05tag67\x18\x43 \x01(\x05\x1a\x18\n\x08NickName\x12\x0c\n\x04name\x18\x01 \x01(\t\x1a\x18\n\x08PY_SHORT\x12\x0c\n\x04name\x18\x01 \x01(\t\x1a\x17\n\x07QuanPin\x12\x0c\n\x04name\x18\x01 \x01(\t\x1a\x16\n\x06\x42\x65iZhu\x12\x0c\n\x04name\x18\x01 \x01(\t\x1a\x1d\n\rREAL_PY_SHORT\x12\x0c\n\x04name\x18\x01 \x01(\t\x1a\x1c\n\x0cREAL_QuanPin\x12\x0c\n\x04name\x18\x01 \x01(\t\x1a\xac\x01\n\x0fGroupMemberList\x12\x0b\n\x03\x63nt\x18\x01 \x01(\x05\x12\x38\n\x06member\x18\x02 \x03(\x0b\x32(.contact_info.GroupMemberList.MemberInfo\x12\x0c\n\x04tag3\x18\x03 \x01(\x05\x12\x0c\n\x04tag4\x18\x04 \x01(\t\x1a\x36\n\nMemberInfo\x12\x0c\n\x04wxid\x18\x01 \x01(\t\x12\x0c\n\x04tag6\x18\x06 \x01(\x05\x12\x0c\n\x04tag8\x18\x08 \x01(\x05\"\xc6\x02\n\x18ManualAuthAccountRequest\x12-\n\x03\x61\x65s\x18\x01 \x02(\x0b\x32 .ManualAuthAccountRequest.AesKey\x12,\n\x04\x65\x63\x64h\x18\x02 \x02(\x0b\x32\x1e.ManualAuthAccountRequest.Ecdh\x12\x10\n\x08userName\x18\x03 \x02(\t\x12\x11\n\tpassword1\x18\x04 \x02(\t\x12\x11\n\tpassword2\x18\x05 \x02(\t\x1a\"\n\x06\x41\x65sKey\x12\x0b\n\x03len\x18\x01 \x02(\x05\x12\x0b\n\x03key\x18\x02 \x02(\x0c\x1aq\n\x04\x45\x63\x64h\x12\x0b\n\x03nid\x18\x01 \x02(\x05\x12\x37\n\x07\x65\x63\x64hKey\x18\x02 \x02(\x0b\x32&.ManualAuthAccountRequest.Ecdh.EcdhKey\x1a#\n\x07\x45\x63\x64hKey\x12\x0b\n\x03len\x18\x01 \x02(\x05\x12\x0b\n\x03key\x18\x02 \x02(\x0c\"\xd2\x05\n\x17ManualAuthDeviceRequest\x12\x19\n\x05login\x18\x01 \x01(\x0b\x32\n.LoginInfo\x12,\n\x04tag2\x18\x02 \x01(\x0b\x32\x1e.ManualAuthDeviceRequest._Tag2\x12\x0c\n\x04imei\x18\x03 \x01(\t\x12\x13\n\x0bsoftInfoXml\x18\x04 \x01(\t\x12\x10\n\x08unknown5\x18\x05 \x01(\x05\x12\x13\n\x0b\x63lientSeqID\x18\x06 \x01(\t\x12\x18\n\x10\x63lientSeqID_sign\x18\x07 \x01(\t\x12\x17\n\x0floginDeviceName\x18\x08 \x01(\t\x12\x15\n\rdeviceInfoXml\x18\t \x01(\t\x12\x10\n\x08language\x18\n \x01(\t\x12\x10\n\x08timeZone\x18\x0b \x01(\t\x12\x11\n\tunknown13\x18\r \x01(\x05\x12\x11\n\tunknown14\x18\x0e \x01(\x05\x12\x13\n\x0b\x64\x65viceBrand\x18\x0f \x01(\t\x12\x13\n\x0b\x64\x65viceModel\x18\x10 \x01(\t\x12\x0e\n\x06osType\x18\x11 \x01(\t\x12\x13\n\x0brealCountry\x18\x12 \x01(\t\x12\x11\n\tunknown22\x18\x16 \x01(\x05\x1a\xad\x02\n\x05_Tag2\x12\x14\n\x04tag1\x18\x01 \x01(\x0b\x32\x06.mmStr\x12\x33\n\x04tag2\x18\x02 \x01(\x0b\x32%.ManualAuthDeviceRequest._Tag2.__Tag2\x12\x31\n\x04tag3\x18\x03 \x01(\x0b\x32#.ManualAuthDeviceRequest._Tag2.TAG3\x12\x14\n\x04tag4\x18\x04 \x01(\x0b\x32\x06.mmStr\x12\x14\n\x04tag5\x18\x05 \x01(\x0b\x32\x06.mmStr\x12\x0c\n\x04tag6\x18\x06 \x01(\x05\x1aH\n\x06__Tag2\x12\x0c\n\x04tag1\x18\x01 \x01(\t\x12\x0c\n\x04tag2\x18\x02 \x01(\t\x12\x0c\n\x04tag3\x18\x03 \x01(\t\x12\x14\n\x04tag4\x18\x04 \x01(\x0b\x32\x06.mmStr\x1a\"\n\x04TAG3\x12\x0c\n\x04tag1\x18\x01 \x01(\t\x12\x0c\n\x04tag2\x18\x02 \x01(\t\"\xb9\x0c\n\x12ManualAuthResponse\x12.\n\x06result\x18\x01 \x02(\x0b\x32\x1e.ManualAuthResponse.AuthResult\x12\x11\n\tunifyFlag\x18\x02 \x02(\x05\x12\x30\n\tauthParam\x18\x03 \x02(\x0b\x32\x1d.ManualAuthResponse.AuthParam\x12\x34\n\x0b\x61\x63\x63ountInfo\x18\x04 \x01(\x0b\x32\x1f.ManualAuthResponse.AccountInfo\x12)\n\x03\x64ns\x18\x05 \x01(\x0b\x32\x1c.ManualAuthResponse.dns_info\x1ai\n\nAuthResult\x12\x0c\n\x04\x63ode\x18\x01 \x02(\x05\x12\x36\n\x07\x65rr_msg\x18\x02 \x02(\x0b\x32%.ManualAuthResponse.AuthResult.ErrMsg\x1a\x15\n\x06\x45rrMsg\x12\x0b\n\x03msg\x18\x01 \x01(\t\x1a\xe5\x02\n\tAuthParam\x12\x0b\n\x03uin\x18\x01 \x02(\x05\x12\x30\n\x04\x65\x63\x64h\x18\x02 \x02(\x0b\x32\".ManualAuthResponse.AuthParam.Ecdh\x12\x39\n\x07session\x18\x03 \x02(\x0b\x32(.ManualAuthResponse.AuthParam.SessionKey\x12\x11\n\tSmsTicket\x18\x10 \x01(\x0c\x12\x18\n\x10\x62indMailLoginUrl\x18\x14 \x01(\t\x12\x12\n\nserverTime\x18\x16 \x01(\x05\x1au\n\x04\x45\x63\x64h\x12\x0b\n\x03nid\x18\x01 \x02(\x05\x12;\n\x07\x65\x63\x64hKey\x18\x02 \x01(\x0b\x32*.ManualAuthResponse.AuthParam.Ecdh.EcdhKey\x1a#\n\x07\x45\x63\x64hKey\x12\x0b\n\x03len\x18\x01 \x02(\x05\x12\x0b\n\x03key\x18\x02 \x01(\x0c\x1a&\n\nSessionKey\x12\x0b\n\x03len\x18\x01 \x02(\x05\x12\x0b\n\x03key\x18\x02 \x01(\x0c\x1a\xad\x02\n\x0b\x41\x63\x63ountInfo\x12\x0c\n\x04wxId\x18\x01 \x01(\t\x12\x10\n\x08nickName\x18\x02 \x01(\t\x12\x0c\n\x04tag3\x18\x03 \x01(\x05\x12\x10\n\x08\x62indMail\x18\x04 \x01(\t\x12\x12\n\nbindMobile\x18\x05 \x01(\t\x12\r\n\x05\x41lias\x18\x06 \x01(\t\x12\x0c\n\x04tag7\x18\x07 \x01(\t\x12\x0e\n\x06status\x18\x08 \x01(\x05\x12\x12\n\npluginFlag\x18\t \x01(\x05\x12\x14\n\x0cregisterType\x18\n \x01(\x05\x12\r\n\x05tag11\x18\x0b \x01(\t\x12\x12\n\nsafeDevice\x18\x0c \x01(\x05\x12\x1a\n\x12officialNamePinyin\x18\r \x01(\t\x12\x16\n\x0eofficialNameZh\x18\x0e \x01(\t\x12\r\n\x05tag15\x18\x0f \x01(\t\x12\r\n\x05\x66sUrl\x18\x10 \x01(\t\x1a\xc9\x04\n\x08\x64ns_info\x12<\n\x08redirect\x18\x01 \x01(\x0b\x32*.ManualAuthResponse.dns_info.redirect_info\x12\x30\n\x02ip\x18\x03 \x01(\x0b\x32$.ManualAuthResponse.dns_info.ip_info\x1a\x9c\x01\n\rredirect_info\x12\x0b\n\x03\x63nt\x18\x01 \x01(\x05\x12L\n\treal_host\x18\x02 \x03(\x0b\x32\x39.ManualAuthResponse.dns_info.redirect_info.real_host_info\x1a\x30\n\x0ereal_host_info\x12\x0c\n\x04host\x18\x01 \x01(\t\x12\x10\n\x08redirect\x18\x02 \x01(\t\x1a\xad\x02\n\x07ip_info\x12\x17\n\x0flonglink_ip_cnt\x18\x01 \x01(\x05\x12\x18\n\x10shortlink_ip_cnt\x18\x02 \x01(\x05\x12G\n\x08longlink\x18\x03 \x03(\x0b\x32\x35.ManualAuthResponse.dns_info.ip_info.longlink_ip_info\x12I\n\tshortlink\x18\x04 \x03(\x0b\x32\x36.ManualAuthResponse.dns_info.ip_info.shortlink_ip_info\x1a,\n\x10longlink_ip_info\x12\n\n\x02ip\x18\x03 \x01(\t\x12\x0c\n\x04host\x18\x04 \x01(\t\x1a-\n\x11shortlink_ip_info\x12\n\n\x02ip\x18\x03 \x01(\t\x12\x0c\n\x04host\x18\x04 \x01(\t\"w\n\x0eNewInitRequest\x12\x19\n\x05login\x18\x01 \x01(\x0b\x32\n.LoginInfo\x12\x0c\n\x04wxid\x18\x02 \x01(\t\x12\x14\n\x0csync_key_cur\x18\x03 \x01(\x0c\x12\x14\n\x0csync_key_max\x18\x04 \x01(\x0c\x12\x10\n\x08language\x18\x05 \x01(\t\"\x8e\x01\n\x0fNewInitResponse\x12\x0c\n\x04tag1\x18\x01 \x01(\t\x12\x14\n\x0csync_key_cur\x18\x02 \x01(\x0c\x12\x14\n\x0csync_key_max\x18\x03 \x01(\x0c\x12\x15\n\rcontinue_flag\x18\x04 \x01(\x05\x12\x0f\n\x07\x63ntList\x18\x06 \x01(\x05\x12\x19\n\x04tag7\x18\x07 \x03(\x0b\x32\x0b.common_msg\"\xb4\x01\n\x0cnew_sync_req\x12)\n\x04\x66lag\x18\x01 \x01(\x0b\x32\x1b.new_sync_req.continue_flag\x12\x10\n\x08selector\x18\x02 \x01(\x05\x12\x10\n\x08sync_Key\x18\x03 \x01(\x0c\x12\r\n\x05scene\x18\x04 \x01(\x05\x12\x0e\n\x06\x64\x65vice\x18\x05 \x01(\t\x12\x17\n\x0fsync_msg_digest\x18\x06 \x01(\x05\x1a\x1d\n\rcontinue_flag\x12\x0c\n\x04\x66lag\x18\x01 \x01(\x05\"\xc2\x01\n\rnew_sync_resp\x12\x0c\n\x04tag1\x18\x01 \x01(\x05\x12#\n\x03msg\x18\x02 \x01(\x0b\x32\x16.new_sync_resp.new_msg\x12\x0c\n\x04tag3\x18\x03 \x01(\x05\x12\x10\n\x08sync_key\x18\x04 \x01(\x0c\x12\x0c\n\x04tag5\x18\x05 \x01(\x05\x12\x0c\n\x04tag6\x18\x06 \x01(\x05\x12\x0b\n\x03utc\x18\x07 \x01(\x05\x1a\x35\n\x07new_msg\x12\x0f\n\x07\x63ntList\x18\x01 \x01(\x05\x12\x19\n\x04tag2\x18\x02 \x03(\x0b\x32\x0b.common_msg\"\xb7\x01\n\x10new_send_msg_req\x12\x0b\n\x03\x63nt\x18\x01 \x01(\x05\x12\'\n\x03msg\x18\x02 \x01(\x0b\x32\x1a.new_send_msg_req.msg_info\x1am\n\x08msg_info\x12\x11\n\x02to\x18\x01 \x01(\x0b\x32\x05.Wxid\x12\x0f\n\x07\x63ontent\x18\x02 \x01(\x0c\x12\x0c\n\x04type\x18\x03 \x01(\x05\x12\x0b\n\x03utc\x18\x04 \x01(\x05\x12\x11\n\tclient_id\x18\x05 \x01(\x05\x12\x0f\n\x07\x61t_list\x18\x06 \x01(\t\"\xa6\x01\n\x11new_send_msg_resp\x12\x14\n\x04tag1\x18\x01 \x01(\x0b\x32\x06.mmStr\x12\x0b\n\x03\x63nt\x18\x02 \x01(\x05\x12&\n\x03res\x18\x03 \x01(\x0b\x32\x19.new_send_msg_resp.result\x1a\x46\n\x06result\x12\x0c\n\x04\x63ode\x18\x01 \x01(\x05\x12\x11\n\x02to\x18\x02 \x01(\x0b\x32\x05.Wxid\x12\x0c\n\x04type\x18\x07 \x01(\x05\x12\r\n\x05svrid\x18\x08 \x01(\x03\"\xed\x02\n\x14new_send_app_msg_req\x12\x19\n\x05login\x18\x01 \x01(\x0b\x32\n.LoginInfo\x12/\n\x04info\x18\x02 \x01(\x0b\x32!.new_send_app_msg_req.appmsg_info\x12\x0c\n\x04tag4\x18\x04 \x01(\x05\x12\x0c\n\x04tag6\x18\x06 \x01(\x05\x12\x0c\n\x04tag7\x18\x07 \x01(\t\x12\x11\n\tfromScene\x18\x08 \x01(\t\x12\x0c\n\x04tag9\x18\t \x01(\x05\x12\r\n\x05tag10\x18\n \x01(\x05\x1a\xae\x01\n\x0b\x61ppmsg_info\x12\x11\n\tfrom_wxid\x18\x01 \x01(\t\x12\x10\n\x08\x61pp_wxid\x18\x02 \x01(\t\x12\x0c\n\x04tag3\x18\x03 \x01(\x05\x12\x0f\n\x07to_wxid\x18\x04 \x01(\t\x12\x0c\n\x04type\x18\x05 \x01(\x05\x12\x0f\n\x07\x63ontent\x18\x06 \x01(\t\x12\x0b\n\x03utc\x18\x07 \x01(\x05\x12\x11\n\tclient_id\x18\x08 \x01(\t\x12\r\n\x05tag10\x18\n \x01(\x05\x12\r\n\x05tag11\x18\x0b \x01(\x05\"\xa3\x01\n\x15new_send_app_msg_resp\x12\x14\n\x04tag1\x18\x01 \x01(\x0b\x32\x06.mmStr\x12\x11\n\tfrom_wxid\x18\x03 \x01(\t\x12\x0f\n\x07to_wxid\x18\x04 \x01(\t\x12\x13\n\x0bsync_key_id\x18\x05 \x01(\x05\x12\x11\n\tclient_id\x18\x06 \x01(\t\x12\x0b\n\x03utc\x18\x07 \x01(\x05\x12\x0c\n\x04type\x18\x08 \x01(\x05\x12\r\n\x05svrid\x18\t \x01(\x03\"\x9c\x02\n\x0fverify_user_req\x12\x19\n\x05login\x18\x01 \x01(\x0b\x32\n.LoginInfo\x12\x0f\n\x07op_code\x18\x02 \x01(\x05\x12\x0c\n\x04tag3\x18\x03 \x01(\x05\x12(\n\x04user\x18\x04 \x01(\x0b\x32\x1a.verify_user_req.user_info\x12\x0f\n\x07\x63ontent\x18\x05 \x01(\t\x12\x0c\n\x04tag6\x18\x06 \x01(\x05\x12\r\n\x05scene\x18\x07 \x01(\t\x12\x1b\n\x0b\x64\x65vice_info\x18\x08 \x01(\x0b\x32\x06.mmStr\x1aZ\n\tuser_info\x12\x0c\n\x04wxid\x18\x01 \x01(\t\x12\x0e\n\x06ticket\x18\x02 \x01(\t\x12\x13\n\x0b\x61nti_ticket\x18\x03 \x01(\t\x12\x0c\n\x04tag4\x18\x04 \x01(\x05\x12\x0c\n\x04tag8\x18\x08 \x01(\x05\"5\n\x10verify_user_resp\x12\x13\n\x03res\x18\x01 \x01(\x0b\x32\x06.mmRes\x12\x0c\n\x04wxid\x18\x02 \x01(\t\"^\n\x10receive_wxhb_req\x12\x19\n\x05login\x18\x01 \x01(\x0b\x32\n.LoginInfo\x12\x0b\n\x03\x63md\x18\x02 \x01(\x05\x12\x0c\n\x04tag3\x18\x03 \x01(\x05\x12\x14\n\x04info\x18\x04 \x01(\x0b\x32\x06.mmStr\"\xaf\x01\n\x11receive_wxhb_resp\x12%\n\x04tag1\x18\x01 \x01(\x0b\x32\x17.receive_wxhb_resp.TAG1\x12\x17\n\x07hb_info\x18\x02 \x01(\x0b\x32\x06.mmStr\x12\x0b\n\x03\x63md\x18\x05 \x01(\x05\x12\x10\n\x08ret_code\x18\x06 \x01(\x05\x12\x0f\n\x07ret_msg\x18\x07 \x01(\t\x1a*\n\x04TAG1\x12\x0c\n\x04tag1\x18\x01 \x01(\x05\x1a\x14\n\x04TAG1\x12\x0c\n\x04tag1\x18\x01 \x01(\t\"[\n\ropen_wxhb_req\x12\x19\n\x05login\x18\x01 \x01(\x0b\x32\n.LoginInfo\x12\x0b\n\x03\x63md\x18\x02 \x01(\x05\x12\x0c\n\x04tag3\x18\x03 \x01(\x05\x12\x14\n\x04info\x18\x04 \x01(\x0b\x32\x06.mmStr\"\xa5\x01\n\x0eopen_wxhb_resp\x12\"\n\x04tag1\x18\x01 \x01(\x0b\x32\x14.open_wxhb_resp.TAG1\x12\x13\n\x03res\x18\x02 \x01(\x0b\x32\x06.mmStr\x12\x0b\n\x03\x63md\x18\x05 \x01(\x05\x12\x10\n\x08ret_code\x18\x06 \x01(\x05\x12\x0f\n\x07ret_msg\x18\x07 \x01(\t\x1a*\n\x04TAG1\x12\x0c\n\x04tag1\x18\x01 \x01(\x05\x1a\x14\n\x04TAG1\x12\x0c\n\x04tag1\x18\x01 \x01(\t\"a\n\x13qry_detail_wxhb_req\x12\x19\n\x05login\x18\x01 \x01(\x0b\x32\n.LoginInfo\x12\x0b\n\x03\x63md\x18\x02 \x01(\x05\x12\x0c\n\x04tag3\x18\x03 \x01(\x05\x12\x14\n\x04info\x18\x04 \x01(\x0b\x32\x06.mmStr\"\xb1\x01\n\x14qry_detail_wxhb_resp\x12(\n\x04tag1\x18\x01 \x01(\x0b\x32\x1a.qry_detail_wxhb_resp.TAG1\x12\x13\n\x03res\x18\x02 \x01(\x0b\x32\x06.mmStr\x12\x0b\n\x03\x63md\x18\x05 \x01(\x05\x12\x10\n\x08ret_code\x18\x06 \x01(\x05\x12\x0f\n\x07ret_msg\x18\x07 \x01(\t\x1a*\n\x04TAG1\x12\x0c\n\x04tag1\x18\x01 \x01(\x05\x1a\x14\n\x04TAG1\x12\x0c\n\x04tag1\x18\x01 \x01(\t\"\xd3\x02\n\x0esend_emoji_req\x12\x19\n\x05login\x18\x01 \x01(\x0b\x32\n.LoginInfo\x12\x0c\n\x04tag2\x18\x02 \x01(\x05\x12)\n\x05\x65moji\x18\x03 \x01(\x0b\x32\x1a.send_emoji_req.emoji_info\x12\x0c\n\x04tag4\x18\x04 \x01(\x05\x1a\xde\x01\n\nemoji_info\x12\x14\n\x0c\x61nimation_id\x18\x01 \x01(\t\x12\x0c\n\x04tag2\x18\x02 \x01(\x05\x12\x0c\n\x04tag3\x18\x03 \x01(\x05\x12-\n\x04tag4\x18\x04 \x01(\x0b\x32\x1f.send_emoji_req.emoji_info.TAG4\x12\x0c\n\x04tag5\x18\x05 \x01(\x05\x12\x0f\n\x07to_wxid\x18\x06 \x01(\t\x12\x10\n\x08game_ext\x18\x07 \x01(\t\x12\x0c\n\x04tag8\x18\x08 \x01(\t\x12\x0b\n\x03utc\x18\t \x01(\t\x12\r\n\x05tag11\x18\x0b \x01(\x05\x1a\x14\n\x04TAG4\x12\x0c\n\x04tag1\x18\x01 \x01(\x05\"\x9f\x01\n\x0fsend_emoji_resp\x12$\n\x03res\x18\x03 \x01(\x0b\x32\x17.send_emoji_resp.result\x1a\x66\n\x06result\x12\x0c\n\x04\x63ode\x18\x01 \x01(\x05\x12\x0c\n\x04tag2\x18\x02 \x01(\x05\x12\x0c\n\x04tag3\x18\x03 \x01(\x05\x12\x11\n\tfile_name\x18\x04 \x01(\t\x12\x10\n\x08sync_key\x18\x05 \x01(\x05\x12\r\n\x05svrid\x18\x06 \x01(\x05\"e\n\x16transfer_operation_req\x12\x19\n\x05login\x18\x01 \x01(\x0b\x32\n.LoginInfo\x12\x0c\n\x04tag2\x18\x02 \x01(\x05\x12\x0c\n\x04tag3\x18\x03 \x01(\x05\x12\x14\n\x04info\x18\x04 \x01(\x0b\x32\x06.mmStr\"Q\n\x17transfer_operation_resp\x12\x13\n\x03res\x18\x02 \x01(\x0b\x32\x06.mmStr\x12\x10\n\x08ret_code\x18\x06 \x01(\x05\x12\x0f\n\x07ret_msg\x18\x07 \x01(\t\"a\n\x12transfer_query_req\x12\x19\n\x05login\x18\x01 \x01(\x0b\x32\n.LoginInfo\x12\x0c\n\x04tag2\x18\x02 \x01(\x05\x12\x0c\n\x04tag3\x18\x03 \x01(\x05\x12\x14\n\x04info\x18\x04 \x01(\x0b\x32\x06.mmStr\"M\n\x13transfer_query_resp\x12\x13\n\x03res\x18\x02 \x01(\x0b\x32\x06.mmStr\x12\x10\n\x08ret_code\x18\x06 \x01(\x05\x12\x0f\n\x07ret_msg\x18\x07 \x01(\t\"\xb4\x01\n\x0fget_contact_req\x12\x19\n\x05login\x18\x01 \x01(\x0b\x32\n.LoginInfo\x12\x0c\n\x04tag2\x18\x02 \x01(\x05\x12\x13\n\x04wxid\x18\x03 \x01(\x0b\x32\x05.Wxid\x12\x0c\n\x04tag4\x18\x04 \x01(\x05\x12\x0c\n\x04tag6\x18\x06 \x01(\x05\x12#\n\x04tag7\x18\x07 \x01(\x0b\x32\x15.get_contact_req.TAG7\x12\x0c\n\x04tag8\x18\x08 \x01(\x05\x1a\x14\n\x04TAG7\x12\x0c\n\x04tag1\x18\x01 \x01(\t\"\x8b\x01\n\x10get_contact_resp\x12\x1b\n\x04info\x18\x03 \x01(\x0b\x32\r.contact_info\x12-\n\x06ticket\x18\x05 \x01(\x0b\x32\x1d.get_contact_resp.ticket_info\x1a+\n\x0bticket_info\x12\x0c\n\x04wxid\x18\x01 \x01(\t\x12\x0e\n\x06ticket\x18\x02 \x01(\t\"\xe7\x01\n\x13\x63reate_chatroom_req\x12\x19\n\x05login\x18\x01 \x01(\x0b\x32\n.LoginInfo\x12\'\n\x04tag2\x18\x02 \x01(\x0b\x32\x19.create_chatroom_req.TAG2\x12\x12\n\nmember_cnt\x18\x03 \x01(\x05\x12\x30\n\x06member\x18\x04 \x03(\x0b\x32 .create_chatroom_req.member_info\x12\x0c\n\x04tag5\x18\x05 \x01(\x05\x1a\x14\n\x04TAG2\x12\x0c\n\x04tag1\x18\x01 \x01(\t\x1a\"\n\x0bmember_info\x12\x13\n\x04wxid\x18\x01 \x01(\x0b\x32\x05.Wxid\"\x8a\x04\n\x14\x63reate_chatroom_resp\x12)\n\x03res\x18\x01 \x01(\x0b\x32\x1c.create_chatroom_resp.result\x12\x12\n\nmember_cnt\x18\x05 \x01(\x05\x12\x31\n\x06member\x18\x06 \x03(\x0b\x32!.create_chatroom_resp.member_info\x12\x1c\n\rchatroom_wxid\x18\x07 \x01(\x0b\x32\x05.Wxid\x12\x35\n\x06\x61vatar\x18\x08 \x01(\x0b\x32%.create_chatroom_resp.chatroom_avatar\x1a\x61\n\x06result\x12\x0c\n\x04\x63ode\x18\x01 \x01(\x05\x12\x31\n\x03msg\x18\x02 \x01(\x0b\x32$.create_chatroom_resp.result.err_msg\x1a\x16\n\x07\x65rr_msg\x12\x0b\n\x03msg\x18\x01 \x01(\t\x1a\x99\x01\n\x0bmember_info\x12\x13\n\x04wxid\x18\x01 \x01(\x0b\x32\x05.Wxid\x12\x43\n\tnick_name\x18\x03 \x01(\x0b\x32\x30.create_chatroom_resp.member_info.nick_name_info\x12\x10\n\x08qianming\x18\x0f \x01(\t\x1a\x1e\n\x0enick_name_info\x12\x0c\n\x04name\x18\x01 \x01(\t\x1a,\n\x0f\x63hatroom_avatar\x12\x0b\n\x03len\x18\x01 \x01(\x05\x12\x0c\n\x04\x64\x61ta\x18\x02 \x01(\x0c\"\xa6\x01\n\x1dmm_facing_create_chatroom_req\x12\x19\n\x05login\x18\x01 \x01(\x0b\x32\n.LoginInfo\x12\x0f\n\x07op_code\x18\x02 \x01(\x05\x12\x14\n\x0c\x63hatroom_pwd\x18\x03 \x01(\t\x12\x0b\n\x03lon\x18\x04 \x01(\x02\x12\x0b\n\x03lat\x18\x05 \x01(\x02\x12\x0c\n\x04tag6\x18\x06 \x01(\x05\x12\x0c\n\x04tag9\x18\t \x01(\x05\x12\r\n\x05tag10\x18\n \x01(\t\"\xd0\x02\n\x1emm_facing_create_chatroom_resp\x12\x33\n\x03res\x18\x01 \x01(\x0b\x32&.mm_facing_create_chatroom_resp.result\x12\x12\n\nmember_cnt\x18\x03 \x01(\x05\x12;\n\x06member\x18\x04 \x03(\x0b\x32+.mm_facing_create_chatroom_resp.member_info\x12\x0c\n\x04wxid\x18\x05 \x01(\t\x1ak\n\x06result\x12\x0c\n\x04\x63ode\x18\x01 \x01(\x05\x12;\n\x03msg\x18\x02 \x01(\x0b\x32..mm_facing_create_chatroom_resp.result.err_msg\x1a\x16\n\x07\x65rr_msg\x12\x0b\n\x03msg\x18\x01 \x01(\t\x1a-\n\x0bmember_info\x12\x0b\n\x03msg\x18\x01 \x01(\t\x12\x11\n\tnick_name\x18\x03 \x01(\t\"\x8e\x02\n\x17\x61\x64\x64_chatroom_member_req\x12\x19\n\x05login\x18\x01 \x01(\x0b\x32\n.LoginInfo\x12\x12\n\nmember_cnt\x18\x02 \x01(\x05\x12\x34\n\x06member\x18\x03 \x03(\x0b\x32$.add_chatroom_member_req.member_info\x12=\n\rchatroom_wxid\x18\x04 \x01(\x0b\x32&.add_chatroom_member_req.chatroom_info\x12\x0c\n\x04tag5\x18\x05 \x01(\x05\x1a\"\n\x0bmember_info\x12\x13\n\x04wxid\x18\x01 \x01(\x0b\x32\x05.Wxid\x1a\x1d\n\rchatroom_info\x12\x0c\n\x04wxid\x18\x01 \x01(\t\"\xb0\x01\n\x18\x61\x64\x64_chatroom_member_resp\x12-\n\x03res\x18\x01 \x01(\x0b\x32 .add_chatroom_member_resp.result\x1a\x65\n\x06result\x12\x0c\n\x04\x63ode\x18\x01 \x01(\x05\x12\x35\n\x03msg\x18\x02 \x01(\x0b\x32(.add_chatroom_member_resp.result.err_msg\x1a\x16\n\x07\x65rr_msg\x12\x0b\n\x03msg\x18\x01 \x01(\t')
 )
 
 
@@ -411,8 +411,8 @@ _MSG_RAWCONTENT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=714,
-  serialized_end=743,
+  serialized_start=711,
+  serialized_end=740,
 )
 
 _MSG = _descriptor.Descriptor(
@@ -486,7 +486,7 @@ _MSG = _descriptor.Descriptor(
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='anticlient', full_name='Msg.anticlient', index=9,
+      name='ex_info', full_name='Msg.ex_info', index=9,
       number=10, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
@@ -526,7 +526,7 @@ _MSG = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=464,
-  serialized_end=743,
+  serialized_end=740,
 )
 
 
@@ -556,8 +556,8 @@ _CONTACT_INFO_NICKNAME = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1802,
-  serialized_end=1826,
+  serialized_start=1799,
+  serialized_end=1823,
 )
 
 _CONTACT_INFO_PY_SHORT = _descriptor.Descriptor(
@@ -586,8 +586,8 @@ _CONTACT_INFO_PY_SHORT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1828,
-  serialized_end=1852,
+  serialized_start=1825,
+  serialized_end=1849,
 )
 
 _CONTACT_INFO_QUANPIN = _descriptor.Descriptor(
@@ -616,8 +616,8 @@ _CONTACT_INFO_QUANPIN = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1854,
-  serialized_end=1877,
+  serialized_start=1851,
+  serialized_end=1874,
 )
 
 _CONTACT_INFO_BEIZHU = _descriptor.Descriptor(
@@ -646,8 +646,8 @@ _CONTACT_INFO_BEIZHU = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1879,
-  serialized_end=1901,
+  serialized_start=1876,
+  serialized_end=1898,
 )
 
 _CONTACT_INFO_REAL_PY_SHORT = _descriptor.Descriptor(
@@ -676,8 +676,8 @@ _CONTACT_INFO_REAL_PY_SHORT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1903,
-  serialized_end=1932,
+  serialized_start=1900,
+  serialized_end=1929,
 )
 
 _CONTACT_INFO_REAL_QUANPIN = _descriptor.Descriptor(
@@ -706,8 +706,8 @@ _CONTACT_INFO_REAL_QUANPIN = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1934,
-  serialized_end=1962,
+  serialized_start=1931,
+  serialized_end=1959,
 )
 
 _CONTACT_INFO_GROUPMEMBERLIST_MEMBERINFO = _descriptor.Descriptor(
@@ -750,8 +750,8 @@ _CONTACT_INFO_GROUPMEMBERLIST_MEMBERINFO = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2083,
-  serialized_end=2137,
+  serialized_start=2080,
+  serialized_end=2134,
 )
 
 _CONTACT_INFO_GROUPMEMBERLIST = _descriptor.Descriptor(
@@ -801,8 +801,8 @@ _CONTACT_INFO_GROUPMEMBERLIST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1965,
-  serialized_end=2137,
+  serialized_start=1962,
+  serialized_end=2134,
 )
 
 _CONTACT_INFO = _descriptor.Descriptor(
@@ -1167,8 +1167,8 @@ _CONTACT_INFO = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=746,
-  serialized_end=2137,
+  serialized_start=743,
+  serialized_end=2134,
 )
 
 
@@ -1205,8 +1205,8 @@ _MANUALAUTHACCOUNTREQUEST_AESKEY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2317,
-  serialized_end=2351,
+  serialized_start=2314,
+  serialized_end=2348,
 )
 
 _MANUALAUTHACCOUNTREQUEST_ECDH_ECDHKEY = _descriptor.Descriptor(
@@ -1242,8 +1242,8 @@ _MANUALAUTHACCOUNTREQUEST_ECDH_ECDHKEY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2431,
-  serialized_end=2466,
+  serialized_start=2428,
+  serialized_end=2463,
 )
 
 _MANUALAUTHACCOUNTREQUEST_ECDH = _descriptor.Descriptor(
@@ -1279,8 +1279,8 @@ _MANUALAUTHACCOUNTREQUEST_ECDH = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2353,
-  serialized_end=2466,
+  serialized_start=2350,
+  serialized_end=2463,
 )
 
 _MANUALAUTHACCOUNTREQUEST = _descriptor.Descriptor(
@@ -1337,8 +1337,8 @@ _MANUALAUTHACCOUNTREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2140,
-  serialized_end=2466,
+  serialized_start=2137,
+  serialized_end=2463,
 )
 
 
@@ -1389,8 +1389,8 @@ _MANUALAUTHDEVICEREQUEST__TAG2___TAG2 = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3083,
-  serialized_end=3155,
+  serialized_start=3080,
+  serialized_end=3152,
 )
 
 _MANUALAUTHDEVICEREQUEST__TAG2_TAG3 = _descriptor.Descriptor(
@@ -1426,8 +1426,8 @@ _MANUALAUTHDEVICEREQUEST__TAG2_TAG3 = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3157,
-  serialized_end=3191,
+  serialized_start=3154,
+  serialized_end=3188,
 )
 
 _MANUALAUTHDEVICEREQUEST__TAG2 = _descriptor.Descriptor(
@@ -1491,8 +1491,8 @@ _MANUALAUTHDEVICEREQUEST__TAG2 = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2890,
-  serialized_end=3191,
+  serialized_start=2887,
+  serialized_end=3188,
 )
 
 _MANUALAUTHDEVICEREQUEST = _descriptor.Descriptor(
@@ -1640,8 +1640,8 @@ _MANUALAUTHDEVICEREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2469,
-  serialized_end=3191,
+  serialized_start=2466,
+  serialized_end=3188,
 )
 
 
@@ -1671,8 +1671,8 @@ _MANUALAUTHRESPONSE_AUTHRESULT_ERRMSG = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3514,
-  serialized_end=3535,
+  serialized_start=3511,
+  serialized_end=3532,
 )
 
 _MANUALAUTHRESPONSE_AUTHRESULT = _descriptor.Descriptor(
@@ -1708,8 +1708,8 @@ _MANUALAUTHRESPONSE_AUTHRESULT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3430,
-  serialized_end=3535,
+  serialized_start=3427,
+  serialized_end=3532,
 )
 
 _MANUALAUTHRESPONSE_AUTHPARAM_ECDH_ECDHKEY = _descriptor.Descriptor(
@@ -1745,8 +1745,8 @@ _MANUALAUTHRESPONSE_AUTHPARAM_ECDH_ECDHKEY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3820,
-  serialized_end=3855,
+  serialized_start=3817,
+  serialized_end=3852,
 )
 
 _MANUALAUTHRESPONSE_AUTHPARAM_ECDH = _descriptor.Descriptor(
@@ -1782,8 +1782,8 @@ _MANUALAUTHRESPONSE_AUTHPARAM_ECDH = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3738,
-  serialized_end=3855,
+  serialized_start=3735,
+  serialized_end=3852,
 )
 
 _MANUALAUTHRESPONSE_AUTHPARAM_SESSIONKEY = _descriptor.Descriptor(
@@ -1819,8 +1819,8 @@ _MANUALAUTHRESPONSE_AUTHPARAM_SESSIONKEY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3857,
-  serialized_end=3895,
+  serialized_start=3854,
+  serialized_end=3892,
 )
 
 _MANUALAUTHRESPONSE_AUTHPARAM = _descriptor.Descriptor(
@@ -1884,8 +1884,8 @@ _MANUALAUTHRESPONSE_AUTHPARAM = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3538,
-  serialized_end=3895,
+  serialized_start=3535,
+  serialized_end=3892,
 )
 
 _MANUALAUTHRESPONSE_ACCOUNTINFO = _descriptor.Descriptor(
@@ -2019,8 +2019,8 @@ _MANUALAUTHRESPONSE_ACCOUNTINFO = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3898,
-  serialized_end=4199,
+  serialized_start=3895,
+  serialized_end=4196,
 )
 
 _MANUALAUTHRESPONSE_DNS_INFO_REDIRECT_INFO_REAL_HOST_INFO = _descriptor.Descriptor(
@@ -2056,8 +2056,8 @@ _MANUALAUTHRESPONSE_DNS_INFO_REDIRECT_INFO_REAL_HOST_INFO = _descriptor.Descript
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=4435,
-  serialized_end=4483,
+  serialized_start=4432,
+  serialized_end=4480,
 )
 
 _MANUALAUTHRESPONSE_DNS_INFO_REDIRECT_INFO = _descriptor.Descriptor(
@@ -2093,8 +2093,8 @@ _MANUALAUTHRESPONSE_DNS_INFO_REDIRECT_INFO = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=4327,
-  serialized_end=4483,
+  serialized_start=4324,
+  serialized_end=4480,
 )
 
 _MANUALAUTHRESPONSE_DNS_INFO_IP_INFO_LONGLINK_IP_INFO = _descriptor.Descriptor(
@@ -2130,8 +2130,8 @@ _MANUALAUTHRESPONSE_DNS_INFO_IP_INFO_LONGLINK_IP_INFO = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=4696,
-  serialized_end=4740,
+  serialized_start=4693,
+  serialized_end=4737,
 )
 
 _MANUALAUTHRESPONSE_DNS_INFO_IP_INFO_SHORTLINK_IP_INFO = _descriptor.Descriptor(
@@ -2167,8 +2167,8 @@ _MANUALAUTHRESPONSE_DNS_INFO_IP_INFO_SHORTLINK_IP_INFO = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=4742,
-  serialized_end=4787,
+  serialized_start=4739,
+  serialized_end=4784,
 )
 
 _MANUALAUTHRESPONSE_DNS_INFO_IP_INFO = _descriptor.Descriptor(
@@ -2218,8 +2218,8 @@ _MANUALAUTHRESPONSE_DNS_INFO_IP_INFO = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=4486,
-  serialized_end=4787,
+  serialized_start=4483,
+  serialized_end=4784,
 )
 
 _MANUALAUTHRESPONSE_DNS_INFO = _descriptor.Descriptor(
@@ -2255,8 +2255,8 @@ _MANUALAUTHRESPONSE_DNS_INFO = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=4202,
-  serialized_end=4787,
+  serialized_start=4199,
+  serialized_end=4784,
 )
 
 _MANUALAUTHRESPONSE = _descriptor.Descriptor(
@@ -2313,8 +2313,8 @@ _MANUALAUTHRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3194,
-  serialized_end=4787,
+  serialized_start=3191,
+  serialized_end=4784,
 )
 
 
@@ -2372,8 +2372,8 @@ _NEWINITREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=4789,
-  serialized_end=4908,
+  serialized_start=4786,
+  serialized_end=4905,
 )
 
 
@@ -2438,8 +2438,8 @@ _NEWINITRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=4911,
-  serialized_end=5053,
+  serialized_start=4908,
+  serialized_end=5050,
 )
 
 
@@ -2469,8 +2469,8 @@ _NEW_SYNC_REQ_CONTINUE_FLAG = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=5207,
-  serialized_end=5236,
+  serialized_start=5204,
+  serialized_end=5233,
 )
 
 _NEW_SYNC_REQ = _descriptor.Descriptor(
@@ -2534,8 +2534,8 @@ _NEW_SYNC_REQ = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=5056,
-  serialized_end=5236,
+  serialized_start=5053,
+  serialized_end=5233,
 )
 
 
@@ -2572,8 +2572,8 @@ _NEW_SYNC_RESP_NEW_MSG = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=5380,
-  serialized_end=5433,
+  serialized_start=5377,
+  serialized_end=5430,
 )
 
 _NEW_SYNC_RESP = _descriptor.Descriptor(
@@ -2644,8 +2644,8 @@ _NEW_SYNC_RESP = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=5239,
-  serialized_end=5433,
+  serialized_start=5236,
+  serialized_end=5430,
 )
 
 
@@ -2691,6 +2691,13 @@ _NEW_SEND_MSG_REQ_MSG_INFO = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='at_list', full_name='new_send_msg_req.msg_info.at_list', index=5,
+      number=6, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
   ],
   extensions=[
   ],
@@ -2703,8 +2710,8 @@ _NEW_SEND_MSG_REQ_MSG_INFO = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=5510,
-  serialized_end=5602,
+  serialized_start=5507,
+  serialized_end=5616,
 )
 
 _NEW_SEND_MSG_REQ = _descriptor.Descriptor(
@@ -2740,8 +2747,8 @@ _NEW_SEND_MSG_REQ = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=5436,
-  serialized_end=5602,
+  serialized_start=5433,
+  serialized_end=5616,
 )
 
 
@@ -2792,8 +2799,8 @@ _NEW_SEND_MSG_RESP_RESULT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=5701,
-  serialized_end=5771,
+  serialized_start=5715,
+  serialized_end=5785,
 )
 
 _NEW_SEND_MSG_RESP = _descriptor.Descriptor(
@@ -2836,8 +2843,8 @@ _NEW_SEND_MSG_RESP = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=5605,
-  serialized_end=5771,
+  serialized_start=5619,
+  serialized_end=5785,
 )
 
 
@@ -2930,8 +2937,8 @@ _NEW_SEND_APP_MSG_REQ_APPMSG_INFO = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=5965,
-  serialized_end=6139,
+  serialized_start=5979,
+  serialized_end=6153,
 )
 
 _NEW_SEND_APP_MSG_REQ = _descriptor.Descriptor(
@@ -3009,8 +3016,8 @@ _NEW_SEND_APP_MSG_REQ = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=5774,
-  serialized_end=6139,
+  serialized_start=5788,
+  serialized_end=6153,
 )
 
 
@@ -3089,8 +3096,8 @@ _NEW_SEND_APP_MSG_RESP = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=6142,
-  serialized_end=6305,
+  serialized_start=6156,
+  serialized_end=6319,
 )
 
 
@@ -3148,8 +3155,8 @@ _VERIFY_USER_REQ_USER_INFO = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=6502,
-  serialized_end=6592,
+  serialized_start=6516,
+  serialized_end=6606,
 )
 
 _VERIFY_USER_REQ = _descriptor.Descriptor(
@@ -3227,8 +3234,8 @@ _VERIFY_USER_REQ = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=6308,
-  serialized_end=6592,
+  serialized_start=6322,
+  serialized_end=6606,
 )
 
 
@@ -3265,8 +3272,8 @@ _VERIFY_USER_RESP = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=6594,
-  serialized_end=6647,
+  serialized_start=6608,
+  serialized_end=6661,
 )
 
 
@@ -3317,8 +3324,8 @@ _RECEIVE_WXHB_REQ = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=6649,
-  serialized_end=6743,
+  serialized_start=6663,
+  serialized_end=6757,
 )
 
 
@@ -3348,8 +3355,8 @@ _RECEIVE_WXHB_RESP_TAG1_TAG1 = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=6901,
-  serialized_end=6921,
+  serialized_start=6915,
+  serialized_end=6935,
 )
 
 _RECEIVE_WXHB_RESP_TAG1 = _descriptor.Descriptor(
@@ -3378,8 +3385,8 @@ _RECEIVE_WXHB_RESP_TAG1 = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=6879,
-  serialized_end=6921,
+  serialized_start=6893,
+  serialized_end=6935,
 )
 
 _RECEIVE_WXHB_RESP = _descriptor.Descriptor(
@@ -3436,8 +3443,8 @@ _RECEIVE_WXHB_RESP = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=6746,
-  serialized_end=6921,
+  serialized_start=6760,
+  serialized_end=6935,
 )
 
 
@@ -3488,8 +3495,8 @@ _OPEN_WXHB_REQ = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=6923,
-  serialized_end=7014,
+  serialized_start=6937,
+  serialized_end=7028,
 )
 
 
@@ -3519,8 +3526,8 @@ _OPEN_WXHB_RESP_TAG1_TAG1 = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=6901,
-  serialized_end=6921,
+  serialized_start=6915,
+  serialized_end=6935,
 )
 
 _OPEN_WXHB_RESP_TAG1 = _descriptor.Descriptor(
@@ -3549,8 +3556,8 @@ _OPEN_WXHB_RESP_TAG1 = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=6879,
-  serialized_end=6921,
+  serialized_start=6893,
+  serialized_end=6935,
 )
 
 _OPEN_WXHB_RESP = _descriptor.Descriptor(
@@ -3607,8 +3614,8 @@ _OPEN_WXHB_RESP = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=7017,
-  serialized_end=7182,
+  serialized_start=7031,
+  serialized_end=7196,
 )
 
 
@@ -3659,8 +3666,8 @@ _QRY_DETAIL_WXHB_REQ = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=7184,
-  serialized_end=7281,
+  serialized_start=7198,
+  serialized_end=7295,
 )
 
 
@@ -3690,8 +3697,8 @@ _QRY_DETAIL_WXHB_RESP_TAG1_TAG1 = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=6901,
-  serialized_end=6921,
+  serialized_start=6915,
+  serialized_end=6935,
 )
 
 _QRY_DETAIL_WXHB_RESP_TAG1 = _descriptor.Descriptor(
@@ -3720,8 +3727,8 @@ _QRY_DETAIL_WXHB_RESP_TAG1 = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=6879,
-  serialized_end=6921,
+  serialized_start=6893,
+  serialized_end=6935,
 )
 
 _QRY_DETAIL_WXHB_RESP = _descriptor.Descriptor(
@@ -3778,8 +3785,8 @@ _QRY_DETAIL_WXHB_RESP = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=7284,
-  serialized_end=7461,
+  serialized_start=7298,
+  serialized_end=7475,
 )
 
 
@@ -3809,8 +3816,8 @@ _SEND_EMOJI_REQ_EMOJI_INFO_TAG4 = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=7783,
-  serialized_end=7803,
+  serialized_start=7797,
+  serialized_end=7817,
 )
 
 _SEND_EMOJI_REQ_EMOJI_INFO = _descriptor.Descriptor(
@@ -3902,8 +3909,8 @@ _SEND_EMOJI_REQ_EMOJI_INFO = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=7581,
-  serialized_end=7803,
+  serialized_start=7595,
+  serialized_end=7817,
 )
 
 _SEND_EMOJI_REQ = _descriptor.Descriptor(
@@ -3953,8 +3960,8 @@ _SEND_EMOJI_REQ = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=7464,
-  serialized_end=7803,
+  serialized_start=7478,
+  serialized_end=7817,
 )
 
 
@@ -4019,8 +4026,8 @@ _SEND_EMOJI_RESP_RESULT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=7863,
-  serialized_end=7965,
+  serialized_start=7877,
+  serialized_end=7979,
 )
 
 _SEND_EMOJI_RESP = _descriptor.Descriptor(
@@ -4049,8 +4056,8 @@ _SEND_EMOJI_RESP = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=7806,
-  serialized_end=7965,
+  serialized_start=7820,
+  serialized_end=7979,
 )
 
 
@@ -4101,8 +4108,8 @@ _TRANSFER_OPERATION_REQ = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=7967,
-  serialized_end=8068,
+  serialized_start=7981,
+  serialized_end=8082,
 )
 
 
@@ -4146,8 +4153,8 @@ _TRANSFER_OPERATION_RESP = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=8070,
-  serialized_end=8151,
+  serialized_start=8084,
+  serialized_end=8165,
 )
 
 
@@ -4198,8 +4205,8 @@ _TRANSFER_QUERY_REQ = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=8153,
-  serialized_end=8250,
+  serialized_start=8167,
+  serialized_end=8264,
 )
 
 
@@ -4243,8 +4250,8 @@ _TRANSFER_QUERY_RESP = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=8252,
-  serialized_end=8329,
+  serialized_start=8266,
+  serialized_end=8343,
 )
 
 
@@ -4274,8 +4281,8 @@ _GET_CONTACT_REQ_TAG7 = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=8492,
-  serialized_end=8512,
+  serialized_start=8506,
+  serialized_end=8526,
 )
 
 _GET_CONTACT_REQ = _descriptor.Descriptor(
@@ -4346,8 +4353,8 @@ _GET_CONTACT_REQ = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=8332,
-  serialized_end=8512,
+  serialized_start=8346,
+  serialized_end=8526,
 )
 
 
@@ -4384,8 +4391,8 @@ _GET_CONTACT_RESP_TICKET_INFO = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=8611,
-  serialized_end=8654,
+  serialized_start=8625,
+  serialized_end=8668,
 )
 
 _GET_CONTACT_RESP = _descriptor.Descriptor(
@@ -4421,8 +4428,8 @@ _GET_CONTACT_RESP = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=8515,
-  serialized_end=8654,
+  serialized_start=8529,
+  serialized_end=8668,
 )
 
 
@@ -4452,8 +4459,8 @@ _CREATE_CHATROOM_REQ_TAG2 = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=8832,
-  serialized_end=8852,
+  serialized_start=8846,
+  serialized_end=8866,
 )
 
 _CREATE_CHATROOM_REQ_MEMBER_INFO = _descriptor.Descriptor(
@@ -4482,8 +4489,8 @@ _CREATE_CHATROOM_REQ_MEMBER_INFO = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=8854,
-  serialized_end=8888,
+  serialized_start=8868,
+  serialized_end=8902,
 )
 
 _CREATE_CHATROOM_REQ = _descriptor.Descriptor(
@@ -4540,8 +4547,8 @@ _CREATE_CHATROOM_REQ = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=8657,
-  serialized_end=8888,
+  serialized_start=8671,
+  serialized_end=8902,
 )
 
 
@@ -4571,8 +4578,8 @@ _CREATE_CHATROOM_RESP_RESULT_ERR_MSG = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=9189,
-  serialized_end=9211,
+  serialized_start=9203,
+  serialized_end=9225,
 )
 
 _CREATE_CHATROOM_RESP_RESULT = _descriptor.Descriptor(
@@ -4608,8 +4615,8 @@ _CREATE_CHATROOM_RESP_RESULT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=9114,
-  serialized_end=9211,
+  serialized_start=9128,
+  serialized_end=9225,
 )
 
 _CREATE_CHATROOM_RESP_MEMBER_INFO_NICK_NAME_INFO = _descriptor.Descriptor(
@@ -4638,8 +4645,8 @@ _CREATE_CHATROOM_RESP_MEMBER_INFO_NICK_NAME_INFO = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=9337,
-  serialized_end=9367,
+  serialized_start=9351,
+  serialized_end=9381,
 )
 
 _CREATE_CHATROOM_RESP_MEMBER_INFO = _descriptor.Descriptor(
@@ -4682,8 +4689,8 @@ _CREATE_CHATROOM_RESP_MEMBER_INFO = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=9214,
-  serialized_end=9367,
+  serialized_start=9228,
+  serialized_end=9381,
 )
 
 _CREATE_CHATROOM_RESP_CHATROOM_AVATAR = _descriptor.Descriptor(
@@ -4719,8 +4726,8 @@ _CREATE_CHATROOM_RESP_CHATROOM_AVATAR = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=9369,
-  serialized_end=9413,
+  serialized_start=9383,
+  serialized_end=9427,
 )
 
 _CREATE_CHATROOM_RESP = _descriptor.Descriptor(
@@ -4777,8 +4784,8 @@ _CREATE_CHATROOM_RESP = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=8891,
-  serialized_end=9413,
+  serialized_start=8905,
+  serialized_end=9427,
 )
 
 
@@ -4857,8 +4864,8 @@ _MM_FACING_CREATE_CHATROOM_REQ = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=9416,
-  serialized_end=9582,
+  serialized_start=9430,
+  serialized_end=9596,
 )
 
 
@@ -4888,8 +4895,8 @@ _MM_FACING_CREATE_CHATROOM_RESP_RESULT_ERR_MSG = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=9189,
-  serialized_end=9211,
+  serialized_start=9203,
+  serialized_end=9225,
 )
 
 _MM_FACING_CREATE_CHATROOM_RESP_RESULT = _descriptor.Descriptor(
@@ -4925,8 +4932,8 @@ _MM_FACING_CREATE_CHATROOM_RESP_RESULT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=9767,
-  serialized_end=9874,
+  serialized_start=9781,
+  serialized_end=9888,
 )
 
 _MM_FACING_CREATE_CHATROOM_RESP_MEMBER_INFO = _descriptor.Descriptor(
@@ -4962,8 +4969,8 @@ _MM_FACING_CREATE_CHATROOM_RESP_MEMBER_INFO = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=9876,
-  serialized_end=9921,
+  serialized_start=9890,
+  serialized_end=9935,
 )
 
 _MM_FACING_CREATE_CHATROOM_RESP = _descriptor.Descriptor(
@@ -5013,8 +5020,8 @@ _MM_FACING_CREATE_CHATROOM_RESP = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=9585,
-  serialized_end=9921,
+  serialized_start=9599,
+  serialized_end=9935,
 )
 
 
@@ -5044,8 +5051,8 @@ _ADD_CHATROOM_MEMBER_REQ_MEMBER_INFO = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=8854,
-  serialized_end=8888,
+  serialized_start=8868,
+  serialized_end=8902,
 )
 
 _ADD_CHATROOM_MEMBER_REQ_CHATROOM_INFO = _descriptor.Descriptor(
@@ -5074,8 +5081,8 @@ _ADD_CHATROOM_MEMBER_REQ_CHATROOM_INFO = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=10165,
-  serialized_end=10194,
+  serialized_start=10179,
+  serialized_end=10208,
 )
 
 _ADD_CHATROOM_MEMBER_REQ = _descriptor.Descriptor(
@@ -5132,8 +5139,8 @@ _ADD_CHATROOM_MEMBER_REQ = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=9924,
-  serialized_end=10194,
+  serialized_start=9938,
+  serialized_end=10208,
 )
 
 
@@ -5163,8 +5170,8 @@ _ADD_CHATROOM_MEMBER_RESP_RESULT_ERR_MSG = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=9189,
-  serialized_end=9211,
+  serialized_start=9203,
+  serialized_end=9225,
 )
 
 _ADD_CHATROOM_MEMBER_RESP_RESULT = _descriptor.Descriptor(
@@ -5200,8 +5207,8 @@ _ADD_CHATROOM_MEMBER_RESP_RESULT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=10272,
-  serialized_end=10373,
+  serialized_start=10286,
+  serialized_end=10387,
 )
 
 _ADD_CHATROOM_MEMBER_RESP = _descriptor.Descriptor(
@@ -5230,8 +5237,8 @@ _ADD_CHATROOM_MEMBER_RESP = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=10197,
-  serialized_end=10373,
+  serialized_start=10211,
+  serialized_end=10387,
 )
 
 _SYNCKEY_MSGKEY_KEY.containing_type = _SYNCKEY_MSGKEY

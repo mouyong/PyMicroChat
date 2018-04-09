@@ -34,7 +34,7 @@ def pack(src, cgi_type, use_compress=0):
     header += bytes([((0x5 << 4) + 0xf)])                                                           # 05:AES加密算法  0xf:cookie长度(默认使用15字节长的cookie)
     header += struct.pack(">I", define.__CLIENT_VERSION__)                                          # 客户端版本号 网络字节序
     header += struct.pack(">i", Util.uin)                                                           # uin
-    header += Util.cookie                                                                           # coockie
+    header += Util.cookie                                                                           # cookie
     header += encoder._VarintBytes(cgi_type)                                                        # cgi type
     header += encoder._VarintBytes(len(src))                                                        # body proto压缩前长度
     header += encoder._VarintBytes(len_proto_compressed)                                            # body proto压缩后长度
@@ -355,7 +355,7 @@ def sync_done_req2buf():
     return send_data
 
 # 发送文字消息请求(名片和小表情[微笑])
-def new_send_msg_req2buf(to_wxid, msg_content, msg_type=1):
+def new_send_msg_req2buf(to_wxid, msg_content, at_user_list = [], msg_type=1):
     # protobuf组包
     req = mm_pb2.new_send_msg_req(
         cnt=1,  # 本次发送消息数量(默认1条)
@@ -367,6 +367,10 @@ def new_send_msg_req2buf(to_wxid, msg_content, msg_type=1):
             client_id=Util.get_utc() + random.randint(0, 0xFFFF)                                            # 确保不重复
         )
     )
+    # 群聊at功能
+    if len(at_user_list):
+        user_list = ''.join(["{},".format(x) for x in at_user_list]).strip(',')
+        req.msg.at_list = '<msgsource><atuserlist><![CDATA[{}]]></atuserlist></msgsource>'.format(user_list)
     # 组包
     return pack(req.SerializeToString(), 522)
 

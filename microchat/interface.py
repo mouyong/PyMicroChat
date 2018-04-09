@@ -52,10 +52,10 @@ def new_sync():
     # 解包
     return business.new_sync_buf2resp(ret_bytes)
 
-# 发消息(Utf-8编码)
-def new_send_msg(to_wxid, msg_content, msg_type=1):
+# 发消息(Utf-8编码)(使用at功能时消息内容必须至少有相同数量的@符号,允许不以\u2005结尾)
+def new_send_msg(to_wxid, msg_content, at_user_list = [], msg_type=1):
     # 组包
-    send_data = business.new_send_msg_req2buf(to_wxid, msg_content, msg_type)
+    send_data = business.new_send_msg_req2buf(to_wxid, msg_content, at_user_list, msg_type)
     # 发包
     ret_bytes = Util.mmPost('/cgi-bin/micromsg-bin/newsendmsg', send_data)
     logger.debug('new_send_msg返回数据:' + Util.b2hex(ret_bytes))
