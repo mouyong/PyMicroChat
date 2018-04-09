@@ -210,6 +210,26 @@ def add_chatroom_member(chatroom_wxid, member_list):
     # 解包
     return business.add_chatroom_member_buf2resp(ret_bytes)
 
+# 群聊中at所有人(每100人一条消息)(最后发送文字消息)
+def at_all_in_group(chatroom_wxid, send_text):
+    group = get_contact(chatroom_wxid)
+    at_text = ''
+    at_list = []
+    for i in range(group.group_member_list.cnt):
+        if i and i%100 == 0:
+            #每at100人发送一次消息
+            new_send_msg(chatroom_wxid,at_text.encode(encoding = 'utf-8'), at_list)
+            at_text = ''
+            at_list = []
+        at_text += '@{}'.format(group.group_member_list.member[i].nick_name)
+        at_list.append(group.group_member_list.member[i].wxid)
+    if at_text and at_list:
+        new_send_msg(chatroom_wxid,at_text.encode(encoding = 'utf-8'), at_list)
+    # 发送文字消息
+    if send_text:
+        new_send_msg(chatroom_wxid,send_text.encode(encoding = 'utf-8'))
+    return
+
 # 初始化python模块
 def init_all():
     #配置logger

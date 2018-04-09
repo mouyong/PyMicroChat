@@ -57,8 +57,8 @@ def test(msg):
         wxid = interface.mm_facing_create_chatroom('{}'.format(random.randint(2222, 9999)))
         if wxid:
             interface.add_chatroom_member(wxid, [msg.from_id.id, ])
-            # 刚建的面对面群立即拉人对方无法收到通知（延迟2秒后再拉人对方才会收到进群通知),这里发消息到群聊测试对方是否入群                                                      
-            interface.new_send_msg(wxid, '你已经在我的群聊里了'.encode(encoding="utf-8"))
+            # 刚建的面对面群立即拉人对方无法收到通知（延迟2秒后再拉人对方才会收到进群通知),这里发消息到群聊at所有人测试对方是否入群
+            interface.at_all_in_group(wxid, '你们已经在我的群聊里了')                                                      
         return False
     return True
 

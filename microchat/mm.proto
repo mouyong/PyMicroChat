@@ -162,7 +162,9 @@ message contact_info
 		message MemberInfo
 		{
 			optional string wxid = 1;
+			optional string nick_name = 2;						//昵称(非群昵称)
 			optional int32  tag6 = 6;
+			optional string inviteer_wxid = 7;					//邀请入群wxid
 			optional int32  tag8 = 8;
 		}
 		repeated MemberInfo member = 2;
