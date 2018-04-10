@@ -166,7 +166,7 @@ def get_contact(wxid):
 
 # 获取群成员列表
 def get_chatroom_member_list(wxid):
-    friend = get_contact(wxid)
+    friend, __ = get_contact(wxid)
     return [member.wxid for member in friend.group_member_list.member]
 
 # 建群聊(参数group_member_list为群成员wxid)(建群成功返回新建群聊的wxid)
@@ -212,7 +212,7 @@ def add_chatroom_member(chatroom_wxid, member_list):
 
 # 群聊中at所有人(每100人一条消息)(最后发送文字消息)
 def at_all_in_group(chatroom_wxid, send_text):
-    group = get_contact(chatroom_wxid)
+    group, __ = get_contact(chatroom_wxid)
     at_text = ''
     at_list = []
     for i in range(group.group_member_list.cnt):

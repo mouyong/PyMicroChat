@@ -698,7 +698,7 @@ def get_contact_buf2resp(buf):
     res.ParseFromString(UnPack(buf))
     # 显示好友信息
     update_contact_info(res.info, False)
-    return res.info
+    return res.info, res.ticket
 
 # 建群聊请求
 def create_chatroom_req2buf(group_member_list):

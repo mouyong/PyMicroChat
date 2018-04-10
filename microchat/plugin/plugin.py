@@ -7,13 +7,14 @@ from .. import Util
 from . import verify_friend
 from . import handle_appmsg
 from . import tuling_robot
+from . import check_friend
 from .logger_wrapper import logger
 
 # 测试命令
 state = lambda i: '已开启' if i else '已关闭'
-TEST_KEY_WORD = ('测试分享链接', '测试好友列表', '图灵机器人', '自动通过好友申请', '自动抢红包/自动收款', '测试扔骰子', '测试面对面建群')
+TEST_KEY_WORD = ('测试分享链接', '测试好友列表', '图灵机器人', '自动通过好友申请', '自动抢红包/自动收款', '测试扔骰子', '测试面对面建群', '检测单向好友')
 # 测试开关
-TEST_STATE    = [1,1,1,1,1,1,1]
+TEST_STATE    = [1, 1, 1, 1, 1, 1, 1, 1]
 
 # 插件黑名单(不处理该wxid的消息)
 plugin_blacklist = ['weixin', ]
@@ -60,6 +61,11 @@ def test(msg):
             # 刚建的面对面群立即拉人对方无法收到通知（延迟2秒后再拉人对方才会收到进群通知),这里发消息到群聊at所有人测试对方是否入群
             interface.at_all_in_group(wxid, '你们已经在我的群聊里了')                                                      
         return False
+    elif TEST_KEY_WORD[7] == msg.raw.content or '7' == msg.raw.content:                                                              # 检测单向好友
+        if TEST_STATE[7]:
+            interface.new_send_msg(msg.from_id.id, '开始检测单向好友......'.encode(encoding="utf-8"))
+            check_friend.check()
+        return False    
     return True
 
 # 处理消息
@@ -83,6 +89,11 @@ def dispatch(msg):
     # appmsg
     elif 49 == msg.type:
             handle_appmsg.appmsg_handler(msg)
+    # 系统消息
+    elif 10000 == msg.type:
+        if TEST_STATE[7]:
+            # 单向好友检测
+            check_friend.check_type(msg)
     else:
         pass
     return
