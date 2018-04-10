@@ -239,3 +239,5 @@ def init_all():
     if not Util.GenEcdhKey():
         logger.error('初始化ECC Key失败!')
         Util.ExitProcess()
+    # 从db加载dns
+    dns_ip.load_dns()

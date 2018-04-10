@@ -21,10 +21,6 @@ from ctypes import *
 from .plugin.logger_wrapper import logger
 
 ################################全局变量################################
-# 日志级别(INFO级别不输出debug信息)
-# __LOG_LEVEL__ = logging.INFO
-# logger = logging.getLogger("mmTest")
-
 # cgi http头
 headers = {
     "Accept": "*/*",
@@ -63,20 +59,6 @@ conn = None
 
 
 ########################################################################
-
-# 日志初始化
-# def initLog():
-#     logger.setLevel(__LOG_LEVEL__)
-#     hterm = logging.StreamHandler()
-#     hterm.setLevel(__LOG_LEVEL__)
-#     hfile = logging.FileHandler(time.strftime(
-#         "%Y-%m-%d", time.localtime()) + ".log")
-#     hfile.setLevel(__LOG_LEVEL__)
-#     formatter = logging.Formatter('[%(asctime)s][%(levelname)s]: %(message)s')
-#     hterm.setFormatter(formatter)
-#     hfile.setFormatter(formatter)
-#     logger.addHandler(hterm)
-#     logger.addHandler(hfile)
 
 # md5
 def GetMd5(src):
@@ -237,8 +219,11 @@ def b2hex(s): return ''.join(["%02X " % x for x in s]).strip()
 # sqlite3数据库初始化
 def init_db():
     global conn
+    # 建db文件夹
+    if not os.path.exists(os.getcwd() + '/db'):
+        os.mkdir(os.getcwd() + '/db')
     # 建库
-    conn = sqlite3.connect('mm_{}.db'.format(wxid))
+    conn = sqlite3.connect('./db/mm_{}.db'.format(wxid))
     cur = conn.cursor()
     # 建消息表
     cur.execute('create table if not exists msg(svrid bigint unique,utc integer,createtime varchar(1024),fromWxid varchar(1024),toWxid varchar(1024),type integer,content text(65535))')

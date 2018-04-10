@@ -48,7 +48,7 @@ def pack(src, cgi_type, use_compress=0):
 # 解包
 def UnPack(src, key=b''):
     if len(src) < 0x20:
-        raise RuntimeError('Unpack Error!Please check mm protocol!')  # 协议需要更新
+        raise RuntimeError('Unpack Error!Please check mm protocol!')                                # 协议需要更新
         return b''
     if not key:
         key = Util.sessionKey
@@ -197,6 +197,8 @@ def login_buf2Resp(buf, login_aes_key):
                 if dns_info.redirect == ip_info.host.replace('\x00', ''):
                     logger.debug('更新短链接DNS:[{}:{}]'.format(dns_info.redirect, ip_info.ip.replace('\x00', '')))
                     dns_ip.short_ip.append(ip_info.ip.replace('\x00', ''))                          # 保存短链接ip
+    # 保存dns到db
+    dns_ip.save_dns()
 
     # 登录异常处理
     if -301 == loginRes.result.code:                                                                # DNS解析失败,请尝试更换idc
@@ -257,7 +259,7 @@ def update_contact_info(friend,update = True):
         logger.info('{}{}:公众号:{} 公众号wxid:{} alias:{} 注册主体:{}'.format(tag, is_friend, friend.nickname.name, friend.wxid.id, friend.alias, friend.register_body if friend.register_body_type == 24 else '个人'), 6)
     else:                                                                                       # 好友
         logger.info('{}{}:昵称:{} 备注名:{} wxid:{} alias:{} 性别:{} 好友来源:{} 个性签名:{}'.format(tag, is_friend, friend.nickname.name, friend.remark_name.name, friend.wxid.id, friend.alias, friend.sex, Util.get_way(friend.src), friend.qianming), 6)
-    if (friend.type & 1) or friend.wxid.id.endswith('@chatroom'):
+    if update or friend.wxid.id.endswith('@chatroom'):
         # 将好友信息存入数据库
         Util.insert_contact_info_to_db(friend.wxid.id, friend.nickname.name, friend.remark_name.name, friend.alias, friend.avatar_big, friend.v1_name, friend.type, friend.sex, friend.country,friend.sheng, friend.shi, friend.qianming, friend.register_body, friend.src, friend.chatroomOwnerWxid, friend.chatroom_serverVer, friend.chatroom_max_member, friend.group_member_list.cnt)
     return
