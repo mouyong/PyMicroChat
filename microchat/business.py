@@ -327,8 +327,10 @@ def new_sync_buf2resp(buf):
         if 5 == res.msg.tag2[i].type:                                                                       # 未读消息
             msg = mm_pb2.Msg()
             msg.ParseFromString(res.msg.tag2[i].data.data)
-            if 10002 == msg.type or 9999 == msg.type:                                                       # 过滤系统垃圾消息
+            if 9999 == msg.type:                                                                            # 过滤系统垃圾消息
                 continue
+            if 10002 == msg.type and 'weixin' ==  msg.from_id.id:                                           # 过滤系统垃圾消息                                                          
+                continue   
             else:
                 # 将消息存入数据库
                 Util.insert_msg_to_db(msg.serverid, msg.createTime, msg.from_id.id, msg.to_id.id, msg.type, msg.raw.content)
@@ -422,7 +424,7 @@ def send_app_msg_req2buf(wxid, title, des, link_url, thumb_url):
         tag10=0,
     )
     # 组包
-    return (pack(req.SerializeToString(), 222), req.info.content)
+    return pack(req.SerializeToString(), 222), req.info.content, client_msg_id
 
 # 分享链接解包函数
 def send_app_msg_buf2resp(buf):
@@ -595,18 +597,15 @@ def send_emoji_req2buf(wxid, file_name, game_type, content):
         tag4 = 0,
     )
     #组包
-    return pack(req.SerializeToString(), 175)
+    return pack(req.SerializeToString(), 175), req.emoji.utc
 
 # 发送emoji表情响应
-def send_emoji_buf2resp(buf,to_wxid):
+def send_emoji_buf2resp(buf):
     res = mm_pb2.send_emoji_resp()
     res.ParseFromString(UnPack(buf))
-    if not res.res.code:                                                            # emoji发送成功
-        # 发送记录存入数据库
-        Util.insert_msg_to_db(res.res.svrid, Util.get_utc(), Util.wxid, to_wxid, 47, res.res.file_name)
-    else:                                                                           # emoji发送失败
+    if res.res.code:                                                            # emoji发送失败                                                
         logger.info('emoji发送失败, 错误码={}'.format(res.res.code), 11)
-    return res.res.code
+    return res.res.code, res.res.svrid
 
 # 收款请求
 def transfer_operation_req2buf(invalid_time, trans_id, transaction_id, user_name):
@@ -833,3 +832,36 @@ def set_group_nick_name_buf2resp(buf):
         code = -1
         logger.info('设置群昵称失败!', 11)
     return code
+
+# 消息撤回请求
+def revoke_msg_req2buf(wxid, svrid):
+    # 在数据库中查询svrid对应的client_msg_id
+    client_msg_id = Util.get_client_msg_id(svrid)
+    #protobuf组包
+    req = mm_pb2.revoke_msg_req(
+        login = mm_pb2.LoginInfo(
+            aesKey =  Util.sessionKey,
+            uin = Util.uin,
+            guid = define.__GUID__ + '\0',          #guid以\0结尾
+            clientVer = define.__CLIENT_VERSION__,
+            androidVer = define.__ANDROID_VER__,
+            unknown = 0,
+        ),
+        client_id = client_msg_id,
+        new_client_id = 0,
+        utc = Util.get_utc(),
+        tag5 = 0,
+        from_wxid = Util.wxid,
+        to_wxid = wxid,
+        index_of_request = 0,                                                       # 自增1
+        svrid = svrid,
+    )
+    # 组包
+    return pack(req.SerializeToString(), 594)
+
+# 消息撤回响应
+def revoke_msg_buf2resp(buf):
+    res = mm_pb2.revoke_msg_resp()
+    res.ParseFromString(UnPack(buf))
+    logger.info('[消息撤回]错误码:{},提示信息:{}'.format(res.res.code, res.response_sys_wording), 11)
+    return res.res.code

@@ -64,21 +64,21 @@ def new_send_msg(to_wxid, msg_content, at_user_list = [], msg_type=1):
     # 消息记录存入数据库
     Util.insert_msg_to_db(svrid, Util.get_utc(), Util.wxid,to_wxid, msg_type, msg_content.decode())
     # 返回发送消息结果
-    return ret_code
+    return ret_code, svrid
 
 # 分享链接
 def send_app_msg(to_wxid, title, des, link_url, thumb_url=''):
      # 组包
-    (send_data, msg_content) = business.send_app_msg_req2buf(to_wxid, title, des, link_url, thumb_url)
+    send_data, msg_content, client_msg_id = business.send_app_msg_req2buf(to_wxid, title, des, link_url, thumb_url)
     # 发包
     ret_bytes = Util.mmPost('/cgi-bin/micromsg-bin/sendappmsg', send_data)
     logger.debug('send_app_msg返回数据:' + Util.b2hex(ret_bytes))
     # 解包
     (ret_code, svrid) = business.send_app_msg_buf2resp(ret_bytes)
     # 消息记录存入数据库
-    Util.insert_msg_to_db(svrid, Util.get_utc(),Util.wxid, to_wxid, 5, msg_content)
+    Util.insert_msg_to_db(svrid, Util.get_utc(),Util.wxid, to_wxid, 5, msg_content, client_msg_id)
     # 返回发送消息结果
-    return ret_code
+    return ret_code, svrid
 
 # 获取好友列表(wxid,昵称,备注,alias,v1_name,头像)
 def get_contact_list(contact_type=Util.CONTACT_TYPE_FRIEND):
@@ -127,12 +127,15 @@ def qry_detail_wxhb(nativeUrl, sendId, limit = 11, offset = 0, ver='v1.0'):
 # content只在game_type不为0即发送游戏表情时有效;content取1-3代表剪刀、石头、布;content取4-9代表投骰子1-6点;
 def send_emoji(wxid, file_name, game_type, content):
     # 组包
-    send_data = business.send_emoji_req2buf(wxid, file_name, game_type, content)
+    send_data, client_msg_id = business.send_emoji_req2buf(wxid, file_name, game_type, content)
     # 发包
     ret_bytes = Util.mmPost('/cgi-bin/micromsg-bin/sendemoji', send_data)
     logger.debug('send_emoji返回数据:' + Util.b2hex(ret_bytes))
     # 解包
-    return business.send_emoji_buf2resp(ret_bytes,wxid)
+    ret_code, svrid  = business.send_emoji_buf2resp(ret_bytes)
+    # 消息记录存入数据库
+    Util.insert_msg_to_db(svrid, Util.get_utc(), Util.wxid, wxid, 47, file_name, client_msg_id)
+    return ret_code, svrid
 
 # 收款
 def transfer_operation(invalid_time, trans_id, transaction_id, user_name):
@@ -239,6 +242,16 @@ def set_group_nick_name(chatroom_wxid, nick_name):
     logger.debug('oplog返回数据:' + Util.b2hex(ret_bytes))
     # 解包
     return business.set_group_nick_name_buf2resp(ret_bytes)
+
+# 消息撤回
+def revoke_msg(wxid, svrid):
+    # 组包
+    send_data = business.revoke_msg_req2buf(wxid, svrid)
+    # 发包
+    ret_bytes = Util.mmPost('/cgi-bin/micromsg-bin/revokemsg', send_data)
+    logger.debug('revokemsg返回数据:' + Util.b2hex(ret_bytes))
+    # 解包
+    return business.revoke_msg_buf2resp(ret_bytes)
 
 # 初始化python模块
 def init_all():
