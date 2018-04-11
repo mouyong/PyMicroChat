@@ -78,7 +78,7 @@ def auto_confirm_transfer(msg):
         invalid_time    = soup.msg.appmsg.wcpayinfo.invalidtime.contents[0]
 
         # 确认收款
-        (ret_code,info) = interface.transfer_operation('0', trans_id, transaction_id, msg.from_id.id)
+        (ret_code,info) = interface.transfer_operation(invalid_time, trans_id, transaction_id, msg.from_id.id)
         if not ret_code:
             logger.info('收款成功!', 11)
             logger.debug('转账详细信息:' + info)

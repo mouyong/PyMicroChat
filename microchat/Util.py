@@ -226,7 +226,7 @@ def init_db():
     conn = sqlite3.connect('./db/mm_{}.db'.format(wxid))
     cur = conn.cursor()
     # 建消息表
-    cur.execute('create table if not exists msg(svrid bigint unique,utc integer,createtime varchar(1024),fromWxid varchar(1024),toWxid varchar(1024),type integer,content text(65535))')
+    cur.execute('create table if not exists msg(svrid bigint unique,clientMsgId varchar(1024),utc integer,createtime varchar(1024),fromWxid varchar(1024),toWxid varchar(1024),type integer,content text(65535))')
     # 建联系人表
     cur.execute('create table if not exists contact(wxid varchar(1024) unique,nick_name varchar(1024),remark_name varchar(1024),alias varchar(1024),avatar_big varchar(1024),v1_name varchar(1024),type integer default(0),sex integer,country varchar(1024),sheng varchar(1024),shi varchar(1024),qianming varchar(2048),register_body varchar(1024),src integer,chatroom_owner varchar(1024),chatroom_serverVer integer,chatroom_max_member integer,chatroom_member_cnt integer)')
     # 建sync key表
@@ -251,11 +251,11 @@ def set_sync_key(key):
     return
 
 # 保存消息
-def insert_msg_to_db(svrid, utc, from_wxid, to_wxid, type, content):
+def insert_msg_to_db(svrid, utc, from_wxid, to_wxid, type, content, client_msg_id = ''):
     cur = conn.cursor()
     try:
-        cur.execute("insert into msg(svrid,utc,createtime,fromWxid,toWxid,type,content) values('{}','{}','{}','{}','{}','{}','{}')".format(
-            svrid, utc, utc_to_local_time(utc), from_wxid, to_wxid, type, content))
+        cur.execute("insert into msg(svrid, clientMsgId, utc, createtime, fromWxid, toWxid, type, content) values('{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}')".format(
+            svrid, client_msg_id, utc, utc_to_local_time(utc), from_wxid, to_wxid, type, content))
         conn.commit()
     except Exception as e:
         logger.info('insert_msg_to_db error:{}'.format(str(e)))
@@ -366,3 +366,15 @@ def SignWith3Des(src):
     # bin_to_hex得到最终加密结果
     enc_buf = ''.join(["%02X" % x for x in enc_bytes]).strip()
     return enc_buf
+
+# 根据svrid查询client_msg_id
+def get_client_msg_id(svrid):
+    try:
+        cur = conn.cursor()
+        cur.execute("select clientMsgId from msg where svrid = '{}'".format(svrid))
+        row = cur.fetchone()
+        if row:
+            return row[0]
+    except:
+        pass
+    return ''

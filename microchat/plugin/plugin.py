@@ -1,5 +1,6 @@
 import json
 import random
+import time
 from .. import define
 from .. import interface
 from .. import mm_pb2
@@ -12,9 +13,9 @@ from .logger_wrapper import logger
 
 # 测试命令
 state = lambda i: '已开启' if i else '已关闭'
-TEST_KEY_WORD = ('测试分享链接', '测试好友列表', '图灵机器人', '自动通过好友申请', '自动抢红包/自动收款', '测试扔骰子', '测试面对面建群', '检测单向好友')
+TEST_KEY_WORD = ('测试分享链接', '测试好友列表', '图灵机器人', '自动通过好友申请', '自动抢红包/自动收款', '测试扔骰子', '测试面对面建群', '检测单向好友', '测试消息撤回')
 # 测试开关
-TEST_STATE    = [1, 1, 1, 1, 1, 1, 1, 1]
+TEST_STATE    = [1, 1, 1, 1, 1, 1, 1, 1, 1]
 
 # 插件黑名单(不处理该wxid的消息)
 plugin_blacklist = ['weixin', ]
@@ -65,7 +66,15 @@ def test(msg):
         if TEST_STATE[7]:
             interface.new_send_msg(msg.from_id.id, '开始检测单向好友......'.encode(encoding="utf-8"))
             check_friend.check()
-        return False    
+        return False 
+    elif TEST_KEY_WORD[8] == msg.raw.content or '8' == msg.raw.content:                                                              # 测试消息撤回
+        ret_code, svrid = interface.send_emoji(msg.from_id.id,'514914788fc461e7205bf0b6ba496c49','2','9')
+        if not ret_code:
+            ret_code_1, svrid_1 = interface.new_send_msg(msg.from_id.id, '我要撤回上一条消息'.encode(encoding="utf-8"))
+            time.sleep(1)
+            interface.revoke_msg(msg.from_id.id, svrid)
+            interface.revoke_msg(msg.from_id.id, svrid_1)
+        return False
     return True
 
 # 处理消息

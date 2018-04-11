@@ -622,8 +622,8 @@ message send_emoji_resp
 		optional int32     tag2      	= 2;						//小游戏随机种子?
 		optional int32     tag3      	= 3;						//小游戏随机种子?
 		optional string    file_name    = 4;
-		optional int32     sync_key     = 5;						//sync_key中id
-		optional int32     svrid      	= 6;						//服务器唯一id
+		optional int32     svrid     	= 5;						//服务器唯一id
+		optional int32     tag6      	= 6;						
 	}
 	optional result res						= 3;					//发送结果
 }
@@ -847,4 +847,25 @@ message oplog_resp
 		optional string msg = 3;									//错误信息
 	}
 	optional result res                        = 2;					//结果
+}
+
+//消息撤回请求
+message revoke_msg_req
+{
+	optional LoginInfo login 				= 1;					//登录信息
+	optional string  client_id				= 2;					//客户端发送的消息id
+	optional int64	new_client_id			= 3;					//新的客户端消息id
+	optional int32	utc						= 4;
+	optional int32	tag5					= 5;
+	optional string from_wxid				= 6;
+	optional string to_wxid					= 7;
+	optional int32  index_of_request		= 8;
+	optional int64  svrid					= 9;					//撤回消息的svrid
+}
+
+//消息撤回响应
+message revoke_msg_resp
+{
+	optional mmRes res						= 1;					//错误码
+	optional string response_sys_wording    = 3;					//消息撤回提示(已撤回或撤回失败原因)
 }
