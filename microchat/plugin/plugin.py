@@ -9,6 +9,7 @@ from . import verify_friend
 from . import handle_appmsg
 from . import tuling_robot
 from . import check_friend
+from . import revoke_joke
 from .logger_wrapper import logger
 
 # 测试命令
@@ -68,12 +69,7 @@ def test(msg):
             check_friend.check()
         return False 
     elif TEST_KEY_WORD[8] == msg.raw.content or '8' == msg.raw.content:                                                              # 测试消息撤回
-        ret_code, svrid = interface.send_emoji(msg.from_id.id,'514914788fc461e7205bf0b6ba496c49','2','9')
-        if not ret_code:
-            ret_code_1, svrid_1 = interface.new_send_msg(msg.from_id.id, '我要撤回上一条消息'.encode(encoding="utf-8"))
-            time.sleep(1)
-            interface.revoke_msg(msg.from_id.id, svrid)
-            interface.revoke_msg(msg.from_id.id, svrid_1)
+        revoke_joke.revoke_joke(msg.from_id.id, '对方', '并亲了你一口')
         return False
     return True
 
