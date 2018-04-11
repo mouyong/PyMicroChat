@@ -23,3 +23,6 @@ Windows环境
 
 > 退出
 >> (PyMicroChat) D:\VSCODE\PyMicroChat>deactivate
+
+
+##### QQ交流群：306804262
