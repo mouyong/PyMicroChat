@@ -230,6 +230,16 @@ def at_all_in_group(chatroom_wxid, send_text):
         new_send_msg(chatroom_wxid,send_text.encode(encoding = 'utf-8'))
     return
 
+# 设置群聊中自己昵称(utf-8)
+def set_group_nick_name(chatroom_wxid, nick_name):
+    # 组包
+    send_data = business.set_group_nick_name_req2buf(chatroom_wxid, nick_name)
+    # 发包
+    ret_bytes = Util.mmPost('/cgi-bin/micromsg-bin/oplog', send_data)
+    logger.debug('oplog返回数据:' + Util.b2hex(ret_bytes))
+    # 解包
+    return business.set_group_nick_name_buf2resp(ret_bytes)
+
 # 初始化python模块
 def init_all():
     #配置logger
