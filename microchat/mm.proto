@@ -810,3 +810,41 @@ message add_chatroom_member_resp
 	}
 	optional result res						= 1;					//群聊拉人结果
 }
+
+//操作请求
+message oplog_req
+{
+	message TAG1
+	{
+		optional int32 tag1    				= 1;
+		message CMD
+		{
+			optional int32 cmd_id = 1;
+			message OPTION
+			{
+				optional int32 len = 1;
+				message OP
+				{
+					optional string tag1  = 1;
+					optional string tag2  = 2;
+					optional bytes tag3  = 3;
+				}
+				optional OP op	= 2;
+			}
+			optional OPTION option	= 2;
+		}
+		optional CMD cmd					= 2;
+	}
+	optional TAG1	tag1                        = 1;
+}
+
+//操作响应
+message oplog_resp
+{
+	message result
+	{
+		optional bytes code = 2;									//错误码  varint
+		optional string msg = 3;									//错误信息
+	}
+	optional result res                        = 2;					//结果
+}
