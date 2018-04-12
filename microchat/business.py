@@ -424,7 +424,7 @@ def send_app_msg_req2buf(wxid, title, des, link_url, thumb_url):
         tag10=0,
     )
     # 组包
-    return pack(req.SerializeToString(), 222), req.info.content, client_msg_id
+    return pack(req.SerializeToString(), 222), req.info.content, req.info.client_id
 
 # 分享链接解包函数
 def send_app_msg_buf2resp(buf):
@@ -807,16 +807,16 @@ def set_group_nick_name_req2buf(chatroom_wxid, nick_name):
             cmd = mm_pb2.oplog_req.TAG1.CMD(
                 cmd_id = 48,
                 option = mm_pb2.oplog_req.TAG1.CMD.OPTION(
-                    op = mm_pb2.oplog_req.TAG1.CMD.OPTION.OP(
+                    data = mm_pb2.op_set_group_nick_name(
                         tag1 = chatroom_wxid,
                         tag2 = Util.wxid,
                         tag3 = nick_name,
-                    ),
+                    ).SerializeToString(),
                 ),
             ),
         ), 
     )
-    req.tag1.cmd.option.len = len(req.tag1.cmd.option.op.SerializeToString())
+    req.tag1.cmd.option.len = len(req.tag1.cmd.option.data)
     # 组包
     return pack(req.SerializeToString(), 681)
 
@@ -865,3 +865,33 @@ def revoke_msg_buf2resp(buf):
     res.ParseFromString(UnPack(buf))
     logger.info('[消息撤回]错误码:{},提示信息:{}'.format(res.res.code, res.response_sys_wording), 11)
     return res.res.code
+
+# 好友(群聊)操作:删除/保存/拉黑/恢复/设置群昵称/设置好友备注名
+def op_friend_req2buf(friend_info, cmd = 2):
+    #protobuf组包
+    req = mm_pb2.oplog_req(
+        tag1 = mm_pb2.oplog_req.TAG1(
+            tag1 = 1,
+            cmd = mm_pb2.oplog_req.TAG1.CMD(
+                cmd_id = cmd,
+                option = mm_pb2.oplog_req.TAG1.CMD.OPTION(
+                    data = friend_info,
+                ),
+            ),
+        ), 
+    )
+    req.tag1.cmd.option.len = len(req.tag1.cmd.option.data)
+    # 组包
+    return pack(req.SerializeToString(), 681)
+
+def op_friend_buf2resp(buf):
+    res = mm_pb2.oplog_resp()
+    res.ParseFromString(UnPack(buf))
+    try:
+        code,__ = decoder._DecodeVarint(res.res.code, 0)
+        if code:
+            logger.info('好友操作失败,错误码:0x{:x},错误信息:{}'.format(code, res.res.msg), 11)
+    except:
+        code = -1
+        logger.info('好友操作失败!', 11)
+    return code

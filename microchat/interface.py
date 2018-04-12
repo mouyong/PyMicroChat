@@ -253,6 +253,61 @@ def revoke_msg(wxid, svrid):
     # 解包
     return business.revoke_msg_buf2resp(ret_bytes)
 
+# 从通讯录中删除好友/恢复好友(删除对方后可以用此接口再添加对方)
+# 群聊使用此接口可以保存到通讯录
+def delete_friend(wxid, delete = True):
+    # 获取好友(群聊)详细信息
+    friend, __ = get_contact(wxid)
+    # 设置保存通讯录标志位
+    if delete:
+        friend.type = (friend.type>>1)<<1                       # 清零
+    else:
+        friend.type |= 1                                        # 置1
+    # 组包
+    send_data = business.op_friend_req2buf(friend.SerializeToString())
+    # 发包
+    ret_bytes = Util.mmPost('/cgi-bin/micromsg-bin/oplog', send_data)
+    logger.debug('oplog返回数据:' + Util.b2hex(ret_bytes))
+    # 解包
+    return business.op_friend_buf2resp(ret_bytes)
+
+# 拉黑/恢复 好友关系
+def ban_friend(wxid, ban = True):
+    # 获取好友(群聊)详细信息
+    friend, __ = get_contact(wxid)
+    # 设置黑名单标志位
+    if ban:
+        friend.type |= 1<<3                                     # 置1
+    else:
+        friend.type = ((friend.type>>4)<<4) + (friend.type&7)   # 清零
+    # 组包
+    send_data = business.op_friend_req2buf(friend.SerializeToString())
+    # 发包
+    ret_bytes = Util.mmPost('/cgi-bin/micromsg-bin/oplog', send_data)
+    logger.debug('oplog返回数据:' + Util.b2hex(ret_bytes))
+    # 解包
+    return business.op_friend_buf2resp(ret_bytes)
+
+# 设置好友备注名/群聊名
+def set_friend_name(wxid, name):
+    cmd_id = 2
+    # 获取好友(群聊)详细信息
+    friend, __ = get_contact(wxid)
+    if wxid.endswith('@chatroom'):
+        # 群聊: 设置群聊名/cmd_id
+        friend.nickname.name = name
+        cmd_id = 27
+    else:
+        # 好友: 设置备注名
+        friend.remark_name.name = name
+    # 组包
+    send_data = business.op_friend_req2buf(friend.SerializeToString(), cmd_id)
+    # 发包
+    ret_bytes = Util.mmPost('/cgi-bin/micromsg-bin/oplog', send_data)
+    logger.debug('oplog返回数据:' + Util.b2hex(ret_bytes))
+    # 解包
+    return business.op_friend_buf2resp(ret_bytes)
+
 # 初始化python模块
 def init_all():
     #配置logger
