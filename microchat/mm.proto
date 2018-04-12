@@ -811,25 +811,27 @@ message add_chatroom_member_resp
 	optional result res						= 1;					//群聊拉人结果
 }
 
+//oplog:cmd_id=48 设置群昵称
+message op_set_group_nick_name
+{
+	optional string tag1  = 1;
+	optional string tag2  = 2;
+	optional bytes tag3  = 3;
+}
+
 //操作请求
 message oplog_req
 {
 	message TAG1
 	{
-		optional int32 tag1    				= 1;
+		optional int32 tag1    				= 1;					//cnt?
 		message CMD
 		{
-			optional int32 cmd_id = 1;
+			optional int32 cmd_id = 1;								//操作类型
 			message OPTION
 			{
 				optional int32 len = 1;
-				message OP
-				{
-					optional string tag1  = 1;
-					optional string tag2  = 2;
-					optional bytes tag3  = 3;
-				}
-				optional OP op	= 2;
+				optional bytes data	= 2;							//不同cmd_id使用不同结构体填充该字段
 			}
 			optional OPTION option	= 2;
 		}
