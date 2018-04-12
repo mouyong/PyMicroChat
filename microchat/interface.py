@@ -308,6 +308,16 @@ def set_friend_name(wxid, name):
     # 解包
     return business.op_friend_buf2resp(ret_bytes)
 
+# 发布群公告(仅限群主;自动@所有人)
+def set_chatroom_announcement(wxid, text):
+    # 组包
+    send_data = business.set_chatroom_announcement_req2buf(wxid, text)
+    # 发包
+    ret_bytes = Util.mmPost('/cgi-bin/micromsg-bin/setchatroomannouncement', send_data)
+    logger.debug('setchatroomannouncement返回数据:' + Util.b2hex(ret_bytes))
+    # 解包
+    return business.set_chatroom_announcement_buf2resp(ret_bytes)
+
 # 初始化python模块
 def init_all():
     #配置logger

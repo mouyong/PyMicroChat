@@ -14,9 +14,9 @@ from .logger_wrapper import logger
 
 # 测试命令
 state = lambda i: '已开启' if i else '已关闭'
-TEST_KEY_WORD = ('测试分享链接', '测试好友列表', '图灵机器人', '自动通过好友申请', '自动抢红包/自动收款', '测试扔骰子', '测试面对面建群', '检测单向好友', '测试消息撤回', '测试拉黑')
+TEST_KEY_WORD = ('测试分享链接', '测试好友列表', '图灵机器人', '自动通过好友申请', '自动抢红包/自动收款', '测试扔骰子', '测试面对面建群', '检测单向好友', '测试消息撤回', '测试拉黑', '测试发布群公告')
 # 测试开关
-TEST_STATE    = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+TEST_STATE    = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
 
 # 插件黑名单(不处理该wxid的消息)
 plugin_blacklist = ['weixin', ]
@@ -77,6 +77,17 @@ def test(msg):
         time.sleep(5)
         interface.ban_friend(msg.from_id.id, False)
         interface.new_send_msg(msg.from_id.id, '已从黑名单中移除'.encode())
+        return False
+    elif TEST_KEY_WORD[10] == msg.raw.content or '10' == msg.raw.content:                                                             # 测试群公告
+        # 面对面建群
+        wxid = interface.mm_facing_create_chatroom()
+        if wxid:
+            # 拉人入群
+            interface.add_chatroom_member(wxid, [msg.from_id.id])
+            # 设置群公告
+            interface.set_chatroom_announcement(wxid, '天王盖地虎')
+            # 设置群聊名
+            interface.set_friend_name(wxid, '宝塔镇河妖')
         return False
     return True
 
