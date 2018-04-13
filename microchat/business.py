@@ -866,7 +866,7 @@ def revoke_msg_buf2resp(buf):
     logger.info('[消息撤回]错误码:{},提示信息:{}'.format(res.res.code, res.response_sys_wording), 11)
     return res.res.code
 
-# 好友(群聊)操作:删除/保存/拉黑/恢复/设置群昵称/设置好友备注名
+# 好友(群聊)操作请求:删除/保存/拉黑/恢复/设置群昵称/设置好友备注名
 def op_friend_req2buf(friend_info, cmd = 2):
     #protobuf组包
     req = mm_pb2.oplog_req(
@@ -884,6 +884,7 @@ def op_friend_req2buf(friend_info, cmd = 2):
     # 组包
     return pack(req.SerializeToString(), 681)
 
+# 好友(群聊)操作结果
 def op_friend_buf2resp(buf):
     res = mm_pb2.oplog_resp()
     res.ParseFromString(UnPack(buf))
@@ -895,3 +896,29 @@ def op_friend_buf2resp(buf):
         code = -1
         logger.info('好友操作失败!', 11)
     return code
+
+# 发布群公告请求(仅限群主;自动@所有人)
+def set_chatroom_announcement_req2buf(wxid, text):
+    #protobuf组包
+    req = mm_pb2.set_chatroom_announcement_req(
+        login = mm_pb2.LoginInfo(
+            aesKey =  Util.sessionKey,
+            uin = Util.uin,
+            guid = define.__GUID__ + '\0',          #guid以\0结尾
+            clientVer = define.__CLIENT_VERSION__,
+            androidVer = define.__ANDROID_VER__,
+            unknown = 0,
+        ),
+        chatroom_wxid = wxid,
+        content = text,
+    )
+    # 组包
+    return pack(req.SerializeToString(), 993)
+
+# 发布群公告响应
+def set_chatroom_announcement_buf2resp(buf):
+    res = mm_pb2.set_chatroom_announcement_resp()
+    res.ParseFromString(UnPack(buf))
+    if res.res.code:
+        logger.info('发布群公告失败!错误码:{},提示信息:{}'.format(res.res.code, res.res.message), 11)
+    return res.res.code

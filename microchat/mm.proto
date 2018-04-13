@@ -871,3 +871,18 @@ message revoke_msg_resp
 	optional mmRes res						= 1;					//错误码
 	optional string response_sys_wording    = 3;					//消息撤回提示(已撤回或撤回失败原因)
 }
+
+//发布群公告请求
+message set_chatroom_announcement_req
+{
+	optional LoginInfo login 				= 1;					//登录信息
+	optional string chatroom_wxid			= 2;					//群聊wxid
+	optional string content					= 3;					//群公告内容
+}
+
+//发布群公告响应
+message set_chatroom_announcement_resp
+{
+	optional mmRes res						= 1;					//发布群公告结果
+}
+
