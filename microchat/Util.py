@@ -19,6 +19,7 @@ from Crypto.Cipher import PKCS1_v1_5 as Cipher_pkcs1_v1_5
 from google.protobuf.internal import decoder, encoder
 from ctypes import *
 from .plugin.logger_wrapper import logger
+from .ecdh import ecdh
 
 ################################全局变量################################
 # cgi http头
@@ -158,60 +159,80 @@ def OpenIE(url):
     subprocess.call('python ./microchat/plugin/browser.py {}'.format(url))
 
 # 使用c接口生成ECDH本地密钥对
-def GenEcdhKey():
+def GenEcdhKey(old=False):
     global EcdhPriKey, EcdhPubKey
-    # 载入c模块
-    loader = ctypes.cdll.LoadLibrary
-    if platform.architecture()[0] == '64bit':
-        lib = loader("./microchat/dll/ecdh_x64.dll")
+    if old:
+        # 载入c模块
+        loader = ctypes.cdll.LoadLibrary
+        if platform.architecture()[0] == '64bit':
+            lib = loader("./microchat/dll/ecdh_x64.dll")
+        else:
+            lib = loader("./microchat/dll/ecdh_x32.dll")
+        # 申请内存
+        priKey = bytes(bytearray(2048))                                                         # 存放本地DH私钥
+        pubKey = bytes(bytearray(2048))                                                         # 存放本地DH公钥
+        lenPri = c_int(0)                                                                       # 存放本地DH私钥长度
+        lenPub = c_int(0)                                                                       # 存放本地DH公钥长度
+        # 转成c指针传参
+        pri = c_char_p(priKey)
+        pub = c_char_p(pubKey)
+        pLenPri = pointer(lenPri)
+        pLenPub = pointer(lenPub)
+        # secp224r1 ECC算法
+        nid = 713
+        # c函数原型:bool GenEcdh(int nid, unsigned char *szPriKey, int *pLenPri, unsigned char *szPubKey, int *pLenPub);
+        bRet = lib.GenEcdh(nid, pri, pLenPri, pub, pLenPub)
+        if bRet:
+            # 从c指针取结果
+            EcdhPriKey = priKey[:lenPri.value]
+            EcdhPubKey = pubKey[:lenPub.value]
+        return bRet
     else:
-        lib = loader("./microchat/dll/ecdh_x32.dll")
-    # 申请内存
-    priKey = bytes(bytearray(2048))                                                         # 存放本地DH私钥
-    pubKey = bytes(bytearray(2048))                                                         # 存放本地DH公钥
-    lenPri = c_int(0)                                                                       # 存放本地DH私钥长度
-    lenPub = c_int(0)                                                                       # 存放本地DH公钥长度
-    # 转成c指针传参
-    pri = c_char_p(priKey)
-    pub = c_char_p(pubKey)
-    pLenPri = pointer(lenPri)
-    pLenPub = pointer(lenPub)
-    # secp224r1 ECC算法
-    nid = 713
-    # c函数原型:bool GenEcdh(int nid, unsigned char *szPriKey, int *pLenPri, unsigned char *szPubKey, int *pLenPub);
-    bRet = lib.GenEcdh(nid, pri, pLenPri, pub, pLenPub)
-    if bRet:
-        # 从c指针取结果
-        EcdhPriKey = priKey[:lenPri.value]
-        EcdhPubKey = pubKey[:lenPub.value]
-    return bRet
+
+        try:
+            pub_key, len_pub, pri_key, len_pri = ecdh.gen_ecdh(713)
+            EcdhPubKey = pub_key[:len_pub]
+            EcdhPriKey = pri_key[:len_pri]
+            return True
+        except Exception as e:
+            print(e)
+            return False  
+
 
 # 密钥协商
-def DoEcdh(serverEcdhPubKey):
-    EcdhShareKey = b''
-    # 载入c模块
-    loader = ctypes.cdll.LoadLibrary
-    if platform.architecture()[0] == '64bit':
-        lib = loader("./microchat/dll/ecdh_x64.dll")
+def DoEcdh(serverEcdhPubKey, old=False):
+    if old:
+        EcdhShareKey = b''
+        # 载入c模块
+        loader = ctypes.cdll.LoadLibrary
+        if platform.architecture()[0] == '64bit':
+            lib = loader("./microchat/dll/ecdh_x64.dll")
+        else:
+            lib = loader("./microchat/dll/ecdh_x32.dll") #修改在32环境下找不到ecdh_x32.dll文件 by luckyfish 2018-04-02
+        # 申请内存
+        shareKey = bytes(bytearray(2048))                                                       # 存放密钥协商结果
+        lenShareKey = c_int(0)                                                                  # 存放共享密钥长度
+        # 转成c指针传参
+        pShareKey = c_char_p(shareKey)
+        pLenShareKey = pointer(lenShareKey)
+        pri = c_char_p(EcdhPriKey)
+        pub = c_char_p(serverEcdhPubKey)
+        # secp224r1 ECC算法
+        nid = 713
+        # c函数原型:bool DoEcdh(int nid, unsigned char * szServerPubKey, int nLenServerPub, unsigned char * szLocalPriKey, int nLenLocalPri, unsigned char * szShareKey, int *pLenShareKey);
+        bRet = lib.DoEcdh(nid, pub, len(serverEcdhPubKey), pri,len(EcdhPriKey), pShareKey, pLenShareKey)
+        if bRet:
+            # 从c指针取结果
+            EcdhShareKey = shareKey[:lenShareKey.value]
+        return EcdhShareKey
     else:
-        lib = loader("./microchat/dll/ecdh_x32.dll") #修改在32环境下找不到ecdh_x32.dll文件 by luckyfish 2018-04-02
-    # 申请内存
-    shareKey = bytes(bytearray(2048))                                                       # 存放密钥协商结果
-    lenShareKey = c_int(0)                                                                  # 存放共享密钥长度
-    # 转成c指针传参
-    pShareKey = c_char_p(shareKey)
-    pLenShareKey = pointer(lenShareKey)
-    pri = c_char_p(EcdhPriKey)
-    pub = c_char_p(serverEcdhPubKey)
-    # secp224r1 ECC算法
-    nid = 713
-    # c函数原型:bool DoEcdh(int nid, unsigned char * szServerPubKey, int nLenServerPub, unsigned char * szLocalPriKey, int nLenLocalPri, unsigned char * szShareKey, int *pLenShareKey);
-    bRet = lib.DoEcdh(nid, pub, len(serverEcdhPubKey), pri,len(EcdhPriKey), pShareKey, pLenShareKey)
-    if bRet:
-        # 从c指针取结果
-        EcdhShareKey = shareKey[:lenShareKey.value]
-    return EcdhShareKey
-
+        try:
+            _, EcdhShareKey = ecdh.do_ecdh(713, serverEcdhPubKey, EcdhPriKey)
+            return EcdhShareKey
+        except Exception as e:
+            print(e)
+            return b''
+    
 
 # bytes转hex输出
 def b2hex(s): return ''.join(["%02X " % x for x in s]).strip()

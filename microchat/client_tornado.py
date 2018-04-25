@@ -1,4 +1,4 @@
-from tornado import gen
+from tornado import gen, iostream
 from tornado.tcpclient import TCPClient
 from tornado.ioloop import IOLoop
 from tornado.ioloop import PeriodicCallback
@@ -64,7 +64,16 @@ class ChatClient(object):
 
     @gen.coroutine
     def start(self):
-        self.stream = yield TCPClient().connect(self.host, self.port)
+        wait_sec = 10
+        while True:
+            try:
+                self.stream = yield TCPClient().connect(self.host, self.port)
+                break
+            except iostream.StreamClosedError:
+                logger.error("connect error and again")
+                yield gen.sleep(wait_sec)
+                wait_sec = (wait_sec if (wait_sec >= 60) else (wait_sec * 2))
+            
         self.send_heart_beat()
         self.heartbeat_callback = PeriodicCallback(self.send_heart_beat, 1000 * HEARTBEAT_TIMEOUT)
         self.heartbeat_callback.start()                 # start scheduler
@@ -90,7 +99,7 @@ class ChatClient(object):
         if (Util.get_utc() - self.last_heartbeat_time) >= HEARTBEAT_TIMEOUT:
             #长链接发包
             send_data = self.pack(CMDID_NOOP_REQ)
-            self.stream.write(send_data)
+            self.send(send_data)
             #记录本次发送心跳时间
             self.last_heartbeat_time = Util.get_utc()
             return True
@@ -101,7 +110,7 @@ class ChatClient(object):
         (login_buf, self.login_aes_key) = business.login_req2buf(
             self.usr_name, self.passwd)
         send_data = self.pack(CMDID_MANUALAUTH_REQ, login_buf)
-        self.stream.write(send_data)
+        self.send(send_data)
 
     @gen.coroutine
     def __recv_header(self, data):
@@ -111,8 +120,17 @@ class ChatClient(object):
         (len_ack, _, _) = struct.unpack('>I4xII', data)
         if self.recv_cb:
             self.recv_cb(data)
+<<<<<<< HEAD
         yield self.stream.read_bytes(len_ack - 16, self.__recv_payload)
 
+=======
+        try:
+            yield self.stream.read_bytes(len_ack - 16, self.__recv_payload)
+        except iostream.StreamClosedError:
+            logger.error("stream read error, TCP disconnect and restart")
+            self.restart(dns_ip.fetch_longlink_ip(), 443)
+        
+>>>>>>> upstream/master
     @gen.coroutine
     def __recv_payload(self, data):
         logger.debug('recive from the server', data)
@@ -133,11 +151,24 @@ class ChatClient(object):
                 else:
                     logger.error('切换DNS尝试次数已用尽,程序即将退出............')
                     self.stop()
+<<<<<<< HEAD
         yield self.stream.read_bytes(16, self.__recv_header)
 
     @gen.coroutine
+=======
+        try:
+            yield self.stream.read_bytes(16, self.__recv_header)
+        except iostream.StreamClosedError:
+            logger.error("stream read error, TCP disconnect and restart")
+            self.restart(dns_ip.fetch_longlink_ip(), 443)
+        
+>>>>>>> upstream/master
     def send(self, data):
-        yield self.stream.write(data.encode('utf-8'))
+        try:
+            self.stream.write(data)
+        except iostream.StreamClosedError:
+            logger.error("stream write error, TCP disconnect and restart")
+            self.restart(dns_ip.fetch_longlink_ip(), 443)
 
     def stop(self):
         self.ioloop.stop()
@@ -187,7 +218,7 @@ class ChatClient(object):
                             self.ioloop.stop()
                             return (UNPACK_FAIL, b'')
                         
-                        self.stream.write(
+                        self.send(
                             self.pack(CMDID_REPORT_KV_REQ,
                                     business.sync_done_req2buf()))  #通知服务器消息已接收
                     else:  #sync key不存在

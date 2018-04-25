@@ -96,7 +96,6 @@ class LoggerWrapper(object):
         self.out = 0
         if os.path.exists(os.getcwd() + '/log') is False:
             os.mkdir(os.getcwd() + '/log')
-        # self.config("microchat", out=2)
 
     def config(self, appName, logFileName=None, level=logging.INFO, out=2, fore_color = ColorDefine.FOREGROUND_GREEN):
         """
