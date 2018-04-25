@@ -120,17 +120,14 @@ class ChatClient(object):
         (len_ack, _, _) = struct.unpack('>I4xII', data)
         if self.recv_cb:
             self.recv_cb(data)
-<<<<<<< HEAD
-        yield self.stream.read_bytes(len_ack - 16, self.__recv_payload)
 
-=======
         try:
             yield self.stream.read_bytes(len_ack - 16, self.__recv_payload)
         except iostream.StreamClosedError:
             logger.error("stream read error, TCP disconnect and restart")
             self.restart(dns_ip.fetch_longlink_ip(), 443)
         
->>>>>>> upstream/master
+
     @gen.coroutine
     def __recv_payload(self, data):
         logger.debug('recive from the server', data)
@@ -151,18 +148,14 @@ class ChatClient(object):
                 else:
                     logger.error('切换DNS尝试次数已用尽,程序即将退出............')
                     self.stop()
-<<<<<<< HEAD
-        yield self.stream.read_bytes(16, self.__recv_header)
 
-    @gen.coroutine
-=======
         try:
             yield self.stream.read_bytes(16, self.__recv_header)
         except iostream.StreamClosedError:
             logger.error("stream read error, TCP disconnect and restart")
             self.restart(dns_ip.fetch_longlink_ip(), 443)
         
->>>>>>> upstream/master
+
     def send(self, data):
         try:
             self.stream.write(data)

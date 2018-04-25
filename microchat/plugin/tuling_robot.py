@@ -38,12 +38,11 @@ def tuling_robot(msg):
                 reply_at_wxid = msg.raw.content[:msg.raw.content.find(':\n')]
                 # 取@我之后的消息内容
                 send_to_tuling_content = msg.raw.content[msg.raw.content.rfind('\u2005') + 1:]           # at格式: @nick_name\u2005
-<<<<<<< HEAD
-=======
+
                 if reply_prefix and reply_at_wxid:
                     # 本条消息需要回复
                     need_reply = True
->>>>>>> upstream/master
+
         except:
             return
     # 公众号消息不回复
@@ -71,20 +70,8 @@ def tuling_robot(msg):
                 "userId": Util.GetMd5(msg.from_id.id)
             }
         }
-<<<<<<< HEAD
-    }
-    try:
-        robot_ret = eval(Util.post(TULING_HOST, TULING_API,json.dumps(data)).decode())
-        logger.debug('tuling api 返回:{}'.format(robot_ret))
-        # 自动回消息
-        if reply_prefix and reply_at_wxid:
-            # 消息前缀: @somebody  并at发消息人
-            interface.new_send_msg(msg.from_id.id, (reply_prefix + ' ' + robot_ret['results'][0]['values']['text']).encode(encoding="utf-8"), [reply_at_wxid])
-        else:
-            interface.new_send_msg(msg.from_id.id, robot_ret['results'][0]['values']['text'].encode(encoding="utf-8"))
-    except:
-        logger.info('tuling api 调用异常!', 1)
-=======
+
+
         try:
             robot_ret = eval(Util.post(TULING_HOST, TULING_API,json.dumps(data)).decode())
             logger.debug('tuling api 返回:{}'.format(robot_ret))
@@ -96,5 +83,5 @@ def tuling_robot(msg):
                 interface.new_send_msg(msg.from_id.id, robot_ret['results'][0]['values']['text'].encode(encoding="utf-8"))
         except:
             logger.info('tuling api 调用异常!', 1)
->>>>>>> upstream/master
+
     return
