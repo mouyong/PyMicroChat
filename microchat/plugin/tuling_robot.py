@@ -46,12 +46,12 @@ def tuling_robot(msg):
         except:
             return
     # 公众号消息不回复
-    elif msg.from_id.id.startswith('gh_'):  
+    elif msg.from_id.id.startswith('gh_'):
         return
     else:
         # 本条消息需要回复
         need_reply = True
-        pass 
+        pass
 
     if need_reply:
         # 使用图灵接口获取自动回复信息

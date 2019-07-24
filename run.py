@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 from microchat import client_tornado
 
 def main():

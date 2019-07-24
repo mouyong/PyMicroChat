@@ -8,6 +8,7 @@ from . import interface
 from . import Util
 from . import business
 from .plugin.logger_wrapper import logger
+from .plugin.tip_bot import tip_waimai
 
 #recv缓冲区大小
 BUFFSIZE = 4096
@@ -61,6 +62,7 @@ class ChatClient(object):
         self.login_aes_key = b''
         self.recv_data = b''
         self.heartbeat_callback = None
+        self.tip_waimai_callback = None
 
     @gen.coroutine
     def start(self):
@@ -73,10 +75,16 @@ class ChatClient(object):
                 logger.error("connect error and again")
                 yield gen.sleep(wait_sec)
                 wait_sec = (wait_sec if (wait_sec >= 60) else (wait_sec * 2))
-            
+
         self.send_heart_beat()
         self.heartbeat_callback = PeriodicCallback(self.send_heart_beat, 1000 * HEARTBEAT_TIMEOUT)
         self.heartbeat_callback.start()                 # start scheduler
+
+        # 每分钟执行一次，检查是否要发送点餐提示
+        tip_waimai()
+        self.tip_waimai_callback = PeriodicCallback(tip_waimai, 1000 * 60)
+        self.tip_waimai_callback.start()
+
         self.login()
         self.stream.read_bytes(16, self.__recv_header)
 
@@ -85,6 +93,7 @@ class ChatClient(object):
         if self.heartbeat_callback:
             # 停止心跳
             self.heartbeat_callback.stop()
+            self.tip_waimai_callback.stop()
         self.host = host
         self.port = port
         self.stream.set_close_callback(self.__closed)
@@ -126,7 +135,7 @@ class ChatClient(object):
         except iostream.StreamClosedError:
             logger.error("stream read error, TCP disconnect and restart")
             self.restart(dns_ip.fetch_longlink_ip(), 443)
-        
+
 
     @gen.coroutine
     def __recv_payload(self, data):
@@ -154,7 +163,7 @@ class ChatClient(object):
         except iostream.StreamClosedError:
             logger.error("stream read error, TCP disconnect and restart")
             self.restart(dns_ip.fetch_longlink_ip(), 443)
-        
+
 
     def send(self, data):
         try:
@@ -210,7 +219,7 @@ class ChatClient(object):
                             logger.error(e)
                             self.ioloop.stop()
                             return (UNPACK_FAIL, b'')
-                        
+
                         self.send(
                             self.pack(CMDID_REPORT_KV_REQ,
                                     business.sync_done_req2buf()))  #通知服务器消息已接收
@@ -232,7 +241,7 @@ class ChatClient(object):
                         elif code:
                             # raise RuntimeError('登录失败!')  #登录失败
                             self.ioloop.stop()
-                            return (UNPACK_FAIL, b'')                           
+                            return (UNPACK_FAIL, b'')
                 return (UNPACK_OK, buf[len_ack:])
 
         return (UNPACK_OK,b'')
