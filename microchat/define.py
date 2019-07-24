@@ -1,4 +1,4 @@
-__CLIENT_VERSION__                          = 637927472
+__CLIENT_VERSION__                          = 637927472 # 707927472 # 原来的值是 637927472
 GUID                                        = "Aff0aef642a31fc2"
 __GUID__                                    = GUID[:15]
 __CLIENT_SEQID__                            = GUID + "_1522827110765"

@@ -5,6 +5,7 @@ from .. import mm_pb2
 from .. import Util
 from bs4 import BeautifulSoup
 from .logger_wrapper import logger
+from .tip_bot import tip_eat
 
 # 图灵机器人接口
 TULING_HOST = 'openapi.tuling123.com'
@@ -71,7 +72,9 @@ def tuling_robot(msg):
             }
         }
 
+        tip_eat()
 
+        return
         try:
             robot_ret = eval(Util.post(TULING_HOST, TULING_API,json.dumps(data)).decode())
             logger.debug('tuling api 返回:{}'.format(robot_ret))

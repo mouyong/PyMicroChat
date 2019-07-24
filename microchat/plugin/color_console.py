@@ -1,6 +1,8 @@
+# coding: utf-8
+
 '''
 输出彩色终端字体，可扩展，可组合，跨平台...
-@example: 
+@example:
     print(ColorConsole.red('I am red!'))
 -----------------colorama模块的一些常量---------------------------
 Fore: BLACK, RED, GREEN, YELLOW, BLUE, MAGENTA, CYAN, WHITE, RESET.
@@ -69,5 +71,5 @@ class ColorConsole(object):
         """前景色:五彩缤纷  背景色:默认"""
         ret = ''
         for i, ch in enumerate(s):
-            ret += RAINBOW[i%7] + ch    
+            ret += RAINBOW[i%7] + ch
         return ret

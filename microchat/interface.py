@@ -321,7 +321,7 @@ def set_chatroom_announcement(wxid, text):
 # 初始化python模块
 def init_all():
     #配置logger
-    logger.config("microchat", out=2, level=logging.DEBUG)
+    logger.config("microchat", out=2, level=logging.INFO)
     logo_bingo()
     # 初始化ECC key
     if not Util.GenEcdhKey():

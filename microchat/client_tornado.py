@@ -8,7 +8,8 @@ from . import interface
 from . import Util
 from . import business
 from .plugin.logger_wrapper import logger
-from .plugin.tip_bot import tip_waimai
+from .plugin.tip_bot import tip_eat
+import time
 
 #recv缓冲区大小
 BUFFSIZE = 4096
@@ -80,19 +81,20 @@ class ChatClient(object):
         self.heartbeat_callback = PeriodicCallback(self.send_heart_beat, 1000 * HEARTBEAT_TIMEOUT)
         self.heartbeat_callback.start()                 # start scheduler
 
-        # 每分钟执行一次，检查是否要发送点餐提示
-        tip_waimai()
-        self.tip_waimai_callback = PeriodicCallback(tip_waimai, 1000 * 60)
-        self.tip_waimai_callback.start()
-
-        self.login()
+        yield self.login()
         self.stream.read_bytes(16, self.__recv_header)
+
+        # 每分钟执行一次，检查是否要发送点餐提示
+        tip_eat()
+        self.tip_waimai_callback = PeriodicCallback(tip_eat, 1000 * 60)
+        self.tip_waimai_callback.start()
 
     @gen.coroutine
     def restart(self, host, port):
         if self.heartbeat_callback:
             # 停止心跳
             self.heartbeat_callback.stop()
+        if self.tip_waimai_callback:
             self.tip_waimai_callback.stop()
         self.host = host
         self.port = port
@@ -115,6 +117,7 @@ class ChatClient(object):
         else:
             return False
 
+    @gen.coroutine
     def login(self):
         (login_buf, self.login_aes_key) = business.login_req2buf(
             self.usr_name, self.passwd)

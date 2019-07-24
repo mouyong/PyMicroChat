@@ -129,7 +129,7 @@ def mmPost(cgi, data):
             if 'timed out' == str(e):
                 logger.info('{}请求超时,正在尝试重新发起请求,剩余尝试次数{}次'.format(cgi, retry), 11)
             else:
-                raise RuntimeError('mmPost Error!!!')    
+                raise RuntimeError('mmPost Error!!!')
     return response
 
 # HTTP短链接发包
@@ -146,7 +146,7 @@ def post(host, api, data, head=''):
     except:
         logger.info('{}请求失败!'.format(api) ,11)
         return b''
-    
+
 
 # 退出程序
 def ExitProcess():
@@ -156,7 +156,8 @@ def ExitProcess():
 
 # 使用IE浏览器访问网页(阻塞)
 def OpenIE(url):
-    subprocess.call('python ./microchat/plugin/browser.py {}'.format(url))
+    logger.info("授权链接：{}".format(url))
+    subprocess.call('python3 ./microchat/plugin/browser.py {}'.format(url))
 
 # 使用c接口生成ECDH本地密钥对
 def GenEcdhKey(old=False):
@@ -196,7 +197,7 @@ def GenEcdhKey(old=False):
             return True
         except Exception as e:
             print(e)
-            return False  
+            return False
 
 
 # 密钥协商
@@ -232,7 +233,7 @@ def DoEcdh(serverEcdhPubKey, old=False):
         except Exception as e:
             print(e)
             return b''
-    
+
 
 # bytes转hex输出
 def b2hex(s): return ''.join(["%02X " % x for x in s]).strip()
@@ -364,7 +365,7 @@ def find_str(src,start,end):
             if end and src.find(start)> -1:
                 end_index = src.find(end,start_index)
                 return src[start_index:end_index]
-            else: 
+            else:
                 return src[start_index:]
     except:
         pass

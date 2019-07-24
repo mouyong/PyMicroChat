@@ -30,7 +30,7 @@ def pack(src, cgi_type, use_compress=0):
     # 封包包头
     header = bytearray(0)
     header += b'\xbf'                                                                               # 标志位(可忽略该字节)
-    header += bytes([0])                                                                            # 最后2bit：02--包体不使用压缩算法;前6bit:包头长度,最后计算      
+    header += bytes([0])                                                                            # 最后2bit：02--包体不使用压缩算法;前6bit:包头长度,最后计算
     header += bytes([((0x5 << 4) + 0xf)])                                                           # 05:AES加密算法  0xf:cookie长度(默认使用15字节长的cookie)
     header += struct.pack(">I", define.__CLIENT_VERSION__)                                          # 客户端版本号 网络字节序
     header += struct.pack(">i", Util.uin)                                                           # uin
@@ -202,7 +202,7 @@ def login_buf2Resp(buf, login_aes_key):
 
     # 登录异常处理
     if -301 == loginRes.result.code:                                                                # DNS解析失败,请尝试更换idc
-        logger.error('登陆结果:\ncode:{}\n即将尝试切换DNS重新登陆!'.format(loginRes.result.code))                    
+        logger.error('登陆结果:\ncode:{}\n即将尝试切换DNS重新登陆!'.format(loginRes.result.code))
     elif -106 == loginRes.result.code:                                                              # 需要在IE浏览器中滑动操作解除环境异常/扫码、短信、好友授权(滑动解除异常后需要重新登录一次)
         logger.error('登陆结果:\ncode:{}\nError msg:{}\n'.format(loginRes.result.code, loginRes.result.err_msg.msg[loginRes.result.err_msg.msg.find('<Content><![CDATA[')+len('<Content><![CDATA['):loginRes.result.err_msg.msg.find(']]></Content>')]))
         # 打开IE,完成授权
@@ -329,14 +329,14 @@ def new_sync_buf2resp(buf):
             msg.ParseFromString(res.msg.tag2[i].data.data)
             if 9999 == msg.type:                                                                            # 过滤系统垃圾消息
                 continue
-            if 10002 == msg.type and 'weixin' ==  msg.from_id.id:                                           # 过滤系统垃圾消息                                                          
-                continue   
+            if 10002 == msg.type and 'weixin' ==  msg.from_id.id:                                           # 过滤系统垃圾消息
+                continue
             else:
                 # 将消息存入数据库
                 Util.insert_msg_to_db(msg.serverid, msg.createTime, msg.from_id.id, msg.to_id.id, msg.type, msg.raw.content)
                 logger.info('收到新消息:\ncreate utc time:{}\ntype:{}\nfrom:{}\nto:{}\nraw data:{}\nxml data:{}'.format(Util.utc_to_local_time(msg.createTime), msg.type, msg.from_id.id, msg.to_id.id, msg.raw.content, msg.xmlContent))
                 # 接入插件
-                plugin.dispatch(msg)   
+                plugin.dispatch(msg)
         elif 2 == res.msg.tag2[i].type:                                                                     # 更新好友消息
             friend = mm_pb2.contact_info()
             friend.ParseFromString(res.msg.tag2[i].data.data)
@@ -463,7 +463,7 @@ def verify_user_req2buf(opcode,user_wxid,user_v1_name,user_ticket,user_anti_tick
     return pack(req.SerializeToString(),30)
 
 #好友操作结果
-def verify_user_msg_buf2resp(buf): 
+def verify_user_msg_buf2resp(buf):
     #解包
     res = mm_pb2.verify_user_resp()
     res.ParseFromString(UnPack(buf))
@@ -507,7 +507,7 @@ def recieve_wxhb_buf2resp(buf):
             return (info['timingIdentifier'],info['sendUserName'])
     except:
         pass
-    logger.info('[recieve_wxhb_buf2resp]请求timingIdentifier失败,err_code={},err_msg:{}'.format(res.ret_code,res.ret_msg))    
+    logger.info('[recieve_wxhb_buf2resp]请求timingIdentifier失败,err_code={},err_msg:{}'.format(res.ret_code,res.ret_msg))
     return ('','')
 
 # 收红包请求2(拆红包)
@@ -583,13 +583,13 @@ def send_emoji_req2buf(wxid, file_name, game_type, content):
         ),
         tag2 = 1,
         emoji = mm_pb2.send_emoji_req.emoji_info(
-            animation_id = file_name,                                          # emoji 加密文件名                   
+            animation_id = file_name,                                          # emoji 加密文件名
             tag2 = 0,
             tag3 = random.randint(1, 9999),
             tag4 = mm_pb2.send_emoji_req.emoji_info.TAG4(tag1 = 0),
             tag5 = 1,
             to_wxid = wxid,
-            game_ext = '<gameext type="{}" content="{}" ></gameext>'.format(game_type, content),        
+            game_ext = '<gameext type="{}" content="{}" ></gameext>'.format(game_type, content),
             tag8 = '',
             utc = '{}'.format(Util.get_utc() * 1000 + random.randint(1, 999)),
             tag11 = 0,
@@ -603,7 +603,7 @@ def send_emoji_req2buf(wxid, file_name, game_type, content):
 def send_emoji_buf2resp(buf):
     res = mm_pb2.send_emoji_resp()
     res.ParseFromString(UnPack(buf))
-    if res.res.code:                                                            # emoji发送失败                                                
+    if res.res.code:                                                            # emoji发送失败
         logger.info('emoji发送失败, 错误码={}'.format(res.res.code), 11)
     return res.res.code, res.res.svrid
 
@@ -636,7 +636,7 @@ def transfer_operation_buf2resp(buf):
     res = mm_pb2.transfer_operation_resp()
     res.ParseFromString(UnPack(buf))
     logger.debug('[收款结果]错误码={},详细信息:{}'.format(res.ret_code,res.res.str))
-    return (res.ret_code,res.res.str)   
+    return (res.ret_code,res.res.str)
 
 # 查询转账记录请求
 def transfer_query_req2buf(invalid_time, trans_id, transfer_id):
@@ -762,11 +762,11 @@ def mm_facing_create_chatroom_buf2resp(buf, op_code):
         if res.res.code:
             logger.info('面对面建群步骤1失败!\n错误码:{}\n错误信息:{}'.format(res.res.code, res.res.msg.msg), 5)
         return res.res.code, ''
-    else:    
+    else:
         if not res.res.code and res.wxid:
             logger.info('面对面建群成功! {} 面对面群聊wxid:{}'.format(res.res.msg.msg, res.wxid), 11)
         else:
-            logger.info('面对面建群步骤2失败!\n错误码:{}\n错误信息:{}'.format(res.res.code, res.res.msg.msg), 5)  
+            logger.info('面对面建群步骤2失败!\n错误码:{}\n错误信息:{}'.format(res.res.code, res.res.msg.msg), 5)
         return res.res.code, res.wxid
 
 # 群聊拉人请求
@@ -814,7 +814,7 @@ def set_group_nick_name_req2buf(chatroom_wxid, nick_name):
                     ).SerializeToString(),
                 ),
             ),
-        ), 
+        ),
     )
     req.tag1.cmd.option.len = len(req.tag1.cmd.option.data)
     # 组包
@@ -878,7 +878,7 @@ def op_friend_req2buf(friend_info, cmd = 2):
                     data = friend_info,
                 ),
             ),
-        ), 
+        ),
     )
     req.tag1.cmd.option.len = len(req.tag1.cmd.option.data)
     # 组包
