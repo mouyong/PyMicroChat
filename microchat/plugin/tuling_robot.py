@@ -87,23 +87,56 @@ def tuling_robot(msg):
             robot_ret = json.loads(Util.post(TULING_HOST, TULING_API, urlencode(data), {'content-type': 'application/x-www-form-urlencoded'}))
             logger.info('tuling api 返回:{}'.format(robot_ret))
 
-            # message = robot_ret['results'][0]['values']['text']
-
-            message = robot_ret['data']['results'][0]['values']['text']
             if robot_ret['type'] == 'error':
                 message = robot_ret['content']
             elif 4003 == robot_ret['data']['intent']['code']: # 请求次数超限制!
                 message = '因个人原因，今天不能陪你聊天了，对不起啦 :('
+            else:
+                message = robot_ret['data']['results'][0]['values']['text']
+
+            multi_msg = False
+            if robot_ret['type'] == 'success' and len(robot_ret['data']['results']) > 1:
+                multi_msg = True
 
             # 自动回消息
-            if reply_prefix and reply_at_wxid:
-                # 消息前缀: @somebody  并at发消息人
-                message = (reply_prefix + ' ' + message)
-                interface.new_send_msg(msg.from_id.id, message.encode(encoding="utf-8"), [reply_at_wxid])
+            if (multi_msg):
+                send_multi_msg(robot_ret['data'], msg, reply_prefix, reply_at_wxid)
             else:
-                interface.new_send_msg(msg.from_id.id, message.encode(encoding="utf-8"))
+                send_msg(message, msg, reply_prefix, reply_at_wxid)
+
         except Exception as e:
             logger.info('tuling api 调用异常!', 1)
             print(e)
 
     return
+
+def send_msg(message, msg, reply_prefix, reply_at_wxid):
+    if reply_prefix and reply_at_wxid:
+        # 消息前缀: @somebody  并at发消息人
+        message = (reply_prefix + ' ' + message)
+        interface.new_send_msg(msg.from_id.id, message.encode(encoding="utf-8"), [reply_at_wxid])
+    else:
+        interface.new_send_msg(msg.from_id.id, message.encode(encoding="utf-8"))
+
+def send_multi_msg(data, msg, reply_prefix, reply_at_wxid):
+    for result in data['results']:
+        if result['resultType'] == 'text':
+            send_msg(result['values']['text'], msg, reply_prefix, reply_at_wxid)
+        elif result['resultType'] == 'voice':
+            intent = data['intent']
+            parameters = intent['parameters']
+
+            title = '请点击查看'
+            desc = ''
+            if intent['code'] == 200101: # 唱歌
+                title = parameters['name']
+                desc = parameters['singer']
+            elif intent['code'] == 200701: # 跳舞
+                title = parameters['song']
+                desc = parameters['singer']
+            elif intent['code'] == 200201: # 故事
+                title = parameters['name']
+                desc = parameters['author']
+
+            interface.send_app_msg(msg.from_id.id, title, desc, result['values']['voice'], thumb_url='')
+
