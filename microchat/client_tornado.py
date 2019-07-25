@@ -8,7 +8,7 @@ from . import interface
 from . import Util
 from . import business
 from .plugin.logger_wrapper import logger
-from .plugin.tip_bot import tip_eat
+from .plugin.tip_bot import tips
 import time
 
 #recv缓冲区大小
@@ -85,8 +85,8 @@ class ChatClient(object):
         self.stream.read_bytes(16, self.__recv_header)
 
         # 每分钟执行一次，检查是否要发送点餐提示
-        tip_eat()
-        self.tip_waimai_callback = PeriodicCallback(tip_eat, 1000 * 60)
+        tips()
+        self.tip_waimai_callback = PeriodicCallback(tips, 1000 * 60)
         self.tip_waimai_callback.start()
 
     @gen.coroutine

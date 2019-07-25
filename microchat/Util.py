@@ -115,7 +115,7 @@ def aesDecrypt(src, key):
 # HTTP短链接发包
 def mmPost(cgi, data):
     ret = False
-    retry = 3
+    retry = 10
     response = b''
     while not ret and retry > 0:
         retry = retry - 1
@@ -125,9 +125,11 @@ def mmPost(cgi, data):
             response = conn.getresponse().read()
             conn.close()
             ret = True
+            if retry != 10:
+                logger.info("发送成功")
         except Exception as e:
             if 'timed out' == str(e):
-                logger.info('{}请求超时,正在尝试重新发起请求,剩余尝试次数{}次'.format(cgi, retry), 11)
+                logger.info('{} 请求超时,正在尝试重新发起请求,剩余尝试次数 {} 次'.format(cgi, retry), 11)
             else:
                 raise RuntimeError('mmPost Error!!!')
     return response

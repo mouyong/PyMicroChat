@@ -5,13 +5,18 @@ from .. import mm_pb2
 from .. import Util
 from bs4 import BeautifulSoup
 from .logger_wrapper import logger
-from .tip_bot import tip_eat
+from .tip_bot import tips
+from urllib.parse import urlencode
 
 # 图灵机器人接口
-TULING_HOST = 'openapi.tuling123.com'
-TULING_API = 'http://openapi.tuling123.com/openapi/api/v2'
+# TULING_HOST = 'openapi.tuling123.com'
+# TULING_API = 'http://openapi.tuling123.com/openapi/api/v2'
 # 图灵机器人key
-TULING_KEY = '460a124248234351b2095b57b88cffd2'
+# TULING_KEY = '460a124248234351b2095b57b88cffd2' # 460a124248234351b2095b57b88cffd2
+
+# 通过抓取网页体验地址得到聊天的接口
+TULING_HOST = 'biz.turingos.cn'
+TULING_API = 'http://biz.turingos.cn/apirobot/dialog/homepage/chat' # http://biz.turingos.cn/chat 体验地址
 
 # 图灵机器人
 def tuling_robot(msg):
@@ -56,35 +61,49 @@ def tuling_robot(msg):
 
     if need_reply:
         # 使用图灵接口获取自动回复信息
+        # data = {
+        #     'reqType': 0,
+        #     'perception':
+        #     {
+        #         "inputText":
+        #         {
+        #             "text": send_to_tuling_content
+        #         },
+        #     },
+        #     'userInfo':
+        #     {
+        #         "apiKey": TULING_KEY,
+        #         "userId": Util.GetMd5(msg.from_id.id)
+        #     }
+        # }
+
         data = {
-            'reqType': 0,
-            'perception':
-            {
-                "inputText":
-                {
-                    "text": send_to_tuling_content
-                },
-            },
-            'userInfo':
-            {
-                "apiKey": TULING_KEY,
-                "userId": Util.GetMd5(msg.from_id.id)
-            }
+            "deviceId": "63ae63ae-63ae-63ae-63ae-63ae63ae63ae",
+            "question": send_to_tuling_content
         }
 
-        tip_eat()
-
-        return
         try:
-            robot_ret = eval(Util.post(TULING_HOST, TULING_API,json.dumps(data)).decode())
-            logger.debug('tuling api 返回:{}'.format(robot_ret))
+            # robot_ret = eval(Util.post(TULING_HOST, TULING_API,json.dumps(data)).decode())
+            robot_ret = json.loads(Util.post(TULING_HOST, TULING_API, urlencode(data), {'content-type': 'application/x-www-form-urlencoded'}))
+            logger.info('tuling api 返回:{}'.format(robot_ret))
+
+            # message = robot_ret['results'][0]['values']['text']
+
+            message = robot_ret['data']['results'][0]['values']['text']
+            if robot_ret['type'] == 'error':
+                message = robot_ret['content']
+            elif 4003 == robot_ret['data']['intent']['code']: # 请求次数超限制!
+                message = '因个人原因，今天不能陪你聊天了，对不起啦 :('
+
             # 自动回消息
             if reply_prefix and reply_at_wxid:
                 # 消息前缀: @somebody  并at发消息人
-                interface.new_send_msg(msg.from_id.id, (reply_prefix + ' ' + robot_ret['results'][0]['values']['text']).encode(encoding="utf-8"), [reply_at_wxid])
+                message = (reply_prefix + ' ' + message)
+                interface.new_send_msg(msg.from_id.id, message.encode(encoding="utf-8"), [reply_at_wxid])
             else:
-                interface.new_send_msg(msg.from_id.id, robot_ret['results'][0]['values']['text'].encode(encoding="utf-8"))
-        except:
+                interface.new_send_msg(msg.from_id.id, message.encode(encoding="utf-8"))
+        except Exception as e:
             logger.info('tuling api 调用异常!', 1)
+            print(e)
 
     return

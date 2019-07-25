@@ -24,6 +24,12 @@ plugin_blacklist = ['weixin', ]
 # 测试接口
 def test(msg):
     global TEST_STATE
+
+    if msg.raw.content in ('退出', 'exit', 'quit', 'q'):
+        interface.new_send_msg(msg.from_id.id, '===========bye==========='.encode())
+        Util.ExitProcess()
+        return False
+
     # 来自群聊的消息不处理
     if '测试' == msg.raw.content:                                                                                                   # help
         send_text = '当前支持的测试指令:\n'
@@ -61,13 +67,13 @@ def test(msg):
         if wxid:
             interface.add_chatroom_member(wxid, [msg.from_id.id, ])
             # 刚建的面对面群立即拉人对方无法收到通知（延迟2秒后再拉人对方才会收到进群通知),这里发消息到群聊at所有人测试对方是否入群
-            interface.at_all_in_group(wxid, '你们已经在我的群聊里了')                                                      
+            interface.at_all_in_group(wxid, '你们已经在我的群聊里了')
         return False
     elif TEST_KEY_WORD[7] == msg.raw.content or '7' == msg.raw.content:                                                              # 检测单向好友
         if TEST_STATE[7]:
             interface.new_send_msg(msg.from_id.id, '开始检测单向好友......'.encode(encoding="utf-8"))
             check_friend.check()
-        return False 
+        return False
     elif TEST_KEY_WORD[8] == msg.raw.content or '8' == msg.raw.content:                                                              # 测试消息撤回
         revoke_joke.revoke_joke(msg.from_id.id, '对方', '并亲了你一口')
         return False
